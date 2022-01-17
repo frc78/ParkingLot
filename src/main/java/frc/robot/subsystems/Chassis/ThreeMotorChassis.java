@@ -22,11 +22,9 @@ public class ThreeMotorChassis extends Chassis {
         super();
         
         // Set the motor IDs
-        leftLeader = new TalonFX(Constants.LLEADER);
         leftFollower1 = new TalonFX(Constants.LFOLLOWER);
         leftFollower2 = new TalonFX(Constants.L2FOLLOWER);
 
-        rightLeader = new TalonFX(Constants.RLEADER);
         rightFollower1 = new TalonFX(Constants.RFOLLOWER);
         rightFollower2 = new TalonFX(Constants.R2FOLLOWER);
 

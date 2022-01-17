@@ -20,13 +20,15 @@ import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 public class RobotContainer {
 
   //            SUBSYSTEMS
-  private final Chassis m_chassis = new ThreeMotorChassis();
+  private final Chassis m_chassis;
 
   //            JOYSTICKS
-  private final XboxController m_driveController = new XboxController(Constants.DRIVEJS);
+  private final XboxController m_driveController;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    m_chassis = new ThreeMotorChassis();
+    m_driveController = new XboxController(Constants.DRIVEJS);
     // Configure the button bindings
     configureButtonBindings();
 
