@@ -43,9 +43,4 @@ public class ThreeMotorChassis extends Chassis {
         rightFollower2.setInverted(!Constants.LEFT_INVERTED);
 
     }
-
-    @Override
-    public void periodic() {
-    // This method will be called once per scheduler run
-    }
 }
