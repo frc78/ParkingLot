@@ -45,6 +45,13 @@ public class ThreeMotorChassis extends Chassis {
     }
 
     @Override
+    public double[] getMotorSpeeds() {
+        double temp[] = {leftLeader.getMotorOutputPercent(), leftFollower1.getMotorOutputPercent(), leftFollower2.getMotorOutputPercent(),
+        rightLeader.getMotorOutputPercent(), rightFollower1.getMotorOutputPercent(), rightFollower2.getMotorOutputPercent()};
+        return temp;
+      }
+
+    @Override
     public void periodic() {
     // This method will be called once per scheduler run
     }

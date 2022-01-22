@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
+import frc.robot.subsystems.Vision;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,6 +22,7 @@ public class RobotContainer {
 
   //            SUBSYSTEMS
   private final Chassis m_chassis;
+  private final Vision m_vision;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -28,6 +30,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_chassis = new ThreeMotorChassis();
+    m_vision = new Vision();
     m_driveController = new XboxController(Constants.DRIVEJS);
     // Configure the button bindings
     configureButtonBindings();

@@ -36,6 +36,12 @@ public class Chassis extends SubsystemBase {
         rightLeader.set(ControlMode.PercentOutput, rSpeed);
   }
 
+  //returns an array with index 0 being left motor speed and index 1 being right motor speed
+  public double[] getMotorSpeeds() {
+    double temp[] = {leftLeader.getMotorOutputPercent(), rightLeader.getMotorOutputPercent()};
+    return temp;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
