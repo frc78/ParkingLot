@@ -26,6 +26,11 @@ public final class Constants {
     public static final int RFOLLOWER = 5;
     public static final int R2FOLLOWER = 6;
 
+            //OTHER MOTORS
+    //GREGS RECUEST
+    public static final int INTAKE = 7;
+
+
     //            JOYSTICKS
     public static final int DRIVEJS = 0;
 

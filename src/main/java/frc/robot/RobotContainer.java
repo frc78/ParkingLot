@@ -4,12 +4,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Forward50;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.Drive.Tank;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 
@@ -21,20 +24,32 @@ import frc.robot.subsystems.Chassis.ThreeMotorChassis;
  */
 public class RobotContainer {
 
+
   //            SUBSYSTEMS
   private final Chassis m_chassis;
+  private final Intake m_intake;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_chassis = new ThreeMotorChassis();
+    
+    CameraServer.startAutomaticCapture();
+
+
+    
+    m_chassis = new Chassis();
+    m_intake = new Intake();
     m_driveController = new XboxController(Constants.DRIVEJS);
     //Configure the button bindings
     configureButtonBindings();
 
+
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
+
+    m_intake.setDefaultCommand(new IntakeCommand(m_driveController,m_intake));
+
   }
 
   /**
@@ -49,6 +64,9 @@ public class RobotContainer {
 
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
+    
+
+
   }
 
   /**
