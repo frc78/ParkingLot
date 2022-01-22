@@ -19,6 +19,7 @@ public class IntakeCommand extends CommandBase {
     m_controller = p;
     m_intake = k;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +30,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     double speed = m_controller.getRightTriggerAxis();
-    m_intake.setSpeed(speed);
+    m_intake.setSpeed(speed*-.75);
   }
 
   // Called once the command ends or is interrupted.
