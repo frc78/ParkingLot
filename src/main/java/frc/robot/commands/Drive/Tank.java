@@ -34,8 +34,8 @@ public class Tank extends CommandBase {
   public void execute() {
     //sets the speed variables, passes in 0.3 as the maxAdjust arguement so that the default speed is 0.7 and range will be 0.4 to 1
     //and the 3rd arguemtent is for speed smoothing, 0 is for no smoothing, 1 is for left motor and 2 is for right motor
-    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.3, 0);
-    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.3, 0);
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.5, 0);
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.5, 0);
 
     m_chassis.setSpeed(lSpeed, rSpeed);
   }
@@ -52,23 +52,22 @@ public class Tank extends CommandBase {
     return false;
   }
 
-  //this function is meant to take in the joystick input, and maxAdjust has to be between 0 and 1, 
-  //THIS FUNCTION HASN'T BEEN TESTED YET
+  //this function is meant to take in the joystick input, and maxAdjust has to be between 0 and 1
   public double triggerAdjustedSpeed(double inputSpeed, double maxAdjust, int smoothing){
     double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
-    //tempSpeed = (tempSpeed * maxAdjust) + (inputSpeed * (1 - maxAdjust));
-    tempSpeed = ((tempSpeed * maxAdjust) + 1) * (inputSpeed * (1 - maxAdjust));
+    //tempSpeed = ((tempSpeed * maxAdjust) * (inputSpeed / Math.abs(inputSpeed))) + (inputSpeed * maxAdjust);
+    tempSpeed = ((tempSpeed) + 1) * (inputSpeed * (1 - maxAdjust));
     
-    // i think there is a 50% chance this works. so be carful testing this lol
+    // THIS DOESNT WORK. NEEDS TO BE WORKED ON OR REMOVED
     // if smoothing = 1 that is the left motor, so it measures the left motor speed for the speed smoothing, if 2 it means the right
     //if m_chassis was of type ThreeMotorChassis, you need to use the getMotorSpeeds indexes 0 and 3 for leftleader and rightleader
     if(smoothing == 1){
       //uses a ternary (short hand) if statement to check what class m_chassis is (either ThreeMotorChassis or Chassis),
       //and uses different indexes of the getmotorspeedsarray, since in Chassis the leaders are 0 and 1
       //and in ThreeMotorChassis they are 0 and 3
-      tempSpeed = tempSpeed + ((tempSpeed - ((m_chassis.getClass() == ThreeMotorChassis.class) ? m_chassis.getMotorSpeeds()[0] : m_chassis.getMotorSpeeds()[0])) / 2);
+      tempSpeed = tempSpeed + ((tempSpeed - ((m_chassis.getClass() == ThreeMotorChassis.class) ? m_chassis.getMotorSpeeds()[0] : m_chassis.getMotorSpeeds()[0])) / 10);
     } else if (smoothing == 2) {
-      tempSpeed = tempSpeed + ((tempSpeed - ((m_chassis.getClass() == ThreeMotorChassis.class) ? m_chassis.getMotorSpeeds()[3] : m_chassis.getMotorSpeeds()[1])) / 2);
+      tempSpeed = tempSpeed + ((tempSpeed - ((m_chassis.getClass() == ThreeMotorChassis.class) ? m_chassis.getMotorSpeeds()[3] : m_chassis.getMotorSpeeds()[1])) / 10);
     }
     
 
