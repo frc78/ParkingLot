@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+
+import frc.robot.utility.Gains;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -30,8 +34,17 @@ public final class Constants {
     public static final int DRIVEJS = 0;
 
     //            SENSORS
+    public static final int IMU = 0;
 
     //            PARAMETERS
-    public static final boolean LEFT_INVERTED = true;
+    public static final TalonFXInvertType LEFT_INVERT = TalonFXInvertType.CounterClockwise;
+    public static final TalonFXInvertType RIGHT_INVERT = TalonFXInvertType.Clockwise;
+
+    public static final int SENSOR_UNITS_PER_ROTATION = 2048;
+    public static final double NEUTRAL_DEADBAND = 0.001;
+    public static final double TURN_UNITS_PER_DEGREE = 8192.0 / 360.0;
+    public static final Gains GAINS_MOTOR_PRIFILE = new Gains( 1.0, 0.0, 0.0, 1023.0/6800.0, 400, 1.00 );
+    public static final int PRIMARY_PID_SLOT = 0;
+    public static final int AUX_PID_SLOT = 1;
 
 }

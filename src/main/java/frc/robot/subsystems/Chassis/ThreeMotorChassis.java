@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.Chassis;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import frc.robot.Constants;
@@ -36,11 +37,11 @@ public class ThreeMotorChassis extends Chassis {
         rightFollower2.follow(rightLeader);
 
         // Set inverted
-        leftFollower1.setInverted(Constants.LEFT_INVERTED);
-        leftFollower2.setInverted(Constants.LEFT_INVERTED);
+        leftFollower1.setInverted(InvertType.FollowMaster);
+        leftFollower2.setInverted(InvertType.FollowMaster);
 
-        rightFollower1.setInverted(!Constants.LEFT_INVERTED);
-        rightFollower2.setInverted(!Constants.LEFT_INVERTED);
+        rightFollower1.setInverted(InvertType.FollowMaster);
+        rightFollower2.setInverted(InvertType.FollowMaster);
 
     }
 
