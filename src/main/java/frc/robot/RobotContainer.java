@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
@@ -29,7 +31,7 @@ public class RobotContainer {
   public RobotContainer() {
     m_chassis = new ThreeMotorChassis();
     m_driveController = new XboxController(Constants.DRIVEJS);
-    // Configure the button bindings
+    //Configure the button bindings
     configureButtonBindings();
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
@@ -41,7 +43,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    JoystickButton aButton = new JoystickButton(m_driveController, 1);
+    aButton.whenHeld(new Forward50(m_chassis, 0.5));
+
+    JoystickButton bButton = new JoystickButton(m_driveController, 2);
+    bButton.whenHeld(new Forward50(m_chassis, -0.5));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

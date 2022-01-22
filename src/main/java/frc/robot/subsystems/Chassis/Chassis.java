@@ -5,8 +5,10 @@
 package frc.robot.subsystems.Chassis;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -29,6 +31,9 @@ public class Chassis extends SubsystemBase {
         leftLeader.setInverted(Constants.LEFT_INVERTED);
 
         rightLeader.setInverted(!Constants.LEFT_INVERTED);
+
+        leftLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        rightLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
   }
 
   public void setSpeed(double lSpeed, double rSpeed) {
@@ -38,6 +43,8 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
     // This method will be called once per scheduler run
   }
 }
