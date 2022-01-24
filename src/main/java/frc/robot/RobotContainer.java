@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,9 +37,13 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
+
+    UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
+    RobotCamera.setResolution(640, 480);
+     
   }
 
-  /**
+  /**       
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
