@@ -57,7 +57,7 @@ public class Tank extends CommandBase {
     double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
     tempSpeed = ((1 - maxAdjust) * inputSpeed) + (inputSpeed * maxAdjust * tempSpeed);
 
-    //clamping the output to make sure it doesnt exit -1 and 1 (for saftey)
+    //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
     return Math.max(-1, Math.min(1, tempSpeed));
   }
 }
