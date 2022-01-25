@@ -26,13 +26,16 @@ public final class Constants {
     public static final int RFOLLOWER = 5;
     public static final int R2FOLLOWER = 6;
 
-            //OTHER MOTORS
-    //GREGS RECUEST
+    //OTHER MOTORS
+    //GREGS REQUEST
     public static final int INTAKE = 7;
 
-
+    // Shooter
+    public static final int LeftShoot = 78;// temporary value will fill in later. 
+    public static final int RightShoot = 78;
     //            JOYSTICKS
-    public static final int DRIVEJS = 0;
+    public static final int DRIVEJS = 1;
+    public static final int DRIVEMP = 0;
 
     //            SENSORS
 

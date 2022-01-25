@@ -14,8 +14,12 @@ import frc.robot.commands.Forward50;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
+import edu.wpi.first.wpilibj2.command.button.Button;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,25 +28,34 @@ import frc.robot.subsystems.Chassis.ThreeMotorChassis;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
-
   //            SUBSYSTEMS
   private final Chassis m_chassis;
   private final Intake m_intake;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
+ 
+  private XboxController m_manipController; 
+  
+  //  Shooter
+  private final Shooter m_shooter;
+  //Drive Buttons
+  //Manipulator buttons
+  private Button manipControllerRB = new JoystickButton(m_manipController, 6);
+  
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
     CameraServer.startAutomaticCapture();
-
-
-    
-    m_chassis = new Chassis();
     m_intake = new Intake();
+    m_chassis = new ThreeMotorChassis();
+    m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
+    m_manipController = new XboxController(Constants.DRIVEMP);
+    
+  
     //Configure the button bindings
     configureButtonBindings();
 
@@ -69,6 +82,7 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
+    manipControllerRB.whileHeld(new Shoot(m_shooter));
   }
 
   /**
