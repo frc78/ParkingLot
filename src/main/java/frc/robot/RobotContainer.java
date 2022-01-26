@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Drive.Climb;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
+import frc.robot.subsystems.Hanger;
 import frc.robot.subsystems.Vision;
 
 /**
@@ -23,6 +25,7 @@ public class RobotContainer {
   //            SUBSYSTEMS
   private final Chassis m_chassis;
   private final Vision m_vision;
+  private final Hanger m_hanger;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -32,10 +35,12 @@ public class RobotContainer {
     m_chassis = new ThreeMotorChassis();
     m_vision = new Vision();
     m_driveController = new XboxController(Constants.DRIVEJS);
+    m_hanger = new Hanger();
     // Configure the button bindings
     configureButtonBindings();
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
+    m_hanger.setDefaultCommand(new Climb(m_hanger, m_driveController));
   }
 
   /**
