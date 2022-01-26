@@ -31,6 +31,12 @@ public class IntakeCommand extends CommandBase {
   public void execute() {
     double speed = m_controller.getRightTriggerAxis();
     m_intake.setSpeed(speed*-.75);
+
+    if(speed > 0){
+      m_intake.DeployIntake();
+    }else{
+      m_intake.StopIntake();
+    }
   }
 
   // Called once the command ends or is interrupted.
