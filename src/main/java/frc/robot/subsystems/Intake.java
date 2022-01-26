@@ -10,10 +10,17 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 //import edu.wpi.first.wpilibj.XboxController;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends SubsystemBase {
+
   /** Creates a new Intake. */
+  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0,1);
+  Compressor comp = new Compressor(PneumaticsModuleType.REVPH);
 
     protected TalonFX intake;
    // private XboxController m_controller;
@@ -32,5 +39,14 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void DeployIntake() {
+    solenoid.set(Value.kForward);
+  }
+
+  public void StopIntake() {
+    setSpeed(0);
+    solenoid.set(Value.kReverse);
   }
 }
