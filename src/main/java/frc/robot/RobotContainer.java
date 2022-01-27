@@ -4,14 +4,22 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Forward50;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.Drive.Tank;
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
+import edu.wpi.first.wpilibj2.command.button.Button;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,24 +28,48 @@ import frc.robot.subsystems.Chassis.ThreeMotorChassis;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
   //            SUBSYSTEMS
   private final Chassis m_chassis;
+  private final Intake m_intake;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
+ 
+  private XboxController m_manipController; 
+  
+  //  Shooter
+  private final Shooter m_shooter;
+  //Drive Buttons
+  //Manipulator buttons
+  private Button manipControllerRB = new JoystickButton(m_manipController, 6);
+  
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    
+    CameraServer.startAutomaticCapture();
+    m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
+    m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
+    m_manipController = new XboxController(Constants.DRIVEMP);
+    
+  
     //Configure the button bindings
     configureButtonBindings();
 
+
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
+
+    UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
+    RobotCamera.setResolution(640, 480);
+     
+    m_intake.setDefaultCommand(new IntakeCommand(m_driveController,m_intake));
+
   }
 
-  /**
+  /**       
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
@@ -49,6 +81,8 @@ public class RobotContainer {
 
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
+
+    manipControllerRB.whileHeld(new Shoot(m_shooter));
   }
 
   /**
