@@ -35,13 +35,13 @@ public class RobotContainer {
   //            JOYSTICKS
   private final XboxController m_driveController;
  
-  private XboxController m_manipController; 
+  private final  XboxController m_manipController; 
   
   //  Shooter
   private final Shooter m_shooter;
   //Drive Buttons
   //Manipulator buttons
-  private Button manipControllerRB = new JoystickButton(m_manipController, 6);
+ // private Button manipControllerRB = new JoystickButton(m_manipController, 6);
   
 
 
@@ -82,6 +82,7 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
+    JoystickButton manipControllerRB = new JoystickButton(m_driveController, 6);
     manipControllerRB.whileHeld(new Shoot(m_shooter));
   }
 
@@ -91,7 +92,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
+     // An ExampleCommand will run in autonomous
     return null; // m_autoCommand;
   }
 }

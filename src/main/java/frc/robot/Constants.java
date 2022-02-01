@@ -17,12 +17,12 @@ public final class Constants {
     //            MOTORS
     //        Drive Motors
     // LEFT
-    public static final int LLEADER = 1;
+    public static final int LLEADER = 78;
     public static final int LFOLLOWER = 2;
     public static final int L2FOLLOWER = 3;
 
     // RIGHT
-    public static final int RLEADER = 4;
+    public static final int RLEADER = 78;
     public static final int RFOLLOWER = 5;
     public static final int R2FOLLOWER = 6;
 
@@ -31,8 +31,8 @@ public final class Constants {
     public static final int INTAKE = 7;
 
     // Shooter
-    public static final int LeftShoot = 78;// temporary value will fill in later. 
-    public static final int RightShoot = 78;
+    public static final int LeftShoot = 1;// temporary value will fill in later. 
+    public static final int RightShoot = 4;
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
