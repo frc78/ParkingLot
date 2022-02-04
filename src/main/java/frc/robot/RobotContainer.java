@@ -4,18 +4,16 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Forward50;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
+import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.Shoot;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -35,23 +33,20 @@ public class RobotContainer {
   //            JOYSTICKS
   private final XboxController m_driveController;
  
-  private XboxController m_manipController; 
+  private final XboxController m_manipController; 
   
   //  Shooter
-  private final Shooter m_shooter;
-  //Drive Buttons
-  //Manipulator buttons
-  private Button manipControllerRB = new JoystickButton(m_manipController, 6);
+  // private final Shooter m_shooter;
   
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
-    m_shooter = new Shooter();
+    // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
     
@@ -62,10 +57,10 @@ public class RobotContainer {
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
 
-    UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
-    RobotCamera.setResolution(640, 480);
+    // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
+    // RobotCamera.setResolution(640, 480);
      
-    m_intake.setDefaultCommand(new IntakeCommand(m_driveController,m_intake));
+    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 
   }
 
@@ -82,7 +77,8 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
-    manipControllerRB.whileHeld(new Shoot(m_shooter));
+    Button manipControllerRB = new JoystickButton(m_manipController, 6);
+    manipControllerRB.whileHeld(new IntakeCommand(m_intake));
   }
 
   /**
