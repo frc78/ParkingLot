@@ -4,29 +4,36 @@
 
 package frc.robot.subsystems.Chassis;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 
 /** Add your docs here. */
 public class ThreeMotorChassis extends Chassis {
 
     // Drive Motors
-    private TalonFX leftFollower1;
-    private TalonFX leftFollower2;
+    private WPI_TalonFX leftFollower1;
+    private WPI_TalonFX leftFollower2;
 
-    private TalonFX rightFollower1;
-    private TalonFX rightFollower2;
+    private WPI_TalonFX rightFollower1;
+    private WPI_TalonFX rightFollower2;
 
     public ThreeMotorChassis() {
         super();
         
         // Set the motor IDs
-        leftFollower1 = new TalonFX(Constants.LFOLLOWER);
-        leftFollower2 = new TalonFX(Constants.L2FOLLOWER);
+        leftFollower1 = new WPI_TalonFX(Constants.LFOLLOWER);
+        leftFollower2 = new WPI_TalonFX(Constants.L2FOLLOWER);
 
-        rightFollower1 = new TalonFX(Constants.RFOLLOWER);
-        rightFollower2 = new TalonFX(Constants.R2FOLLOWER);
+        rightFollower1 = new WPI_TalonFX(Constants.RFOLLOWER);
+        rightFollower2 = new WPI_TalonFX(Constants.R2FOLLOWER);
+
+        // Reset motors
+        leftFollower1.configFactoryDefault();
+        leftFollower2.configFactoryDefault();
+
+        rightFollower1.configFactoryDefault();
+        rightFollower2.configFactoryDefault();
 
         // Set Follower
         leftFollower1.follow(leftLeader);
@@ -36,11 +43,17 @@ public class ThreeMotorChassis extends Chassis {
         rightFollower2.follow(rightLeader);
 
         // Set inverted
-        leftFollower1.setInverted(Constants.LEFT_INVERTED);
-        leftFollower2.setInverted(Constants.LEFT_INVERTED);
+        leftFollower1.setInverted(InvertType.FollowMaster);
+        leftFollower2.setInverted(InvertType.FollowMaster);
 
-        rightFollower1.setInverted(!Constants.LEFT_INVERTED);
-        rightFollower2.setInverted(!Constants.LEFT_INVERTED);
+        rightFollower1.setInverted(InvertType.FollowMaster);
+        rightFollower2.setInverted(InvertType.FollowMaster);
 
+        // Set motor mode
+        leftFollower1.setNeutralMode(Constants.MOTOR_MODE);
+        leftFollower2.setNeutralMode(Constants.MOTOR_MODE);
+
+        rightFollower1.setNeutralMode(Constants.MOTOR_MODE);
+        rightFollower2.setNeutralMode(Constants.MOTOR_MODE);
     }
 }

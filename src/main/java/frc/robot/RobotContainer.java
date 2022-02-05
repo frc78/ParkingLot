@@ -4,11 +4,22 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
+import java.io.IOException;
+import java.nio.file.Path;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PerpetualCommand;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
@@ -45,7 +56,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
     m_unjam = new Unjam(m_intake);
@@ -63,7 +74,7 @@ public class RobotContainer {
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
      
-    m_intake.setDefaultCommand(new InstantCommand(m_intake::StopIntake, m_intake));
+    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 
     m_unjam.setDefaultCommand(new InstantCommand());
 
@@ -95,7 +106,42 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+
+    // var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
+    //   new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter),
+    //   Constants.kDriveKinematics,
+    //   10
+    // );
+    // These are not needed as they are retrieved from path json file
+    // TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared).setKinematics(Constants.kDriveKinematics).addConstraint(autoVoltageConstraint);
+
+    Trajectory trajectory = new Trajectory();
+
+    String trajectoryJSON = "test1.wpilib.json";
+
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    }
+
+    RamseteCommand ramseteCommand = new RamseteCommand(
+      trajectory, 
+      m_chassis::getPose, 
+      new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta), 
+      new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter), 
+      Constants.kDriveKinematics, 
+      m_chassis::getWheelSpeeds, 
+      new PIDController(Constants.kPDriveVel, 0, 0), 
+      new PIDController(Constants.kPDriveVel, 0, 0), 
+      m_chassis::setVoltage, 
+      m_chassis
+    );
+
+    m_chassis.resetOdometry(trajectory.getInitialPose());
+
     // An ExampleCommand will run in autonomous
-    return null; // m_autoCommand;
+    return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
   }
 }

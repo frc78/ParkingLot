@@ -31,7 +31,7 @@ public class Tank extends CommandBase {
     double lSpeed = m_controller.getLeftY();
     double rSpeed = m_controller.getRightY();
 
-    m_chassis.setSpeed(lSpeed, rSpeed);
+    m_chassis.setSpeed(lSpeed * .7, rSpeed * .7);
   }
 
   // Called once the command ends or is interrupted.
