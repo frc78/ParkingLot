@@ -25,7 +25,9 @@ import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.Unjam;
+import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -42,6 +44,7 @@ public class RobotContainer {
   private final Chassis m_chassis;
   private final Intake m_intake;
   private final Unjam m_unjam;
+  private final Shooter m_shooter;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -60,6 +63,7 @@ public class RobotContainer {
     m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
     m_unjam = new Unjam(m_intake);
+    m_shooter = new Shooter();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -77,6 +81,8 @@ public class RobotContainer {
     m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 
     m_unjam.setDefaultCommand(new InstantCommand());
+
+    m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely)));
 
   }
 
@@ -98,6 +104,9 @@ public class RobotContainer {
 
     Button manipControllerUnJam = new JoystickButton(m_manipController, 3);
     manipControllerUnJam.whileHeld(new IntakeCommand(m_intake));
+
+    Button manipControllerLB = new JoystickButton(m_manipController, 7);
+    manipControllerLB.whileHeld(new SpinUp(m_shooter));
   }
 
   /**
