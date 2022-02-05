@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive.Forward50;
@@ -76,7 +78,7 @@ public class RobotContainer {
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
 
-    m_intake.setDefaultCommand(new IntakeCommand(m_intake, m_feed, m_indexer));
+    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
