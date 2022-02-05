@@ -126,7 +126,10 @@ public class RobotContainer {
     manipControllerLB.whileHeld(new SpinUp(m_shooter));
     
     Button manipControllerY = new JoystickButton(m_manipController, 4);
-    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer));
+    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
+
+    Button manipControllerB = new JoystickButton(m_manipController, 2);
+    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
 
     
   }
