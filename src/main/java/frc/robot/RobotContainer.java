@@ -117,7 +117,7 @@ public class RobotContainer {
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
 
     Button manipControllerUnJam = new JoystickButton(m_manipController, 3);
-    manipControllerUnJam.whileHeld(new IntakeCommand(m_intake));
+    manipControllerUnJam.whileHeld(new Unjam(m_intake));
 
     Button manipControllerLB = new JoystickButton(m_manipController, 7);
     manipControllerLB.whileHeld(new SpinUp(m_shooter));
