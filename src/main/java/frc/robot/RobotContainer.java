@@ -17,13 +17,15 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Shoot.Fire;
+import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.FeedWheel;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
@@ -40,6 +42,9 @@ public class RobotContainer {
   //            SUBSYSTEMS
   private final Chassis m_chassis;
   private final Intake m_intake;
+  private final Feed m_feed;
+  private final Indexer m_indexer;
+  private final FeedWheel m_feedWheel;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -57,6 +62,9 @@ public class RobotContainer {
     // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
+    m_feed = new Feed();
+    m_indexer = new Indexer();
+    m_feedWheel = new FeedWheel();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -68,10 +76,12 @@ public class RobotContainer {
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
 
+    m_intake.setDefaultCommand(new IntakeCommand(m_intake, m_feed, m_indexer));
+
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
      
-    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
+    
 
   }
 
@@ -88,8 +98,13 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
+    Button manipControllerX = new JoystickButton(m_manipController, 3);
+    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer));
+
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
-    manipControllerRB.whileHeld(new IntakeCommand(m_intake));
+    manipControllerRB.whenPressed(new Fire(m_feed, m_indexer, m_feedWheel));
+
+    
     
     
 
