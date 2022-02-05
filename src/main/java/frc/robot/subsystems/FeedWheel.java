@@ -7,24 +7,17 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-public class Feed extends SubsystemBase {
-  private CANSparkMax beltneo = new CANSparkMax(Constants.BeltNeo, MotorType.kBrushless);
-  
-  
-  /** Creates a new Feed. */
-  public Feed() {
-   beltneo = new CANSparkMax(Constants.BeltNeo, null);
-   
-   
+public class FeedWheel extends SubsystemBase {
+  private CANSparkMax wheelNeo = new CANSparkMax(Constants.WheelNeo, MotorType.kBrushless);
+  /** Creates a new FeedWheel. */
+  public FeedWheel() {
+    wheelNeo = new CANSparkMax(Constants.WheelNeo, null);
   }
-  public void feedRun() {
-    beltneo.set(.78);//subject to change during testing 
-    
-
+  public void runFeedWheel(){
+    wheelNeo.set(.78);//Also subject to change during testing
   }
 
   @Override
