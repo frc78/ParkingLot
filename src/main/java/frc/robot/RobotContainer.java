@@ -24,11 +24,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.Unjam;
+import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.commands.Shoot.Fire;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -44,6 +47,8 @@ public class RobotContainer {
   //            SUBSYSTEMS
   private final Chassis m_chassis;
   private final Intake m_intake;
+  private final Unjam m_unjam;
+  private final Shooter m_shooter;
   private final Feed m_feed;
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
@@ -64,6 +69,8 @@ public class RobotContainer {
     // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
     m_chassis = new ThreeMotorChassis();
+    m_unjam = new Unjam(m_intake);
+    m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
     m_feedWheel = new FeedWheel();
@@ -85,6 +92,10 @@ public class RobotContainer {
      
     
 
+    m_unjam.setDefaultCommand(new InstantCommand());
+
+    m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely)));
+
   }
 
   /**       
@@ -104,12 +115,13 @@ public class RobotContainer {
     manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer));
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
+
+    Button manipControllerUnJam = new JoystickButton(m_manipController, 3);
+    manipControllerUnJam.whileHeld(new IntakeCommand(m_intake));
+
+    Button manipControllerLB = new JoystickButton(m_manipController, 7);
+    manipControllerLB.whileHeld(new SpinUp(m_shooter));
     manipControllerRB.whenPressed(new Fire(m_feed, m_indexer, m_feedWheel));
-
-    
-    
-    
-
   }
 
   /**

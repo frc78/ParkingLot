@@ -34,8 +34,12 @@ public class Shooter extends SubsystemBase {
 
   }
  public void startWheely(){
-   shooterWheel.set(ControlMode.PercentOutput, 0.78);
-   shooterWheel2.set(ControlMode.PercentOutput, -0.78);
+   shooterWheel.set(ControlMode.PercentOutput, 0.33);
+   shooterWheel2.set(ControlMode.PercentOutput, -0.33);
+ }
+ public void stopWheely(){
+   shooterWheel.set(ControlMode.PercentOutput, 0);
+   shooterWheel2.set(ControlMode.PercentOutput, 0);
  }
   @Override
   public void periodic() {
