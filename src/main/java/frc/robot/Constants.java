@@ -41,6 +41,9 @@ public final class Constants {
     //Feed
     public static final int BeltNeo = 9;
     public static final int WheelNeo = 10;
+
+    //Indexer
+    public static final int Indexer = 11;//Temporary subject to change.
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;

@@ -5,16 +5,21 @@
 package frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.FeedWheel;
 
-public class RunFeed extends CommandBase {
+public class Fire extends CommandBase {
   private Feed m_feed;
+  private Indexer m_indexer;
+  private FeedWheel m_feedWheel;
   /** Creates a new RunFeed. */
-  public RunFeed(Feed subsystem) {
+  public Fire(Feed subsystem, Indexer subsystem2, FeedWheel subsystem3) {
     m_feed = subsystem;
+    m_indexer = subsystem2;
+    m_feedWheel = subsystem3;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_feed);
+    addRequirements(m_feed, m_indexer, m_feedWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +30,11 @@ public class RunFeed extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_indexer.indexRun();
+    m_feed.feedRun();
+    m_feedWheel.runFeedWheel();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

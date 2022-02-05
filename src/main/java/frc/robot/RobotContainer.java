@@ -26,6 +26,10 @@ import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.Unjam;
 import frc.robot.commands.Shoot.SpinUp;
+import frc.robot.commands.Shoot.Fire;
+import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.FeedWheel;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
@@ -45,6 +49,9 @@ public class RobotContainer {
   private final Intake m_intake;
   private final Unjam m_unjam;
   private final Shooter m_shooter;
+  private final Feed m_feed;
+  private final Indexer m_indexer;
+  private final FeedWheel m_feedWheel;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -64,6 +71,9 @@ public class RobotContainer {
     m_chassis = new ThreeMotorChassis();
     m_unjam = new Unjam(m_intake);
     m_shooter = new Shooter();
+    m_feed = new Feed();
+    m_indexer = new Indexer();
+    m_feedWheel = new FeedWheel();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -75,10 +85,12 @@ public class RobotContainer {
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
 
+    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
+
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
      
-    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
+    
 
     m_unjam.setDefaultCommand(new InstantCommand());
 
@@ -99,14 +111,17 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
+    Button manipControllerX = new JoystickButton(m_manipController, 3);
+    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer));
+
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
-    manipControllerRB.whileHeld(new IntakeCommand(m_intake));
 
     Button manipControllerUnJam = new JoystickButton(m_manipController, 3);
     manipControllerUnJam.whileHeld(new IntakeCommand(m_intake));
 
     Button manipControllerLB = new JoystickButton(m_manipController, 7);
     manipControllerLB.whileHeld(new SpinUp(m_shooter));
+    manipControllerRB.whenPressed(new Fire(m_feed, m_indexer, m_feedWheel));
   }
 
   /**

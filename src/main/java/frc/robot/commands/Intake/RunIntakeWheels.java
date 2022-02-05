@@ -5,48 +5,31 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Feed;
-import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 
-public class IntakeCommand extends CommandBase {
-  /** Creates a new Intake. */
+public class RunIntakeWheels extends CommandBase {
   private Intake m_intake;
-  private Feed m_feed;
-  private Indexer m_indexer;
-  
-
-  public IntakeCommand(Intake subsystem, Feed subsystem2, Indexer subsystem3) {
-
-    m_intake = subsystem;
-    m_feed = subsystem2;
-    m_indexer = subsystem3;
+  /** Creates a new RunIntakeWheels. */
+  public RunIntakeWheels(Intake Subsystem) {
+    m_intake = Subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_intake, m_feed, m_indexer);
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.DeployIntake();
-    m_feed.feedRun();
-    m_indexer.indexRun();
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_intake.setSpeed(-.75);
-    m_feed.feedRun();
-    m_indexer.indexRun();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_intake.StopIntake();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
