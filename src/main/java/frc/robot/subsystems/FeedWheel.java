@@ -11,13 +11,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class FeedWheel extends SubsystemBase {
-  private CANSparkMax wheelNeo = new CANSparkMax(Constants.WheelNeo, MotorType.kBrushless);
+  private CANSparkMax wheelNeo;
   /** Creates a new FeedWheel. */
   public FeedWheel() {
-    wheelNeo = new CANSparkMax(Constants.WheelNeo, null);
+    wheelNeo = new CANSparkMax(Constants.WheelNeo, MotorType.kBrushless);
   }
   public void runFeedWheel(){
-    wheelNeo.set(.78);//Also subject to change during testing
+    wheelNeo.set(-.78);//Also subject to change during testing
+  }
+
+  public void stopFeedWheel() {
+    wheelNeo.set(0.0);
   }
 
   @Override

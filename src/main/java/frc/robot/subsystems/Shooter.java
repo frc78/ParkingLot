@@ -25,9 +25,9 @@ public class Shooter extends SubsystemBase {
     shooterWheel2.follow(shooterWheel);
     shooterWheel2.configNeutralDeadband(0);// this basically makes it so that shooter two never gets ahead and that they are always gonna be together :]❤
 
-    shooterWheel.setInverted(TalonFXInvertType.Clockwise);//This will be subject to change if needed or if it needs to change direction
+    shooterWheel.setInverted(TalonFXInvertType.CounterClockwise);//This will be subject to change if needed or if it needs to change direction
     shooterWheel.setSensorPhase(false);
-    shooterWheel2.setInverted(TalonFXInvertType.CounterClockwise);
+    shooterWheel2.setInverted(TalonFXInvertType.Clockwise);
 
     shooterWheel.setNeutralMode(NeutralMode.Coast);
     shooterWheel2.setNeutralMode(NeutralMode.Coast);
@@ -35,7 +35,7 @@ public class Shooter extends SubsystemBase {
   }
  public void startWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0.33);
-   shooterWheel2.set(ControlMode.PercentOutput, -0.33);
+   shooterWheel2.set(ControlMode.PercentOutput, 0.33);
  }
  public void stopWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0);

@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.Tuck;
 import frc.robot.commands.Intake.Unjam;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.commands.Shoot.Fire;
@@ -94,8 +95,9 @@ public class RobotContainer {
 
     m_unjam.setDefaultCommand(new InstantCommand());
 
-    m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely)));
-
+    m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely, m_shooter)));
+    m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
+    m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
   }
 
   /**       
@@ -115,13 +117,18 @@ public class RobotContainer {
     manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer));
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
+    manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
 
     Button manipControllerUnJam = new JoystickButton(m_manipController, 3);
     manipControllerUnJam.whileHeld(new Unjam(m_intake));
 
-    Button manipControllerLB = new JoystickButton(m_manipController, 7);
+    Button manipControllerLB = new JoystickButton(m_manipController, 5);
     manipControllerLB.whileHeld(new SpinUp(m_shooter));
-    manipControllerRB.whenPressed(new Fire(m_feed, m_indexer, m_feedWheel));
+    
+    Button manipControllerY = new JoystickButton(m_manipController, 4);
+    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer));
+
+    
   }
 
   /**

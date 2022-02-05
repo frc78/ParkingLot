@@ -46,6 +46,8 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_intake.StopIntake();
+    m_feed.stopFeed();
+    m_indexer.stopIndexer();
   }
 
   // Returns true when the command should end.

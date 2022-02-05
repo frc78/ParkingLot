@@ -25,6 +25,10 @@ public class Indexer extends SubsystemBase {
     IndexMotor.set(ControlMode.PercentOutput, 0.75);
   }
 
+  public void stopIndexer() {
+    IndexMotor.set(ControlMode.PercentOutput, 0.0);
+  }
+
   @Override
   public void periodic() {
     

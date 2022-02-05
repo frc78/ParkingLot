@@ -12,19 +12,21 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feed extends SubsystemBase {
-  private CANSparkMax beltneo = new CANSparkMax(Constants.BeltNeo, MotorType.kBrushless);
+  private CANSparkMax beltneo;
   
   
   /** Creates a new Feed. */
   public Feed() {
-   beltneo = new CANSparkMax(Constants.BeltNeo, null);
+   beltneo = new CANSparkMax(Constants.BeltNeo, MotorType.kBrushless);
    
    
   }
   public void feedRun() {
     beltneo.set(.78);//subject to change during testing 
-    
+  }
 
+  public void stopFeed() {
+    beltneo.set(0.0);
   }
 
   @Override
