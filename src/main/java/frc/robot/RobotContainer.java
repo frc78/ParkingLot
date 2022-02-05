@@ -79,6 +79,9 @@ public class RobotContainer {
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
     manipControllerRB.whileHeld(new IntakeCommand(m_intake));
+    
+    
+
   }
 
   /**
