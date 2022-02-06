@@ -11,10 +11,14 @@ import frc.robot.subsystems.Indexer;
 public class Tuck extends CommandBase {
   private Feed m_feed;
   private Indexer m_indexer;
+  private boolean m_isTuck;
   /** Creates a new Tuck. */
-  public Tuck(Feed subsystem, Indexer subsystem2) {
+  public Tuck(Feed subsystem, Indexer subsystem2, boolean IsTuck) {
     m_feed = subsystem;
     m_indexer = subsystem2;
+    m_isTuck = IsTuck;
+
+  
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -26,8 +30,14 @@ public class Tuck extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_feed.feedRun();
-    m_indexer.indexRun();
+    if(m_isTuck){
+      m_feed.feedRun();
+      m_indexer.indexRun();
+    }else{
+      m_feed.feedReverse();
+      m_indexer.indexReverse();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
