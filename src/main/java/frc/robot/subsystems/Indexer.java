@@ -24,6 +24,9 @@ public class Indexer extends SubsystemBase {
   public void indexRun(){
     IndexMotor.set(ControlMode.PercentOutput, 0.75);
   }
+  public void indexReverse(){
+    IndexMotor.set(ControlMode.PercentOutput, -0.75);
+  }
 
   public void stopIndexer() {
     IndexMotor.set(ControlMode.PercentOutput, 0.0);

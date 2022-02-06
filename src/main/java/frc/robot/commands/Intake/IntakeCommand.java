@@ -14,13 +14,15 @@ public class IntakeCommand extends CommandBase {
   private Intake m_intake;
   private Feed m_feed;
   private Indexer m_indexer;
+  private Boolean m_isIntake;
   
 
-  public IntakeCommand(Intake subsystem, Feed subsystem2, Indexer subsystem3) {
+  public IntakeCommand(Intake subsystem, Feed subsystem2, Indexer subsystem3, boolean IsIntake) {
 
     m_intake = subsystem;
     m_feed = subsystem2;
     m_indexer = subsystem3;
+    m_isIntake = IsIntake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_intake, m_feed, m_indexer);
   }
@@ -37,9 +39,18 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.setSpeed(-.75);
-    m_feed.feedRun();
-    m_indexer.indexRun();
+    if(m_isIntake){
+      m_intake.DeployIntake();
+      m_intake.setSpeed(-.75);
+      m_feed.feedRun();
+      m_indexer.indexRun();
+    }else{
+      m_intake.DeployIntake();
+      m_intake.setSpeed(.75);
+    }
+
+    
+    
   }
 
   // Called once the command ends or is interrupted.

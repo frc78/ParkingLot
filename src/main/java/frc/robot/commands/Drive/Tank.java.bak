@@ -2,45 +2,47 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Intake;
+package frc.robot.commands.Drive;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Chassis.Chassis;
 
-public class Unjam extends CommandBase {
-  public Intake m_unjam;
+public class Tank extends CommandBase {
 
-  /** Creates a new Unjam. */
-  public Unjam(Intake subsystem) {
-    m_unjam = subsystem; 
+  private Chassis m_chassis;
+  private XboxController m_controller;
+  
+  /** Creates a new Tank. */
+  public Tank(Chassis chassis, XboxController xbox) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_unjam);
-    
+    m_chassis = chassis;
+    m_controller = xbox;
+    addRequirements(chassis);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_unjam.DeployIntake();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_unjam.setSpeed(0.75);
+    double lSpeed = m_controller.getLeftY();
+    double rSpeed = m_controller.getRightY();
+
+    m_chassis.setSpeed(lSpeed * .7, rSpeed * .7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_chassis.setSpeed(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
-  }
-
-  public void setDefaultCommand(InstantCommand instantCommand) {
   }
 }
