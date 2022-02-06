@@ -6,6 +6,7 @@ package frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
 
 public class SpinUp extends CommandBase {
   private Shooter shooter;
@@ -24,7 +25,7 @@ public class SpinUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.startWheely();
+    shooter.startWheel(Constants.spinupVel);
   }
 
   // Called once the command ends or is interrupted.

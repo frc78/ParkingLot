@@ -5,9 +5,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,6 +19,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Shooter extends SubsystemBase {
   private static TalonFX shooterWheel = new TalonFX(Constants.LeftShoot);
   private static TalonFX shooterWheel2 = new TalonFX(Constants.RightShoot);
+  private static TalonFXConfiguration _velocity_closed = new TalonFXConfiguration();
+
+
+  /**NOT NEEDED YET public static int shootMode = 0;*/
+
   /** Creates a new Shooter. */
   public Shooter() {
     //reset the motor configurations
@@ -32,11 +40,28 @@ public class Shooter extends SubsystemBase {
     shooterWheel.setNeutralMode(NeutralMode.Coast);
     shooterWheel2.setNeutralMode(NeutralMode.Coast);
 
+    
+    // Config all PID settings
+    _velocity_closed.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
+    _velocity_closed.nominalOutputForward = 0;
+    _velocity_closed.nominalOutputReverse = 0;
+    _velocity_closed.peakOutputForward = 1;
+    _velocity_closed.peakOutputReverse = 0; // Should never go in reverse
+    _velocity_closed.slot0.kF = 0.04843;//0.05;
+    _velocity_closed.slot0.kP = 0.078;//0.02;
+    _velocity_closed.slot0.kI = 0;
+    _velocity_closed.slot0.kD = 0;
   }
  public void startWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0.33);
    shooterWheel2.set(ControlMode.PercentOutput, 0.33);
  }
+
+ public void startWheel(double velocity){
+  velocity = ((velocity * 2048) / 600); // Convert velocity in RPM to Units Per 100ms
+  shooterWheel.set(ControlMode.Velocity, velocity);
+}
+
  public void stopWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0);
    shooterWheel2.set(ControlMode.PercentOutput, 0);

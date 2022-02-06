@@ -8,16 +8,19 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
+//import edu.wpi.first.wpilibj.XboxController;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends SubsystemBase {
 
   /** Creates a new Intake. */
   DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0,1);
-  Compressor comp = new Compressor(1, PneumaticsModuleType.REVPH);
+  Compressor comp = new Compressor(PneumaticsModuleType.REVPH);
 
     protected TalonFX intake;
    // private XboxController m_controller;
