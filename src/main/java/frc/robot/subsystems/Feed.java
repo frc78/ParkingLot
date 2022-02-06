@@ -22,10 +22,10 @@ public class Feed extends SubsystemBase {
    
   }
   public void feedRun() {
-    beltneo.set(.78);//subject to change during testing 
+    beltneo.set(.50);//subject to change during testing 
   }
   public void feedReverse() {
-    beltneo.set(-.78);
+    beltneo.set(-.50);
   }
 
   public void stopFeed() {
