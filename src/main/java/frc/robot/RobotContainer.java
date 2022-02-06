@@ -26,6 +26,7 @@ import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.Tuck;
 import frc.robot.commands.Shoot.SpinUp;
+import frc.robot.commands.Shoot.AutoTaxi;
 import frc.robot.commands.Shoot.Fire;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
@@ -169,6 +170,8 @@ public class RobotContainer {
     m_chassis.resetOdometry(trajectory.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-    return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
+   // return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    return new AutoTaxi(ramseteCommand, ramseteCommand);
   }
 }
+
