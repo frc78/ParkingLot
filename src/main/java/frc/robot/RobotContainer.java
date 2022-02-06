@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutoTaxi;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -169,6 +170,7 @@ public class RobotContainer {
     m_chassis.resetOdometry(trajectory.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-    return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    //return ramseteCommand.andThen(() -> m_chassis.stop());  m_autoCommand;
+    return new AutoTaxi(ramseteCommand, ramseteCommand);
   }
 }
