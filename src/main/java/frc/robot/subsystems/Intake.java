@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class Intake extends SubsystemBase {
 
   /** Creates a new Intake. */
-  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0,1);
-  Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0,1);
+  Compressor comp = new Compressor(1, PneumaticsModuleType.REVPH);
 
     protected TalonFX intake;
    // private XboxController m_controller;
