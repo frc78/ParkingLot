@@ -21,13 +21,14 @@ public class Feed extends SubsystemBase {
    
    
   }
+  
   public void feedRun(double m_feedSpeed) {
     
     beltneo.set(m_feedSpeed);//subject to change during testing 
-    
   }
+  
   public void feedReverse() {
-    beltneo.set(-.78);
+    beltneo.set(-.50);
   }
 
   public void stopFeed() {

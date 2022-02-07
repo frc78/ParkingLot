@@ -118,7 +118,7 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+  //  m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
     SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
     SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
