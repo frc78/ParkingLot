@@ -31,7 +31,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void initialize() {
     m_intake.DeployIntake();
-    m_feed.feedRun();
+    m_feed.feedRun(0.0);
     m_indexer.indexRun();
 
   }
@@ -42,7 +42,7 @@ public class IntakeCommand extends CommandBase {
     if(m_isIntake){
       m_intake.DeployIntake();
       m_intake.setSpeed(-.75);
-      m_feed.feedRun();
+      m_feed.feedRun(.75);
       m_indexer.indexRun();
     }else{
       m_intake.DeployIntake();
