@@ -12,7 +12,7 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feed extends SubsystemBase {
-  private CANSparkMax beltneo;
+  private CANSparkMax beltneo; 
   
   
   /** Creates a new Feed. */
@@ -21,8 +21,10 @@ public class Feed extends SubsystemBase {
    
    
   }
-  public void feedRun() {
-    beltneo.set(.78);//subject to change during testing 
+  public void feedRun(double m_feedSpeed) {
+    
+    beltneo.set(m_feedSpeed);//subject to change during testing 
+    
   }
   public void feedReverse() {
     beltneo.set(-.78);

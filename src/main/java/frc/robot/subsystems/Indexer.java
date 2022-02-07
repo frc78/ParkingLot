@@ -22,10 +22,10 @@ public class Indexer extends SubsystemBase {
   
   }
   public void indexRun(){
-    IndexMotor.set(ControlMode.PercentOutput, 0.75);
+    IndexMotor.set(ControlMode.PercentOutput, 0.30);
   }
   public void indexReverse(){
-    IndexMotor.set(ControlMode.PercentOutput, -0.75);
+    IndexMotor.set(ControlMode.PercentOutput, -0.30);
   }
 
   public void stopIndexer() {
