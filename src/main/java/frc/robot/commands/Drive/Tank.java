@@ -5,6 +5,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -31,7 +32,10 @@ public class Tank extends CommandBase {
     double lSpeed = m_controller.getLeftY();
     double rSpeed = m_controller.getRightY();
 
-    m_chassis.setSpeed(lSpeed * -.7, rSpeed * -.7);
+    m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
+
+    SmartDashboard.putNumber("Left Joystick Value", lSpeed);
+    SmartDashboard.putNumber("Right Joystick Value", rSpeed);
   }
 
   // Called once the command ends or is interrupted.
