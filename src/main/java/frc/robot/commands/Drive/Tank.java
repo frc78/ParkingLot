@@ -32,10 +32,16 @@ public class Tank extends CommandBase {
     double lSpeed = m_controller.getLeftY();
     double rSpeed = m_controller.getRightY();
 
-    m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
-
+    boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
+    if(motorToggle){
+      m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
+    }else{
+      m_chassis.setSpeed(lSpeed, rSpeed);
+    }
+    
     SmartDashboard.putNumber("Left Joystick Value", lSpeed);
     SmartDashboard.putNumber("Right Joystick Value", rSpeed);
+
   }
 
   // Called once the command ends or is interrupted.
