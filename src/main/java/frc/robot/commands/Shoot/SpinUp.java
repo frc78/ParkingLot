@@ -22,6 +22,8 @@ public class SpinUp extends CommandBase {
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
+  
+  // WHEN MERGED WITH ShooterVelicityPID BRANCH, CHANGE COMMAND FROM .startWheely to .startWheel
   @Override
   public void execute() {
     shooter.startWheely();
