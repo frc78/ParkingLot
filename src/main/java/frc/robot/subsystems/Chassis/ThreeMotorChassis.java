@@ -55,5 +55,12 @@ public class ThreeMotorChassis extends Chassis {
 
         rightFollower1.setNeutralMode(Constants.MOTOR_MODE);
         rightFollower2.setNeutralMode(Constants.MOTOR_MODE);
+
+        // Set minimum time to ramp up (originally .8)
+        leftFollower1.configOpenloopRamp(0.78);
+        leftFollower2.configOpenloopRamp(0.78);
+
+        rightFollower1.configOpenloopRamp(0.78);
+        rightFollower2.configOpenloopRamp(0.78);
     }
 }
