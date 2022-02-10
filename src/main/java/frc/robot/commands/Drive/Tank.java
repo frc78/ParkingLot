@@ -29,8 +29,8 @@ public class Tank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double lSpeed = m_controller.getLeftY();
-    double rSpeed = m_controller.getRightY();
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.3);
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.3);
 
     boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
     if(motorToggle){
@@ -41,7 +41,14 @@ public class Tank extends CommandBase {
     
     SmartDashboard.putNumber("Left Joystick Value", lSpeed);
     SmartDashboard.putNumber("Right Joystick Value", rSpeed);
+  }
 
+  public double triggerAdjustedSpeed(double inputSpeed, double maxAdjust){
+    double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
+    tempSpeed = ((1 - maxAdjust) * inputSpeed) + (inputSpeed * maxAdjust * tempSpeed);
+
+    //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
+    return Math.max(-1, Math.min(1, tempSpeed));
   }
 
   // Called once the command ends or is interrupted.

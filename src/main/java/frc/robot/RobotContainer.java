@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -34,7 +35,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
-import edu.wpi.first.wpilibj2.command.button.Button;
 
 
 /**
@@ -54,14 +54,11 @@ public class RobotContainer {
 
   //            JOYSTICKS
   private final XboxController m_driveController;
- 
   private final XboxController m_manipController; 
   
   //  Shooter
   // private final Shooter m_shooter;
   
-
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
@@ -80,14 +77,11 @@ public class RobotContainer {
     //Configure the button bindings
     configureButtonBindings();
 
-
+    //Set some default commands
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
-
     m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
-
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
-
     m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely, m_shooter)));
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
@@ -123,8 +117,6 @@ public class RobotContainer {
 
     Button manipControllerB = new JoystickButton(m_manipController, 2);
     manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
-
-    
   }
 
   /**

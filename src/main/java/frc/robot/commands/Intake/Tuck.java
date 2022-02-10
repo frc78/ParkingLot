@@ -31,7 +31,7 @@ public class Tuck extends CommandBase {
   @Override
   public void execute() {
     if(m_isTuck){
-      m_feed.feedRun(.5);
+      m_feed.feedRun(1);
       m_indexer.indexRun();
     }else{
       m_feed.feedReverse();
