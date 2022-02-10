@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.Constants;
 
-public class pathCommands {
+public class PathCommands {
 
 public RamseteCommand createRamseteCommand(Trajectory trajectory, Chassis m_chassis) {
         return new RamseteCommand(

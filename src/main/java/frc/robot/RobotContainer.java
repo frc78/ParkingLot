@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Auto.AutoTaxi;
-import frc.robot.commands.Auto.pathCommands;
+import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -53,6 +53,7 @@ public class RobotContainer {
   private final Feed m_feed;
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
+  private final PathCommands pathCommands;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -74,6 +75,7 @@ public class RobotContainer {
     m_feed = new Feed();
     m_indexer = new Indexer();
     m_feedWheel = new FeedWheel();
+    pathCommands = new PathCommands();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -154,8 +156,8 @@ public class RobotContainer {
     Trajectory trajectory1 = pathCommands.createTrajectory("test2Part1.wpilib.json");
     Trajectory trajectory2 = pathCommands.createTrajectory("test2Part2.wpilib.json");
 
-    RamseteCommand ramseteComman1 = pathCommands.createRamseteCommand(trajectory1, m_chassis);
-    RamseteCommand ramseteComman2 = pathCommands.createRamseteCommand(trajectory2, m_chassis);
+    RamseteCommand ramseteCommand1 = pathCommands.createRamseteCommand(trajectory1, m_chassis);
+    RamseteCommand ramseteCommand2 = pathCommands.createRamseteCommand(trajectory2, m_chassis);
 
     m_chassis.resetOdometry(trajectory1.getInitialPose());
 
