@@ -166,4 +166,3 @@ public class RobotContainer {
     return new AutoTaxi(m_feed, m_indexer, m_feedWheel, ramseteCommand1, ramseteCommand2);
   }
 }
-
