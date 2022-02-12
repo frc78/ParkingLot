@@ -64,10 +64,10 @@ public final class Constants {
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
     //        Feedback
-    public static final double ksVolts = 0.630;
-    public static final double kvVoltSecondsPerMeter = 3.057;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.229;
-    public static final double kPDriveVel = 0.693;
+    public static final double ksVolts = 0.621;
+    public static final double kvVoltSecondsPerMeter = 4.1176;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.32188;
+    public static final double kPDriveVel = 0.9399;
 
     //        Robot Speed
     public static final double kMaxSpeedMetersPerSecond = 1;
