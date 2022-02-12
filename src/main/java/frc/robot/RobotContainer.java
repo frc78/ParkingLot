@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -59,6 +60,9 @@ public class RobotContainer {
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
 
+  //THERE IS PROBABLY A BETTER WAY TO DO THIS THAN INSTANTIATING A CLASS
+  private final PathCommands m_pathcommands;
+
   //            JOYSTICKS
   private final XboxController m_driveController;
  
@@ -82,6 +86,7 @@ public class RobotContainer {
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
+    m_pathcommands = new PathCommands();
     
   
     //Configure the button bindings
@@ -141,53 +146,13 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
-    // var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
-    //   new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter),
-    //   Constants.kDriveKinematics,
-    //   10
-    // );
-    // //These are not needed as they are retrieved from path json file
-    // TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared).setKinematics(Constants.kDriveKinematics).addConstraint(autoVoltageConstraint);
+    //Trajectory trajectory1 = new Trajectory();
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/auto1.wpilib.json");
+    RamseteCommand ramseteCommand1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
 
-    // // An example trajectory to follow.  All units in meters.
-    // Trajectory manualTrajectory =
-    //     TrajectoryGenerator.generateTrajectory(
-    //         // Start at the origin facing the +X direction
-    //         new Pose2d(0, 0, new Rotation2d(0)),
-    //         // Pass through these two interior waypoints, making an 's' curve path
-    //         List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-    //         // End 3 meters straight ahead of where we started, facing forward
-    //         new Pose2d(3, 0, new Rotation2d(0)),
-    //         // Pass config
-    //         config);
-
-    Trajectory trajectory = new Trajectory();
-
-    String trajectoryJSON = "paths/output/auto1.wpilib.json";
-
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-    } catch (IOException ex) {
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-    }
-
-    RamseteCommand ramseteCommand = new RamseteCommand(
-      trajectory, 
-      m_chassis::getPose, 
-      new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta), 
-      new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter), 
-      Constants.kDriveKinematics, 
-      m_chassis::getWheelSpeeds, 
-      new PIDController(Constants.kPDriveVel, 0, 0), 
-      new PIDController(Constants.kPDriveVel, 0, 0), 
-      m_chassis::setVoltage, 
-      m_chassis
-    );
-
-    m_chassis.resetOdometry(trajectory.getInitialPose());
+    m_chassis.resetOdometry(trajectory1.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-    return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
   }
 }
