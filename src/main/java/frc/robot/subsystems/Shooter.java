@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 
 import frc.robot.Constants;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -51,6 +51,9 @@ public class Shooter extends SubsystemBase {
     _velocity_closed.slot0.kP = 0.078;//0.02;
     _velocity_closed.slot0.kI = 0;
     _velocity_closed.slot0.kD = 0;
+
+    shooterWheel.configAllSettings(_velocity_closed);
+    shooterWheel.selectProfileSlot(0, 0);
   }
  public void startWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0.33);
@@ -68,6 +71,8 @@ public class Shooter extends SubsystemBase {
  }
   @Override
   public void periodic() {
+    double vel = SmartDashboard.getNumber("Velocity", Constants.spinupVel);
+    double vel2 = SmartDashboard.getNumber("VelocityTop", Constants.spinupVel2);
     // This method will be called once per scheduler run
   }
 }

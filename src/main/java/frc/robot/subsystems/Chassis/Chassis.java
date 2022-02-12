@@ -72,6 +72,7 @@ public class Chassis extends SubsystemBase {
   public void setSpeed(double lSpeed, double rSpeed) {
     leftLeader.set(ControlMode.PercentOutput, lSpeed);
     rightLeader.set(ControlMode.PercentOutput, rSpeed);
+    m_drive.feed();
   }
 
   public void stop() {

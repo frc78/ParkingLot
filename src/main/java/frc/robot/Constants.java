@@ -46,7 +46,8 @@ public final class Constants {
     public static final int Indexer = 12;//Temporary subject to change.
 
     //Shooter Velocity
-    public static final double spinupVel = 0.4; //VARIABLE TO CHANGE 
+    public static final double spinupVel = 2200.0; //Bottom Goal
+    public static final double spinupVel2 = 3150.0;//Top Goal
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
