@@ -6,12 +6,19 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -67,7 +74,7 @@ public class RobotContainer {
     
     // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
-    m_chassis = new ThreeMotorChassis();
+    m_chassis = new Chassis();
     m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
@@ -139,12 +146,24 @@ public class RobotContainer {
     //   Constants.kDriveKinematics,
     //   10
     // );
-    // These are not needed as they are retrieved from path json file
+    // //These are not needed as they are retrieved from path json file
     // TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared).setKinematics(Constants.kDriveKinematics).addConstraint(autoVoltageConstraint);
+
+    // // An example trajectory to follow.  All units in meters.
+    // Trajectory manualTrajectory =
+    //     TrajectoryGenerator.generateTrajectory(
+    //         // Start at the origin facing the +X direction
+    //         new Pose2d(0, 0, new Rotation2d(0)),
+    //         // Pass through these two interior waypoints, making an 's' curve path
+    //         List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+    //         // End 3 meters straight ahead of where we started, facing forward
+    //         new Pose2d(3, 0, new Rotation2d(0)),
+    //         // Pass config
+    //         config);
 
     Trajectory trajectory = new Trajectory();
 
-    String trajectoryJSON = "test1.wpilib.json";
+    String trajectoryJSON = "paths/path1NEW.wpilib.json";
 
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);

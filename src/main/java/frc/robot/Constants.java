@@ -52,25 +52,26 @@ public final class Constants {
     public static final int IMU = 0;
 
     //            PARAMETERS
-    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
-    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.CounterClockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
     public static final double WHEEL_CIRC_METERS = 0.478;
+    public static final double WHEEL_GEAR_RATIO = 12.27;
 
     //            PATH FOLLOWING CONSTANTS
     public static final double kTrackWidthMeters = 0.584;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
     //        Feedback
-    public static final double ksVolts = 0.22;
-    public static final double kvVoltSecondsPerMeter = 1.98;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.2;
-    public static final double kPDriveVel = 8.5;
+    public static final double ksVolts = 0.630;
+    public static final double kvVoltSecondsPerMeter = 3.057;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.229;
+    public static final double kPDriveVel = 0.693;
 
     //        Robot Speed
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 1;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 0.5;
     //        Ramsete Controller
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
