@@ -5,19 +5,26 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Shoot.SpinUp;
+import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoTaxiPar extends ParallelCommandGroup {
+public class AutoTaxiPar extends ParallelRaceGroup {
   /** Creates a new AutoTaxi. */
-  public AutoTaxiPar(RamseteCommand ramseteCommand1, Shooter m_shooter) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoTaxiSeq(ramseteCommand1), new SpinUp(m_shooter));
+  public AutoTaxiPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
+    addCommands(
+      new AutoTaxiSeq(ramseteCommand1),
+      new SpinUp(m_shooter),
+      new IntakeCommand(intake, feed, indexer, true)
+      );
   }
 }

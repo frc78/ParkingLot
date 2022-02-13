@@ -59,7 +59,7 @@ public final class Constants {
     public static final double WHEEL_CIRC_METERS = 0.478;
     public static final double WHEEL_GEAR_RATIO = 12.27;
 
-    //            PATH FOLLOWING CONSTANTS
+    //            PATH FOLLOWING CONSTANTS FOR SMALL MULE CHASSIS
     public static final double kTrackWidthMeters = 0.584;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 

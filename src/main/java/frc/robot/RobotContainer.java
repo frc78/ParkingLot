@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Auto.AutoTestSeq;
 import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
@@ -147,12 +148,15 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
     //Trajectory trajectory1 = new Trajectory();
-    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/auto1.wpilib.json");
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/autoTest1.wpilib.json");
+    Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
     RamseteCommand ramseteCommand1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
+    RamseteCommand ramseteCommand2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
 
     m_chassis.resetOdometry(trajectory1.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-    return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    //return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    return new AutoTestSeq(ramseteCommand1, ramseteCommand2);
   }
 }
