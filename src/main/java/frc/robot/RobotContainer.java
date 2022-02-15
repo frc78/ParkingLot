@@ -120,7 +120,7 @@ public class RobotContainer {
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
     Button manipControllerX = new JoystickButton(m_manipController, 3);
-    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
+    manipControllerX.whenHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
 
     Button manipControllerA = new JoystickButton(m_manipController, 1);
     manipControllerA.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));

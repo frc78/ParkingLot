@@ -5,6 +5,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -12,7 +13,7 @@ public class Tank extends CommandBase {
 
   private Chassis m_chassis;
   private XboxController m_controller;
-
+  
   /** Creates a new Tank. */
   public Tank(Chassis chassis, XboxController xbox) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,12 +29,19 @@ public class Tank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //sets the speed variables, passes in 0.3 as the maxAdjust arguement so that the default speed is 0.7 and range will be 0.4 to 1
-    //and the 3rd arguemtent is for speed smoothing, 0 is for no smoothing, 1 is for left motor and 2 is for right motor
-    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.5);
-    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.5);
+    double lSpeed = m_controller.getLeftY();
+    double rSpeed = m_controller.getRightY();
 
-    m_chassis.setSpeed(lSpeed, rSpeed);
+    boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
+    if(motorToggle){
+      m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
+    }else{
+      m_chassis.setSpeed(lSpeed, rSpeed);
+    }
+    
+    SmartDashboard.putNumber("Left Joystick Value", lSpeed);
+    SmartDashboard.putNumber("Right Joystick Value", rSpeed);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -46,14 +54,5 @@ public class Tank extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
-  }
-
-  //this function is meant to take in the joystick input, and maxAdjust has to be between 0 and 1
-  public double triggerAdjustedSpeed(double inputSpeed, double maxAdjust){
-    double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
-    tempSpeed = ((1 - maxAdjust) * inputSpeed) + (inputSpeed * maxAdjust * tempSpeed);
-
-    //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
-    return Math.max(-1, Math.min(1, tempSpeed));
   }
 }
