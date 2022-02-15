@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
@@ -91,6 +92,12 @@ public class RobotContainer {
     m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely, m_shooter)));
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
+
+
+    //OOGA BOOGA
+    double startingBalls = 1;//this should be how many we start wiht it could not be one
+    SmartDashboard.putNumber("Balls", startingBalls);
+
   }
 
   /**       

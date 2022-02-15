@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.FeedWheel;
+import frc.robot.subsystems.BallCount;
 
 public class Fire extends CommandBase {
   private Feed m_feed;
@@ -42,6 +43,7 @@ public class Fire extends CommandBase {
     m_indexer.stopIndexer();
     m_feed.stopFeed();
     m_feedWheel.stopFeedWheel();
+    BallCount.resetBallCount();
   }
 
   // Returns true when the command should end.
