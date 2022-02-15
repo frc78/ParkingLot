@@ -6,6 +6,7 @@ package frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.BallCount;
 
 public class SpinUp extends CommandBase {
   private Shooter shooter;
