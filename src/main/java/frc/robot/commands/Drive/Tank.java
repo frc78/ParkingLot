@@ -30,8 +30,8 @@ public class Tank extends CommandBase {
   public void execute() {
     //sets the speed variables, passes in 0.3 as the maxAdjust arguement so that the default speed is 0.7 and range will be 0.4 to 1
     //and the 3rd arguemtent is for speed smoothing, 0 is for no smoothing, 1 is for left motor and 2 is for right motor
-    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.5);
-    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.5);
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.3) * -1;
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.3) * -1;
 
     m_chassis.setSpeed(lSpeed, rSpeed);
   }
