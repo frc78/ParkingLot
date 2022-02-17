@@ -18,11 +18,11 @@ import frc.robot.subsystems.Chassis.Chassis;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoTaxiPar extends ParallelRaceGroup {
+public class Auto1BallPar extends ParallelRaceGroup {
   /** Creates a new AutoTaxi. */
-  public AutoTaxiPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
+  public Auto1BallPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
     addCommands(
-      new AutoTaxiSeq(ramseteCommand1),
+      new Auto1BallSeq(ramseteCommand1),
       new SpinUp(m_shooter),
       new IntakeCommand(intake, feed, indexer, true)
       );

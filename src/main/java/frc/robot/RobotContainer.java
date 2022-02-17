@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Auto.Auto1BallPar;
 import frc.robot.commands.Auto.AutoTestSeq;
 import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Drive.Forward50;
@@ -54,7 +55,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   //            SUBSYSTEMS
-  private final Chassis m_chassis;
+  private final ThreeMotorChassis m_chassis;
   private final Intake m_intake;
   private final Shooter m_shooter;
   private final Feed m_feed;
@@ -79,7 +80,7 @@ public class RobotContainer {
     
     // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
-    m_chassis = new Chassis();
+    m_chassis = new ThreeMotorChassis();
     m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
@@ -148,15 +149,15 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
     //Trajectory trajectory1 = new Trajectory();
-    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/autoTest1.wpilib.json");
-    Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/auto1Ball1.wpilib.json");
+    //Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
     RamseteCommand ramseteCommand1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
-    RamseteCommand ramseteCommand2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
+    //RamseteCommand ramseteCommand2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
 
     m_chassis.resetOdometry(trajectory1.getInitialPose());
 
     // An ExampleCommand will run in autonomous
     //return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
-    return new AutoTestSeq(ramseteCommand1, ramseteCommand2);
+    return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
   }
 }
