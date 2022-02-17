@@ -73,6 +73,10 @@ public class Chassis extends SubsystemBase {
     // Setup drivebase
     m_drive = new DifferentialDrive(leftLeader, rightLeader);
     m_odometry = new DifferentialDriveOdometry(pidgey.getRotation2d());
+
+    // Set minimum time to ramp up (originally .8)
+    leftLeader.configOpenloopRamp(0.78);
+    rightLeader.configOpenloopRamp(0.78);
   }
 
   public void setSpeed(double lSpeed, double rSpeed) {
@@ -126,7 +130,7 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+  //  m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
     SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
     SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());

@@ -38,6 +38,7 @@ public final class Constants {
     // Shooter
     public static final int LeftShoot = 8;// temporary value will fill in later. 
     public static final int RightShoot = 9;
+    
     //Feed
     public static final int BeltNeo = 10;
     public static final int WheelNeo = 11;
