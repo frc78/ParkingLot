@@ -32,9 +32,18 @@ public class Intake extends SubsystemBase {
 
   }
 
+  public boolean getDigitalInput(){
+    
+    if(/*digitalinput ==*/true)
+    return true;
+    return false;
+  }
+
+
   public void setSpeed(double speed) {
     intake.set(ControlMode.PercentOutput, speed);
   }
+
 
   @Override
   public void periodic() {
