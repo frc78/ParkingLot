@@ -4,15 +4,16 @@
 
 package frc.robot.commands.Hanger;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Hanger;
 
 public class DeployHanger extends CommandBase {
   private Hanger m_hanger;
-  private XboxController m_controller;
+  private Joystick m_controller;
   /** Creates a new DeployHanger. */
-  public DeployHanger(Hanger hanger, XboxController controller ) {
+  public DeployHanger(Hanger hanger, Joystick controller ) {
     
     // Use addRequirements() here to declare subsystem dependencies.
     m_hanger = hanger;
@@ -32,7 +33,7 @@ public class DeployHanger extends CommandBase {
           m_hanger.stop();
         } else if ((dPadValue > 90) && (dPadValue <= 270)){
           m_hanger.fall();
-        } else if ((dPadValue <= 90) && (dPadValue > 270)){
+        } else if ((dPadValue <= 90) || (dPadValue > 270)){
           m_hanger.rise();
         }
       }

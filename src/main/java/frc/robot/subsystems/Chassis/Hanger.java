@@ -39,7 +39,7 @@ public class Hanger extends SubsystemBase{
     }
     public void stop(){
         climbLeader.set(ControlMode.PercentOutput, 0);
-        climbFollower.set(ControlMode.PercentOutput, 0.5);
+        climbFollower.set(ControlMode.PercentOutput, 0);
     }
     @Override
     public void periodic(){}
