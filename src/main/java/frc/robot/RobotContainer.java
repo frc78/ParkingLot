@@ -15,12 +15,14 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -55,7 +57,7 @@ public class RobotContainer {
   //            JOYSTICKS
   private final XboxController m_driveController;
  
-  private final XboxController m_manipController; 
+  private final Joystick m_manipController; 
   
   //  Shooter
   // private final Shooter m_shooter;
@@ -74,7 +76,7 @@ public class RobotContainer {
     m_feedWheel = new FeedWheel();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
-    m_manipController = new XboxController(Constants.DRIVEMP);
+    m_manipController = new Joystick(Constants.DRIVEMP);
     
   
     //Configure the button bindings
@@ -116,7 +118,10 @@ public class RobotContainer {
     manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
 
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
-    manipControllerLB.whileHeld(new SpinUp(m_shooter));
+    manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2));//High Goal
+
+    Button manipControllerLowLT = new JoystickButton(m_manipController, 7);
+    manipControllerLowLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel));//Low goal
     
     Button manipControllerY = new JoystickButton(m_manipController, 4);
     manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
