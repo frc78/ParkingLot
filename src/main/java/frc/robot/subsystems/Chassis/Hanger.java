@@ -6,6 +6,7 @@ package frc.robot.subsystems.Chassis;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,17 +24,22 @@ public class Hanger extends SubsystemBase{
 
         climbFollower.setNeutralMode(NeutralMode.Brake);
         climbLeader.setNeutralMode(NeutralMode.Brake);
-        climbFollower.follow(climbLeader);
+        climbFollower.setInverted(TalonFXInvertType.CounterClockwise);
+        climbLeader.setInverted(TalonFXInvertType.Clockwise);
+        // climbFollower.follow(climbLeader);
     }
 
     public void rise() {
         climbLeader.set(ControlMode.PercentOutput, 0.5);
+        climbFollower.set(ControlMode.PercentOutput, 0.5);
     }
     public void fall(){
         climbLeader.set(ControlMode.PercentOutput, -0.5);
+        climbFollower.set(ControlMode.PercentOutput, -0.5);
     }
     public void stop(){
         climbLeader.set(ControlMode.PercentOutput, 0);
+        climbFollower.set(ControlMode.PercentOutput, 0.5);
     }
     @Override
     public void periodic(){}
