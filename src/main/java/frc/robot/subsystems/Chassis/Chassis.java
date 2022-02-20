@@ -124,6 +124,10 @@ public class Chassis extends SubsystemBase {
     return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
 
+  public double getRawMotorPosition(int motor) {
+    return motor == 0 ? leftLeader.getSelectedSensorPosition() : rightLeader.getSelectedSensorPosition();
+  }
+
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getMotorSpeed(leftLeader), getMotorSpeed(rightLeader));
   }

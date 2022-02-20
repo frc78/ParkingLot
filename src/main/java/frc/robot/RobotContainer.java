@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -31,6 +33,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Auto.Auto1BallPar;
 import frc.robot.commands.Auto.AutoTestSeq;
 import frc.robot.commands.Auto.PathCommands;
+import frc.robot.commands.Auto.BackupAuto.AutoStraight;
+import frc.robot.commands.Auto.BackupAuto.AutoTurn;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -61,6 +65,7 @@ public class RobotContainer {
   private final Feed m_feed;
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
+  private final PigeonIMU m_pigeon;
 
   //THERE IS PROBABLY A BETTER WAY TO DO THIS THAN INSTANTIATING A CLASS
   private final PathCommands m_pathcommands;
@@ -89,6 +94,8 @@ public class RobotContainer {
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
     m_pathcommands = new PathCommands();
+
+    m_pigeon = new PigeonIMU(Constants.IMU);
     
   
     //Configure the button bindings
@@ -158,6 +165,7 @@ public class RobotContainer {
 
     // An ExampleCommand will run in autonomous
     //return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
-    return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
+    return new AutoTurn(m_chassis, m_pigeon, -90, 0.3);
+    //return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
   }
 }
