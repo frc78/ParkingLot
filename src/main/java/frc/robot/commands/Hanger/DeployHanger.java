@@ -32,26 +32,10 @@ public class DeployHanger extends CommandBase {
           m_hanger.stop();
         } else if ((dPadValue > 90) && (dPadValue <= 270)){
           m_hanger.fall();
-        } else if ((dPadValue <= 90) || (dPadValue > 270)){
+        } else if ((dPadValue <= 90) && (dPadValue > 270)){
           m_hanger.rise();
         }
-
       }
-  
-      
-    /*public staic enum Direction {
-      UP (0), Right (90), Down (180), Left (270);
-
-      
-    }*/
-
-
-    
-      
-    
-  }
-
-  
 
   // Called once the command ends or is interrupted.
   @Override

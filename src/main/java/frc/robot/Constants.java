@@ -45,6 +45,10 @@ public final class Constants {
 
     //Indexer
     public static final int Indexer = 12;//Temporary subject to change.
+
+    // Climber
+    public static final int CFOLLOWER = 0;
+    public static final int CLEADER = 0;
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
