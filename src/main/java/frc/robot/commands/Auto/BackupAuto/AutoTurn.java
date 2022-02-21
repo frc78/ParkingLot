@@ -15,10 +15,10 @@ public class AutoTurn extends CommandBase {
   
   private Chassis m_chassis;
   private PigeonIMU pigeon;
-  private int degrees;
+  private double degrees;
   private double speed;
   /** Creates a new AutoTurn. */
-  public AutoTurn(Chassis subsystem1, PigeonIMU gyro, int turnDegrees, double turnSpeed) {
+  public AutoTurn(Chassis subsystem1, PigeonIMU gyro, double turnDegrees, double turnSpeed) {
     m_chassis = subsystem1;
     pigeon = gyro;
     degrees = turnDegrees;
@@ -52,9 +52,9 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     if (degrees > 0) {
-      return pigeon.getFusedHeading() > degrees ? true:false;
+      return pigeon.getYaw() > degrees ? true:false;
     } else {
-      return pigeon.getFusedHeading() < degrees ? true:false;
+      return pigeon.getYaw() < degrees ? true:false;
     }
   }
 }
