@@ -21,12 +21,13 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Auto.AutoTaxi;
+import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.Tuck;
 import frc.robot.commands.Shoot.SpinUp;
-import frc.robot.commands.Shoot.AutoTaxi;
 import frc.robot.commands.Shoot.Fire;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
@@ -52,6 +53,7 @@ public class RobotContainer {
   private final Feed m_feed;
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
+  private final PathCommands pathCommands;
 
   //            JOYSTICKS
   private final XboxController m_driveController;
@@ -73,6 +75,7 @@ public class RobotContainer {
     m_feed = new Feed();
     m_indexer = new Indexer();
     m_feedWheel = new FeedWheel();
+    pathCommands = new PathCommands();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -143,35 +146,23 @@ public class RobotContainer {
     // These are not needed as they are retrieved from path json file
     // TrajectoryConfig config = new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared).setKinematics(Constants.kDriveKinematics).addConstraint(autoVoltageConstraint);
 
-    Trajectory trajectory = new Trajectory();
+    // try {
+    //   Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+    //   trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    // } catch (IOException ex) {
+    //   DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    // }
 
-    String trajectoryJSON = "test1.wpilib.json";
+    Trajectory trajectory1 = pathCommands.createTrajectory("test2Part1.wpilib.json");
+    Trajectory trajectory2 = pathCommands.createTrajectory("test2Part2.wpilib.json");
 
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-    } catch (IOException ex) {
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-    }
+    RamseteCommand ramseteCommand1 = pathCommands.createRamseteCommand(trajectory1, m_chassis);
+    RamseteCommand ramseteCommand2 = pathCommands.createRamseteCommand(trajectory2, m_chassis);
 
-    RamseteCommand ramseteCommand = new RamseteCommand(
-      trajectory, 
-      m_chassis::getPose, 
-      new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta), 
-      new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter), 
-      Constants.kDriveKinematics, 
-      m_chassis::getWheelSpeeds, 
-      new PIDController(Constants.kPDriveVel, 0, 0), 
-      new PIDController(Constants.kPDriveVel, 0, 0), 
-      m_chassis::setVoltage, 
-      m_chassis
-    );
-
-    m_chassis.resetOdometry(trajectory.getInitialPose());
+    m_chassis.resetOdometry(trajectory1.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-   // return ramseteCommand.andThen(() -> m_chassis.stop()); // m_autoCommand;
-    return new AutoTaxi(ramseteCommand, ramseteCommand);
+    //return ramseteCommand.andThen(() -> m_chassis.stop());  m_autoCommand;
+    return new AutoTaxi(m_feed, m_indexer, m_feedWheel, ramseteCommand1, ramseteCommand2);
   }
 }
-
