@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems.Chassis;
 
+import java.sql.Driver;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -13,6 +15,7 @@ import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -50,6 +53,9 @@ public class Chassis extends SubsystemBase {
 
     rightLeader.setNeutralMode(Constants.MOTOR_MODE);
 
+    leftLeader.setSensorPhase(true);
+    rightLeader.setSensorPhase(true);
+
     // Set inverted
     leftLeader.setInverted(Constants.LEFT_INVERTED);
 
@@ -86,6 +92,7 @@ public class Chassis extends SubsystemBase {
   public void setVoltage(double lVoltage, double rVoltage) {
     leftLeader.setVoltage(lVoltage);
     rightLeader.setVoltage(rVoltage);
+    DriverStation.reportWarning("L: " + lVoltage + " R: " + rVoltage, false);
     m_drive.feed();
   }
 
@@ -110,11 +117,11 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getMotorSpeed(TalonFX motor) {
-    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS;
+    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
 
   public double getMotorPosition(TalonFX motor) {
-    return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS;
+    return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
