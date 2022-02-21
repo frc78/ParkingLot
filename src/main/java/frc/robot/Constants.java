@@ -61,6 +61,7 @@ public final class Constants {
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
     public static final double WHEEL_CIRC_METERS = 0.478;
+    public static final double WHEEL_GEAR_RATIO = 12.27;
 
     //            PATH FOLLOWING CONSTANTS
     public static final double kTrackWidthMeters = 0.584;

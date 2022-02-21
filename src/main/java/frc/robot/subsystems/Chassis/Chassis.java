@@ -103,8 +103,13 @@ public class Chassis extends SubsystemBase {
 
   public void zeroAllSensors() {
     resetEncoder();
-    pidgey.setYaw(0, 30);
-    pidgey.setAccumZAngle(0, 30);
+    pidgey.reset();
+    // pidgey.setYaw(0, 30);
+    // pidgey.setAccumZAngle(0, 30);
+  }
+
+  public void feedDrive() {
+    m_drive.feed();
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -126,6 +131,11 @@ public class Chassis extends SubsystemBase {
 
   public double getRawMotorPosition(int motor) {
     return motor == 0 ? leftLeader.getSelectedSensorPosition() : rightLeader.getSelectedSensorPosition();
+  }
+
+  public double getPidgeonYaw() {
+    // return pidgey.getYaw();
+    return pidgey.getAngle();
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {

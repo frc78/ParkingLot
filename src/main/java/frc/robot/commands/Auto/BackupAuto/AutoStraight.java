@@ -13,12 +13,14 @@ public class AutoStraight extends CommandBase {
 
   private Chassis m_chassis;
   private double encDistance;
+  private double speed;
   //private double goalDistance;
   
-  public AutoStraight(Chassis subsytem1, double distance) {
+  public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {
     m_chassis = subsytem1;
+    speed = maxSpeed;
     //encDistance = (int) Math.round(((distance / Constants.WHEEL_CIRC_METERS) / Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION);
-    encDistance = ((distance / Constants.WHEEL_CIRC_METERS) * Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION;
+    encDistance = ((distanceM / Constants.WHEEL_CIRC_METERS) * Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION;
     addRequirements(m_chassis);
   }
 
@@ -32,7 +34,7 @@ public class AutoStraight extends CommandBase {
   @Override
   public void execute() {
     //m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance));
-    m_chassis.setSpeed(0.5, 0.5);
+    m_chassis.setSpeed(speed, speed);
     DriverStation.reportError("enc position :" + m_chassis.getRawMotorPosition(0), false);
   }
 

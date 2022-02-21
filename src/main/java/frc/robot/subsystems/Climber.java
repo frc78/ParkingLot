@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import frc.robot.Constants;
 
 /** Add your docs here. */
 public class Climber {
@@ -12,8 +13,8 @@ public class Climber {
     private WPI_TalonFX climbLeader;
     private WPI_TalonFX climbFollower;
     public Climber(){
-        climbFollower = new WPI_TalonFX(constants.CFOLLOWER);
-        climbLeader = new WPI_TalonFX(constants.CLEADER);
+        climbFollower = new WPI_TalonFX(Constants.CFOLLOWER);
+        climbLeader = new WPI_TalonFX(Constants.CLEADER);
 
     }
 }

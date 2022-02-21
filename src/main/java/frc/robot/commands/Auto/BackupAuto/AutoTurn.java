@@ -4,24 +4,24 @@
 
 package frc.robot.commands.Auto.BackupAuto;
 
-import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
-import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Chassis;
 
 public class AutoTurn extends CommandBase {
   
   private Chassis m_chassis;
-  private PigeonIMU pigeon;
   private double degrees;
   private double speed;
+
   /** Creates a new AutoTurn. */
-  public AutoTurn(Chassis subsystem1, PigeonIMU gyro, double turnDegrees, double turnSpeed) {
+  public AutoTurn(Chassis subsystem1, double turndegrees, double turnSpeed) {
     m_chassis = subsystem1;
-    pigeon = gyro;
-    degrees = turnDegrees;
+    degrees = turndegrees;
     speed = turnSpeed;
     addRequirements(m_chassis);
   }
@@ -29,18 +29,20 @@ public class AutoTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pigeon.setYaw(0, 30);
-
+    m_chassis.zeroAllSensors();
     if (degrees > 0) {
-      m_chassis.setSpeed(speed * -1, speed);
-    } else {
       m_chassis.setSpeed(speed, speed * -1);
+    } else {
+      m_chassis.setSpeed(speed * -1, speed);
     }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_chassis.feedDrive();
+    DriverStation.reportError("real moment, this is the readed headings: " + m_chassis.getPidgeonYaw(), false);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -52,9 +54,9 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     if (degrees > 0) {
-      return pigeon.getYaw() > degrees ? true:false;
+      return m_chassis.getPidgeonYaw() > degrees ? true:false;
     } else {
-      return pigeon.getYaw() < degrees ? true:false;
+      return m_chassis.getPidgeonYaw() < degrees ? true:false;
     }
   }
 }
