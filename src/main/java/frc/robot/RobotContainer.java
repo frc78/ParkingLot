@@ -55,7 +55,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   //            SUBSYSTEMS
-  private final ThreeMotorChassis m_chassis;
+  private final Chassis m_chassis;
   private final Intake m_intake;
   private final Shooter m_shooter;
   private final Feed m_feed;
@@ -80,7 +80,7 @@ public class RobotContainer {
     
     // CameraServer.startAutomaticCapture();
     m_intake = new Intake();
-    m_chassis = new ThreeMotorChassis();
+    m_chassis = new Chassis();
     m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
@@ -149,7 +149,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
     //Trajectory trajectory1 = new Trajectory();
-    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/auto1Ball1.wpilib.json");
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/straight2.wpilib.json");
     //Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
     RamseteCommand ramseteCommand1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
     //RamseteCommand ramseteCommand2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);

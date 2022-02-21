@@ -57,35 +57,23 @@ public final class Constants {
     public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
-    public static final double WHEEL_CIRC_METERS = 0.478;
-    public static final double WHEEL_GEAR_RATIO = 12.27;
+    // LARGE CHASSIS
+    // public static final double WHEEL_CIRC_METERS = 0.478;
+    // public static final double WHEEL_GEAR_RATIO = 12.27;
+
+    // SMALL CHASSIS
+    public static final double WHEEL_CIRC_METERS = 0.31918;
+    public static final double WHEEL_GEAR_RATIO = 9.091;
 
     // //            PATH FOLLOWING CONSTANTS FOR SMALL MULE CHASSIS
-    // public static final double kTrackWidthMeters = 0.584;
-    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
-
-    // //        Feedback
-    // public static final double ksVolts = 0.621;
-    // public static final double kvVoltSecondsPerMeter = 4.1176;
-    // public static final double kaVoltSecondsSquaredPerMeter = 0.32188;
-    // public static final double kPDriveVel = 0.9399;
-
-    // //        Robot Speed
-    // public static final double kMaxSpeedMetersPerSecond = 1;
-    // public static final double kMaxAccelerationMetersPerSecondSquared = 0.5;
-    // //        Ramsete Controller
-    // public static final double kRamseteB = 2;
-    // public static final double kRamseteZeta = 0.7;
-
-    //            PATH FOLLOWING CONSTANTS FOR LARGE THREE MOTOR MULE CHASSIS
-    public static final double kTrackWidthMeters = 0.6604;
+    public static final double kTrackWidthMeters = 0.584;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
     //        Feedback
-    public static final double ksVolts = 0.59839;
-    public static final double kvVoltSecondsPerMeter = 2.6554;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.16144;
-    public static final double kPDriveVel = 0.0000016043;
+    public static final double ksVolts = 0.621;
+    public static final double kvVoltSecondsPerMeter = 4.1176;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.32188;
+    public static final double kPDriveVel = 0.9399;
 
     //        Robot Speed
     public static final double kMaxSpeedMetersPerSecond = 1;
@@ -93,5 +81,22 @@ public final class Constants {
     //        Ramsete Controller
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
+
+    //            PATH FOLLOWING CONSTANTS FOR LARGE THREE MOTOR MULE CHASSIS
+    // public static final double kTrackWidthMeters = 0.6604;
+    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+
+    // //        Feedback
+    // public static final double ksVolts = 0.59839;
+    // public static final double kvVoltSecondsPerMeter = 2.6554;
+    // public static final double kaVoltSecondsSquaredPerMeter = 0.16144;
+    // public static final double kPDriveVel = 0.0000016043;
+
+    // //        Robot Speed
+    // public static final double kMaxSpeedMetersPerSecond = 0.5;
+    // public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
+    // //        Ramsete Controller
+    // public static final double kRamseteB = 2;
+    // public static final double kRamseteZeta = 0.7;
 
 }

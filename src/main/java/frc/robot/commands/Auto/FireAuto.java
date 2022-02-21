@@ -38,7 +38,7 @@ public class FireAuto extends CommandBase {
   @Override
   public void execute() {
     m_indexer.indexRun();
-    m_feed.feedRun();
+    m_feed.feedRun(0.5);
     m_feedWheel.runFeedWheel();
   }
 
