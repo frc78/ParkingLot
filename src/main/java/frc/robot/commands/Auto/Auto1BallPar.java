@@ -7,6 +7,7 @@ package frc.robot.commands.Auto;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import frc.robot.Constants;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
@@ -23,7 +24,7 @@ public class Auto1BallPar extends ParallelRaceGroup {
   public Auto1BallPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
     addCommands(
       new Auto1BallSeq(ramseteCommand1),
-      new SpinUp(m_shooter),
+      new SpinUp(m_shooter, Constants.spinupVel),
       new IntakeCommand(intake, feed, indexer, true)
       );
   }
