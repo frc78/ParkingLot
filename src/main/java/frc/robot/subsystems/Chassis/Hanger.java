@@ -58,6 +58,10 @@ public class Hanger extends SubsystemBase{
         climbLeader.set(ControlMode.PercentOutput, -0.5);
         climbFollower.set(ControlMode.PercentOutput, -0.5);
     }
+    public void slowFall() {
+        climbLeader.set(ControlMode.PercentOutput, -0.2);
+        climbFollower.set(ControlMode.PercentOutput, -0.2);
+    }
     public void stop(){
         climbLeader.set(ControlMode.PercentOutput, 0);
         climbFollower.set(ControlMode.PercentOutput, 0);

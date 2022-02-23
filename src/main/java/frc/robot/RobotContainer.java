@@ -108,7 +108,7 @@ public class RobotContainer {
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
     m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
-    m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
+    //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
     
   }
 
