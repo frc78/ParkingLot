@@ -24,7 +24,7 @@ public RamseteCommand createRamseteCommand(Trajectory trajectory, Chassis m_chas
             new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta), 
             new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter), 
             Constants.kDriveKinematics, 
-            m_chassis::getWheelSpeeds, 
+            m_chassis::getWheelSpeedsAuto, 
             new PIDController(Constants.kPDriveVel, 0, 0), 
             new PIDController(Constants.kPDriveVel, 0, 0), 
             m_chassis::setVoltage, 

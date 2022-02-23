@@ -120,12 +120,23 @@ public class Chassis extends SubsystemBase {
     return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
 
+  public double getMotorSpeedAuto(TalonFX motor) {
+    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+  }
+
   public double getMotorPosition(TalonFX motor) {
     return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getMotorSpeed(leftLeader), getMotorSpeed(rightLeader));
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeedsAuto() {
+    DriverStation.reportError("lEnc: " + getMotorSpeedAuto(leftLeader) + "rEnc: " + getMotorSpeedAuto(rightLeader), false);
+    SmartDashboard.putNumber("Left Encoder", getMotorSpeedAuto(leftLeader));
+    SmartDashboard.putNumber("Right Encoder", getMotorSpeedAuto(rightLeader));
+    return new DifferentialDriveWheelSpeeds(getMotorSpeedAuto(leftLeader), getMotorSpeedAuto(rightLeader));
   }
 
   @Override

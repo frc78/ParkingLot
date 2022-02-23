@@ -61,7 +61,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   //            SUBSYSTEMS
-  private final Chassis m_chassis;
+  private final ThreeMotorChassis m_chassis;
   private final Intake m_intake;
   private final Shooter m_shooter;
   private final Feed m_feed;
@@ -87,7 +87,7 @@ public class RobotContainer {
     
     //CameraServer.startAutomaticCapture();
     m_intake = new Intake();
-    m_chassis = new Chassis();
+    m_chassis = new ThreeMotorChassis();
     m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
