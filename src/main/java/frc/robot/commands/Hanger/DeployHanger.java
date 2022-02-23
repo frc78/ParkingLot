@@ -4,14 +4,16 @@
 
 package frc.robot.commands.Hanger;
 
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Hanger;
 
 public class DeployHanger extends CommandBase {
   private Hanger m_hanger;
   private Joystick m_controller;
+
   /** Creates a new DeployHanger. */
   public DeployHanger(Hanger hanger, Joystick controller ) {
     
@@ -23,18 +25,49 @@ public class DeployHanger extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-        int dPadValue = m_controller.getPOV();
-        if (dPadValue == -1){
+    int dPadValue = m_controller.getPOV();
+    SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
+        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < 300000){
+          //will run down buttons 
+          SmartDashboard.putNumber("Climbif", dPadValue);
+          if (dPadValue == -1){
+            m_hanger.stop();
+          } else if ((dPadValue > 90) && (dPadValue <= 270)){
+            m_hanger.fall();
+          } else if ((dPadValue <= 90) || (dPadValue > 270)){
+            m_hanger.rise();
+          }
+        }else if(m_hanger.getPosition() <= 0){
+          SmartDashboard.putNumber("Climbif", 2);
+          //will not run down buttons
+          if (dPadValue == -1){
+            m_hanger.stop();
+          } else if ((dPadValue > 90) && (dPadValue <= 270)){
+            m_hanger.stop();
+          } else if ((dPadValue <= 90) || (dPadValue > 270)){
+            m_hanger.rise();
+          }
+        }else if(m_hanger.getPosition() > 300000){
+          SmartDashboard.putNumber("Climbif", 3);
+          // Buttons up will not run
+          if (dPadValue == -1){
+            m_hanger.stop();
+          } else if ((dPadValue > 90) && (dPadValue <= 270)){
+            m_hanger.fall();
+          } else if ((dPadValue <= 90) || (dPadValue > 270)){
+            m_hanger.stop();
+          }
+        }else{
+          SmartDashboard.putNumber("Climbif", 4);
+          //do not run whatsoever
           m_hanger.stop();
-        } else if ((dPadValue > 90) && (dPadValue <= 270)){
-          m_hanger.fall();
-        } else if ((dPadValue <= 90) || (dPadValue > 270)){
-          m_hanger.rise();
+          
         }
       }
 
