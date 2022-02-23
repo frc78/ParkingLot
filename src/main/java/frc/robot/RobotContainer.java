@@ -170,7 +170,7 @@ public class RobotContainer {
     m_chassis.resetOdometry(trajectory1.getInitialPose());
 
     // An ExampleCommand will run in autonomous
-    //return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
-    return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
+    return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
+    // return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
   }
 }
