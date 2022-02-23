@@ -5,21 +5,24 @@
 package frc.robot.commands.Auto.BackupAuto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Auto.AutoStraight;
+import frc.robot.commands.Auto.FireAuto;
+import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.FeedWheel;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class BackupAuto1Seq extends SequentialCommandGroup {
-  /** Creates a new BackupAuto1Seq. */
-  public BackupAuto1Seq(Chassis subsystem1) {
+public class AutoTaxi1Seq extends SequentialCommandGroup {
+  /** Creates a new AutoTaxi1. */
+  public AutoTaxi1Seq(Chassis m_chassis, Indexer m_indexer, Feed m_feed, FeedWheel m_feedWheel) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(subsystem1, 1, 0.1),
-      new AutoTurn(subsystem1, 180, 0.15),
-      new AutoStraight(subsystem1, 1, 0.1),
-      new AutoTurn(subsystem1, 180, 0.15)
+      new FireAuto(m_indexer, m_feed, m_feedWheel),
+      new AutoStraight(m_chassis, 1.95, -0.3)
     );
   }
 }

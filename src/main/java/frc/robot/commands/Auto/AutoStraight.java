@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Auto.BackupAuto;
+package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -47,7 +47,7 @@ public class AutoStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return encDistance - m_chassis.getRawMotorPosition(0) < 4 ? true:false;
+    return encDistance < Math.abs(m_chassis.getRawMotorPosition(0)) ? true:false;
   }
 
   // this just doesn't seem to work for now, would be nice to fix it

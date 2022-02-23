@@ -30,12 +30,16 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Auto.Auto1BallPar;
-import frc.robot.commands.Auto.AutoTestSeq;
+import frc.robot.commands.Auto.AutoStraight;
+import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Auto.PathCommands;
-import frc.robot.commands.Auto.BackupAuto.AutoStraight;
-import frc.robot.commands.Auto.BackupAuto.AutoTurn;
-import frc.robot.commands.Auto.BackupAuto.BackupAuto1Seq;
+import frc.robot.commands.Auto.BackupAuto.Auto1Ball2Par;
+import frc.robot.commands.Auto.BackupAuto.Auto1Ball3Par;
+import frc.robot.commands.Auto.BackupAuto.AutoTaxi1Seq;
+import frc.robot.commands.Auto.BackupAuto.BackupAutoTestSeq;
+import frc.robot.commands.Auto.BackupAuto.Testing;
+import frc.robot.commands.Auto.PathweaverAutos.Auto1BallPar;
+import frc.robot.commands.Auto.PathweaverAutos.AutoTestSeq;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -153,19 +157,14 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
-    //Trajectory trajectory1 = new Trajectory();
-    // Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/auto1Ball1.wpilib.json");
-    // //Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
-    // RamseteCommand ramseteCommand1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
-    // //RamseteCommand ramseteCommand2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
+    // return new BackupAuto1Seq(m_chassis);
+    // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
+    // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
+    return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
 
-    // m_chassis.resetOdometry(trajectory1.getInitialPose());
 
-    // An ExampleCommand will run in autonomous
-    //return ramseteCommand1.andThen(() -> m_chassis.stop()); // m_autoCommand;
-    return new BackupAuto1Seq(m_chassis);
-    // return new AutoStraight(m_chassis, 1, 0.2);
-    // return new AutoTurn(m_chassis, 90, 0.1);
-    //return new Auto1BallPar(ramseteCommand1, m_shooter, m_intake, m_feed, m_indexer);
+
+   //return new Testing(m_chassis);
+    
   }
 }
