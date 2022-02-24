@@ -51,7 +51,7 @@ public final class Constants {
     public static final int CLEADER = 14;
 
     //Shooter Velocity
-    public static final double spinupVel = 2200.0; //Bottom Goal
+    public static final double spinupVel = 2000.0; //Bottom Goal
     public static final double spinupVel2 = 3150.0;//Top Goal
     
     //            JOYSTICKS

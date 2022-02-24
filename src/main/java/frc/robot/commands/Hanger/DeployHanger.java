@@ -13,6 +13,7 @@ import frc.robot.subsystems.Chassis.Hanger;
 public class DeployHanger extends CommandBase {
   private Hanger m_hanger;
   private Joystick m_controller;
+  private int MAX_ENCODER_CLICKS = 151554;
 
   /** Creates a new DeployHanger. */
   public DeployHanger(Hanger hanger, Joystick controller ) {
@@ -33,7 +34,7 @@ public class DeployHanger extends CommandBase {
   public void execute() {
     int dPadValue = m_controller.getPOV();
     SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
-        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < 300000){
+        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < MAX_ENCODER_CLICKS){
           //will run down buttons 
           SmartDashboard.putNumber("Climbif", dPadValue);
           if (dPadValue == -1){
@@ -53,7 +54,7 @@ public class DeployHanger extends CommandBase {
           } else if ((dPadValue <= 90) || (dPadValue > 270)){
             m_hanger.rise();
           }
-        }else if(m_hanger.getPosition() > 300000){
+        }else if(m_hanger.getPosition() > MAX_ENCODER_CLICKS){
           SmartDashboard.putNumber("Climbif", 3);
           // Buttons up will not run
           if (dPadValue == -1){

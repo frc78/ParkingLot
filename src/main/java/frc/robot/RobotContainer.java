@@ -125,20 +125,20 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
     
-    Button driveControllerSTART = new JoystickButton(m_driveController, 10);
-    driveControllerSTART.whileHeld(new SetUpHanger(m_hanger));
+    //Button driveControllerSTART = new JoystickButton(m_driveController, 10);
+   // driveControllerSTART.whileHeld(new SetUpHanger(m_hanger));
 
-    Button manipControllerA = new JoystickButton(m_manipController, 1);//Bandaid fix
+    Button manipControllerA = new JoystickButton(m_manipController, 2);//Bandaid fix
     manipControllerA.whenHeld(new IntakeNoFeed(m_intake, m_indexer));
 
-    Button manipControllerX = new JoystickButton(m_manipController, 3);// swapped with x until wiring is fixed
-    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));
+    Button manipControllerX = new JoystickButton(m_manipController, 1);// swapped with x until wiring is fixed
+    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
     manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
 
-    Button manipControllerRT = new JoystickButton(m_manipController, 10);
-    manipControllerRT.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
+    Button manipControllerSTART = new JoystickButton(m_manipController, 10);
+    manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
     manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2));//High Goal
@@ -146,11 +146,11 @@ public class RobotContainer {
     Button manipControllerLowLT = new JoystickButton(m_manipController, 7);
     manipControllerLowLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel));//Low goal
     
-    Button manipControllerB = new JoystickButton(m_manipController, 2);// swapped with b 
-    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, true));
+    Button manipControllerB = new JoystickButton(m_manipController, 3);// swapped with b 
+    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
 
     Button manipControllerY = new JoystickButton(m_manipController, 4);//bandaid---- Fixed Officially Names and everything. 
-    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, false));
+    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
 
   }
 
