@@ -2,45 +2,36 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Shoot;
+package frc.robot.commands.Hanger;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
-import frc.robot.Constants;
-
-public class SpinUp extends CommandBase {
-  private Shooter shooter;
-  private double vel;
-  
+import frc.robot.subsystems.Chassis.Hanger;
 
 
-  /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity) {
-    this.shooter = shooter;
-    this.vel = Velocity;
+public class HangerOverrideReset extends CommandBase {
+  private Hanger m_hanger;
+
+  /** Creates a new HangerOverrideReset. */
+  public HangerOverrideReset(Hanger hanger) {
+    m_hanger = hanger;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    addRequirements(m_hanger);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    System.out.println("Starting spin up!");
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    shooter.startWheel(vel);
-
+    m_hanger.fall();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stopWheely();
+    m_hanger.stop();
   }
 
   // Returns true when the command should end.

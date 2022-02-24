@@ -32,7 +32,7 @@ public class Fire extends CommandBase {
   @Override
   public void execute() {
     m_indexer.indexRun();
-    m_feed.feedRun(.75);
+    m_feed.feedRun(-.75);
     m_feedWheel.runFeedWheel();
   }
 
