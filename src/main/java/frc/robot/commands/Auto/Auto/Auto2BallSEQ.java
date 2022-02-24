@@ -4,26 +4,29 @@
 
 package frc.robot.commands.Auto.Auto;
 
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import frc.robot.Constants;
-import frc.robot.commands.Shoot.SpinUp;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Auto.AutoTurn;
+import frc.robot.commands.Shoot.FireAUTO;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoTaxi1Par extends ParallelRaceGroup {
-  /** Creates a new AutoTaxi1Par. */
-  public AutoTaxi1Par(Shooter m_shooter, Chassis m_chassis, Indexer m_indexer, Feed m_feed, FeedWheel m_feedWheel) {
+public class Auto2BallSEQ extends SequentialCommandGroup {
+  /** Creates a new Auto2BallSEQ. */
+  public Auto2BallSEQ(Chassis chassis, Intake intake, Feed feed, Shooter shooter, FeedWheel wheely, Indexer index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(m_shooter, Constants.spinupVel),
-      new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel)
+    new DriveAndIntake(chassis, intake, index),
+    new AutoTurn(chassis, 170, .2),
+    new DriveAndSpinUp(chassis, shooter),
+    new SpinAndFire(shooter, feed, index, wheely)
     );
   }
 }

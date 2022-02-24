@@ -2,30 +2,28 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Auto.PathweaverAutos;
+package frc.robot.commands.Auto.Auto;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Shoot.FireAUTO;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
+import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto1BallPar extends ParallelRaceGroup {
-  /** Creates a new AutoTaxi. */
-  public Auto1BallPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
+public class SpinAndFire extends ParallelRaceGroup {
+  /** Creates a new SpinAndFire. */
+  public SpinAndFire(Shooter shooter, Feed feed, Indexer index, FeedWheel wheely) {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new Auto1BallSeq(ramseteCommand1),
-      new SpinUp(m_shooter, Constants.spinupVel),
-      new IntakeCommand(intake, feed, indexer, true)
-      );
+      new FireAUTO(feed, wheely, index),
+      new SpinUp(shooter, Constants.spinupVel)
+    );
   }
 }

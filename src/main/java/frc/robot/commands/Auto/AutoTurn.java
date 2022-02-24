@@ -54,9 +54,9 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     if (degrees > 0) {
-      return m_chassis.getPidgeonYaw() > degrees ? true:false;
+      return Math.abs(m_chassis.getPidgeonYaw()) > degrees ? true:false;
     } else {
-      return m_chassis.getPidgeonYaw() < degrees ? true:false;
+      return -Math.abs(m_chassis.getPidgeonYaw()) < degrees ? true:false;
     }
   }
 }

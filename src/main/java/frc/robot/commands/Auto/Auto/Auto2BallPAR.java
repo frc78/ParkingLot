@@ -5,6 +5,7 @@
 package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Shoot.Fire;
@@ -24,7 +25,7 @@ public class Auto2BallPAR extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(shoot),
+      new SpinUp(shoot, Constants.spinupVel),
       new AutoTurn(chassis, 180, .2),
       new Fire(feed, indexer, feedWheel)
 

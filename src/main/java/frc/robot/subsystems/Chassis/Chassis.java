@@ -75,8 +75,8 @@ public class Chassis extends SubsystemBase {
     m_odometry = new DifferentialDriveOdometry(pidgey.getRotation2d());
 
     // Set minimum time to ramp up (originally .8)
-    leftLeader.configOpenloopRamp(0.78);
-    rightLeader.configOpenloopRamp(0.78);
+    leftLeader.configOpenloopRamp(0.2);
+    rightLeader.configOpenloopRamp(0.2);
   }
 
   public void setSpeed(double lSpeed, double rSpeed) {

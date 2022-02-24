@@ -40,6 +40,7 @@ import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Auto.Auto.AUTO1BALLSEQ;
 import frc.robot.commands.Auto.Auto.Auto1Ball2Par;
 import frc.robot.commands.Auto.Auto.Auto1Ball3Par;
+import frc.robot.commands.Auto.Auto.Auto2BallSEQ;
 import frc.robot.commands.Auto.Auto.AutoTaxi1Seq;
 import frc.robot.commands.Auto.Auto.BackupAutoTestSeq;
 import frc.robot.commands.Auto.Auto.Testing;
@@ -133,7 +134,7 @@ public class RobotContainer {
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
     m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
-    m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
+    //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
     
   }
 
@@ -190,7 +191,8 @@ public class RobotContainer {
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
   //  return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
-    return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);
+    //return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);
+    return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer);
 
 
 

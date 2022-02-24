@@ -5,6 +5,7 @@
 package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import frc.robot.Constants;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
@@ -23,7 +24,7 @@ public class Auto1Ball2Par extends ParallelRaceGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new IntakeCommand(m_intake, m_feed, m_indexer, true),
-      new SpinUp(m_shooter),
+      new SpinUp(m_shooter, Constants.spinupVel),
       new Auto1Ball2Seq(m_chassis)
     );
   }

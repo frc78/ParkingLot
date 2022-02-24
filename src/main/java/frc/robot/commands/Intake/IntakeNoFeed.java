@@ -30,7 +30,7 @@ public class IntakeNoFeed extends CommandBase {
   @Override
   public void execute() {
     m_intake.DeployIntake();
-    m_intake.setSpeed(.75);
+    m_intake.setSpeed(-.75);
     m_indexer.indexRun();
   }
 
