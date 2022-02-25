@@ -17,7 +17,7 @@ public class FeedWheel extends SubsystemBase {
     wheelNeo = new CANSparkMax(Constants.WheelNeo, MotorType.kBrushless);
   }
   public void runFeedWheel(){
-    wheelNeo.set(-.78);//Also subject to change during testing
+    wheelNeo.set(-1);//Also subject to change during testing
   }
 
   public void stopFeedWheel() {
