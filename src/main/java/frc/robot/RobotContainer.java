@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PerpetualCommand;
@@ -47,7 +48,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Hanger.DeployHanger;
+import frc.robot.commands.Hanger.HangerOverrideReset;
+import frc.robot.commands.Hanger.SetUpHanger;
 import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.IntakeNoFeed;
 import frc.robot.commands.Intake.Tuck;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.commands.Shoot.Fire;
@@ -110,6 +114,7 @@ public class RobotContainer {
   
     //Configure the button bindings
     configureButtonBindings();
+    SmartDashboard.putData(new HangerOverrideReset(m_hanger));
 
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
@@ -126,6 +131,8 @@ public class RobotContainer {
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
     m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
+    //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
+    
   }
 
   /**       
@@ -140,15 +147,21 @@ public class RobotContainer {
 
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
+    
+    //Button driveControllerSTART = new JoystickButton(m_driveController, 10);
+   // driveControllerSTART.whileHeld(new SetUpHanger(m_hanger));
 
-    Button manipControllerX = new JoystickButton(m_manipController, 3);
-    manipControllerX.whenHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
+    Button manipControllerA = new JoystickButton(m_manipController, 2);//Bandaid fix
+    manipControllerA.whenHeld(new IntakeNoFeed(m_intake, m_indexer));
 
-    Button manipControllerA = new JoystickButton(m_manipController, 1);
-    manipControllerA.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));
+    Button manipControllerX = new JoystickButton(m_manipController, 1);// swapped with x until wiring is fixed
+    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
     manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
+
+    Button manipControllerSTART = new JoystickButton(m_manipController, 10);
+    manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
     manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2));//High Goal
@@ -156,11 +169,12 @@ public class RobotContainer {
     Button manipControllerLowLT = new JoystickButton(m_manipController, 7);
     manipControllerLowLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel));//Low goal
     
-    Button manipControllerY = new JoystickButton(m_manipController, 4);
+    Button manipControllerB = new JoystickButton(m_manipController, 3);// swapped with b 
+    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
+
+    Button manipControllerY = new JoystickButton(m_manipController, 4);//bandaid---- Fixed Officially Names and everything. 
     manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
 
-    Button manipControllerB = new JoystickButton(m_manipController, 2);
-    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
   }
 
   /**
