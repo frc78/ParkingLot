@@ -32,13 +32,16 @@ public final class Constants {
     public static final int R2FOLLOWER = 6;
 
     //OTHER MOTORS
+    //Climb Motors
+    public static final int CLEADER = 13;
+    public static final int CFOLLOWER = 14;
+
     //GREGS REQUEST
     public static final int INTAKE = 7;
 
     // Shooter
     public static final int LeftShoot = 8;// temporary value will fill in later. 
     public static final int RightShoot = 9;
-    
     //Feed
     public static final int BeltNeo = 10;
     public static final int WheelNeo = 11;
@@ -67,6 +70,7 @@ public final class Constants {
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
     public static final double WHEEL_CIRC_METERS = 0.478;
+    public static final double WHEEL_GEAR_RATIO = 12.27;
 
     //            PATH FOLLOWING CONSTANTS
     public static final double kTrackWidthMeters = 0.584;
