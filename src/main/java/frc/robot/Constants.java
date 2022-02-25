@@ -19,6 +19,8 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
  */
 public final class Constants {
 
+    public static final boolean DEBUG = true;
+
     //            MOTORS
     //        Drive Motors
     // LEFT
@@ -43,10 +45,6 @@ public final class Constants {
 
     //Indexer
     public static final int Indexer = 12;//Temporary subject to change.
-
-    // Climber
-    public static final int CFOLLOWER = 13;
-    public static final int CLEADER = 14;
 
     //Shooter Velocity
     public static final double spinupVel = 1900.0; //Bottom Goal

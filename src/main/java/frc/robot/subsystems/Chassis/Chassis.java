@@ -76,7 +76,7 @@ public class Chassis extends SubsystemBase {
 
     // Set minimum time to ramp up (originally .8)
     leftLeader.configOpenloopRamp(0.2);
-    rightLeader.configOpenloopRamp(0.2);
+   rightLeader.configOpenloopRamp(0.2);
   }
 
   public void setSpeed(double lSpeed, double rSpeed) {
