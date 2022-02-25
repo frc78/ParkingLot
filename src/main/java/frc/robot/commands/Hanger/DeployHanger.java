@@ -13,7 +13,7 @@ import frc.robot.subsystems.Chassis.Hanger;
 public class DeployHanger extends CommandBase {
   private Hanger m_hanger;
   private Joystick m_controller;
-  private int MAX_ENCODER_CLICKS = 151554;
+  private int MAX_ENCODER_CLICKS = 205000;
 
   /** Creates a new DeployHanger. */
   public DeployHanger(Hanger hanger, Joystick controller ) {

@@ -51,8 +51,8 @@ public class Hanger extends SubsystemBase{
     }
 
     public void rise() {
-        climbLeader.set(ControlMode.PercentOutput, 0.5);
-        climbFollower.set(ControlMode.PercentOutput, 0.5);
+        climbLeader.set(ControlMode.PercentOutput, 1);
+        climbFollower.set(ControlMode.PercentOutput, 1);
     }
     public void fall(){
         climbLeader.set(ControlMode.PercentOutput, -0.5);
@@ -69,8 +69,8 @@ public class Hanger extends SubsystemBase{
     public void hover(){
        // climbLeader.set(ControlMode.PercentOutput, 0.03);
         //climbFollower.set(ControlMode.PercentOutput, 0.03);
-        climbLeader.setVoltage(3);
-        climbFollower.setVoltage(3);
+        climbLeader.setVoltage(-1.2);
+        climbFollower.setVoltage(-1.2);
     }
     public double getPosition(){
        return climbLeader.getSelectedSensorPosition();
