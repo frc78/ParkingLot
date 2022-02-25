@@ -5,6 +5,7 @@
 package frc.robot.commands.Auto.BackupAuto;
 
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import frc.robot.Constants;
 import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
@@ -21,7 +22,7 @@ public class AutoTaxi1Par extends ParallelRaceGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(m_shooter),
+      new SpinUp(m_shooter, Constants.spinupVel),
       new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel)
     );
   }

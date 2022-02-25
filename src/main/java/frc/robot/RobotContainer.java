@@ -108,7 +108,7 @@ public class RobotContainer {
     m_hanger = new Hanger();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
-    m_manipController = new XboxController(Constants.DRIVEMP);
+    m_manipController = new Joystick(Constants.DRIVEMP);
     m_pathcommands = new PathCommands();
     
   
