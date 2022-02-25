@@ -37,12 +37,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Auto.PathCommands;
-import frc.robot.commands.Auto.BackupAuto.Auto1Ball2Par;
-import frc.robot.commands.Auto.BackupAuto.Auto1Ball3Par;
-import frc.robot.commands.Auto.BackupAuto.AutoTaxi1Seq;
-import frc.robot.commands.Auto.BackupAuto.BackupAutoTestSeq;
-import frc.robot.commands.Auto.BackupAuto.Testing;
+import frc.robot.commands.Auto.Auto.AUTO1BALLSEQ;
+import frc.robot.commands.Auto.Auto.Auto1Ball2Par;
+import frc.robot.commands.Auto.Auto.Auto1Ball3Par;
+import frc.robot.commands.Auto.Auto.Auto2BallSEQ;
+import frc.robot.commands.Auto.Auto.AutoTaxi1Seq;
+import frc.robot.commands.Auto.Auto.BackupAutoTestSeq;
+import frc.robot.commands.Auto.Auto.Testing;
 import frc.robot.commands.Auto.PathweaverAutos.Auto1BallPar;
+import frc.robot.commands.Auto.PathweaverAutos.Auto1BallSeq;
 import frc.robot.commands.Auto.PathweaverAutos.AutoTestSeq;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Drive.Forward50;
@@ -186,8 +189,10 @@ public class RobotContainer {
 
     // return new BackupAuto1Seq(m_chassis);
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
-    // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
-    return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
+  //  return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
+    // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
+    return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
+    //return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
 
 
 
