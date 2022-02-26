@@ -10,6 +10,7 @@ import frc.robot.commands.Shoot.Fire;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -18,12 +19,12 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AUTO1BALLSEQ extends SequentialCommandGroup {
   /** Creates a new AUTO1BALLSEQ. */
-  public AUTO1BALLSEQ(Chassis chassis, Feed feed, Indexer index, Shooter shooter, FeedWheel feedWheel) {
+  public AUTO1BALLSEQ(Chassis chassis, Feed feed, Indexer index, Shooter shooter, FeedWheel feedWheel, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new Auto1BALL(shooter, feed, index, feedWheel),
-      new AutoStraight(chassis, 2, .3)
+      new Auto1BALL(shooter, feed, index, feedWheel, intake),
+      new AutoStraight(chassis, 2, -.3)
     );
   }
 }
