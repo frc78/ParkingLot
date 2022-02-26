@@ -62,35 +62,35 @@ public final class Constants {
     public static final int IMU = 0;
 
     //            PARAMETERS
-    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
-    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.CounterClockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
 
-    // // SMALL CHASSIS
-    // public static final double WHEEL_CIRC_METERS = 0.31918;
-    // public static final double WHEEL_GEAR_RATIO = 9.091;
+    // SMALL CHASSIS
+    public static final double WHEEL_CIRC_METERS = 0.31918;
+    public static final double WHEEL_GEAR_RATIO = 9.091;
 
-    // // //            PATH FOLLOWING CONSTANTS FOR SMALL MULE CHASSIS
-    // public static final double kTrackWidthMeters = 0.584;
-    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+    // //            PATH FOLLOWING CONSTANTS FOR SMALL MULE CHASSIS
+    public static final double kTrackWidthMeters = 0.584;
+    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
-    // //        Feedback
-    // public static final double ksVolts = 0.621;
-    // public static final double kvVoltSecondsPerMeter = 4.1176;
-    // public static final double kaVoltSecondsSquaredPerMeter = 0.32188;
-    // public static final double kPDriveVel = 0.9399;
+    //        Feedback
+    public static final double ksVolts = 0.621;
+    public static final double kvVoltSecondsPerMeter = 4.1176;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.32188;
+    public static final double kPDriveVel = 0.9399;
 
-    // //        Robot Speed
-    // public static final double kMaxSpeedMetersPerSecond = 1;
-    // public static final double kMaxAccelerationMetersPerSecondSquared = 0.5;
-    // //        Ramsete Controller
-    // public static final double kRamseteB = 2;
-    // public static final double kRamseteZeta = 0.7;
+    //        Robot Speed
+    public static final double kMaxSpeedMetersPerSecond = 0.25;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
+    //        Ramsete Controller
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 
     // LARGE CHASSIS
-    public static final double WHEEL_CIRC_METERS = 0.478;
-    public static final double WHEEL_GEAR_RATIO = 12.27;
+    // public static final double WHEEL_CIRC_METERS = 0.478;
+    // public static final double WHEEL_GEAR_RATIO = 12.27;
 
     // //            PATH FOLLOWING CONSTANTS FOR LARGE THREE MOTOR MULE CHASSIS
     // public static final double kTrackWidthMeters = 0.6604;
@@ -112,20 +112,39 @@ public final class Constants {
     // // NEW VALUES LARGE CHASSIS
 
     //            PATH FOLLOWING CONSTANTS FOR LARGE THREE MOTOR MULE CHASSIS
-    public static final double kTrackWidthMeters = 0.6604;
-    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+    // public static final double kTrackWidthMeters = 0.6604;
+    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
-    //        Feedback
-    public static final double ksVolts = 0.55697;
-    public static final double kvVoltSecondsPerMeter = 2.6126;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.48947;
-    public static final double kPDriveVel = 2.4458;
+    // //        Feedback
+    // public static final double ksVolts = 0.55697;
+    // public static final double kvVoltSecondsPerMeter = 2.6126;
+    // public static final double kaVoltSecondsSquaredPerMeter = 0.48947;
+    // public static final double kPDriveVel = 2.4458;
 
-    //        Robot Speed
-    public static final double kMaxSpeedMetersPerSecond = 0.5;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
-    //        Ramsete Controller
-    public static final double kRamseteB = 2;
-    public static final double kRamseteZeta = 0.7;
+    // //        Robot Speed
+    // public static final double kMaxSpeedMetersPerSecond = 0.5;
+    // public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
+    // //        Ramsete Controller
+    // public static final double kRamseteB = 2;
+    // public static final double kRamseteZeta = 0.7;
+
+    // public static final double kTrackWidthMeters = 0.6604;
+    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+
+    // //        Feedback
+    // public static final double ksVolts = 0.59605;
+    // public static final double kvVoltSecondsPerMeter = 27.241;
+    // public static final double kaVoltSecondsSquaredPerMeter = 3.959;
+    // public static final double kPDriveVel = 0.36919;
+
+    // //        Robot Speed
+    // public static final double kMaxSpeedMetersPerSecond = 0.5;
+    // public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
+    // //        Ramsete Controller
+    // public static final double kRamseteB = 2;
+    // public static final double kRamseteZeta = 0.7;
+
+    // public static final double kTrackWidthMeters = 0.6604;
+    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
 }

@@ -10,11 +10,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +29,9 @@ public class Chassis extends SubsystemBase {
   protected WPI_TalonFX leftLeader;
 
   protected WPI_TalonFX rightLeader;
+
+  private CANCoder rightCanCoder;
+  private CANCoder leftCanCoder;
 
   // Sensors
   protected WPI_PigeonIMU pidgey;
@@ -53,8 +58,13 @@ public class Chassis extends SubsystemBase {
 
     rightLeader.setNeutralMode(Constants.MOTOR_MODE);
 
-    leftLeader.setSensorPhase(true);
-    rightLeader.setSensorPhase(true);
+    leftCanCoder = new CANCoder(1);
+    rightCanCoder = new CANCoder(2);
+    leftCanCoder.configSensorDirection(true);
+    rightCanCoder.configSensorDirection(false);
+
+    //leftLeader.setSensorPhase(true);
+    //rightLeader.setSensorPhase(true);
 
     // Set inverted
     leftLeader.setInverted(Constants.LEFT_INVERTED);
@@ -97,8 +107,10 @@ public class Chassis extends SubsystemBase {
   }
 
   public void resetEncoder() {
-    leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
-    rightLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+    //leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+    //rightLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+    leftCanCoder.setPosition(0);
+    rightCanCoder.setPosition(0);
   }
 
   public void zeroAllSensors() {
@@ -117,31 +129,33 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getMotorSpeed(TalonFX motor) {
-    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS * Constants.WHEEL_GEAR_RATIO;
   }
 
   public double getMotorSpeedAuto(TalonFX motor) {
-    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS * Constants.WHEEL_GEAR_RATIO;
   }
 
   public double getMotorPosition(TalonFX motor) {
-    return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+    return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS * Constants.WHEEL_GEAR_RATIO;
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getMotorSpeed(leftLeader), getMotorSpeed(rightLeader));
+    //return new DifferentialDriveWheelSpeeds(getMotorSpeed(leftLeader), getMotorSpeed(rightLeader));
+    return new DifferentialDriveWheelSpeeds(leftCanCoder.getVelocity() * 10 / 4096 * Constants.WHEEL_CIRC_METERS, rightCanCoder.getVelocity() * 10 / 4096 * Constants.WHEEL_CIRC_METERS);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeedsAuto() {
     DriverStation.reportError("lEnc: " + getMotorSpeedAuto(leftLeader) + "rEnc: " + getMotorSpeedAuto(rightLeader), false);
     SmartDashboard.putNumber("Left Encoder", getMotorSpeedAuto(leftLeader));
     SmartDashboard.putNumber("Right Encoder", getMotorSpeedAuto(rightLeader));
-    return new DifferentialDriveWheelSpeeds(getMotorSpeedAuto(leftLeader), getMotorSpeedAuto(rightLeader));
+   // return new DifferentialDriveWheelSpeeds(getMotorSpeedAuto(leftLeader), getMotorSpeedAuto(rightLeader));
+   return new DifferentialDriveWheelSpeeds(leftCanCoder.getVelocity() * 10 / 4096 * Constants.WHEEL_CIRC_METERS, rightCanCoder.getVelocity() * 10 / 4096 * Constants.WHEEL_CIRC_METERS);
   }
 
   @Override
   public void periodic() {
-  //  m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+    m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
     SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
     SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
