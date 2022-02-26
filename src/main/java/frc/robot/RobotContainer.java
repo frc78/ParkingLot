@@ -61,7 +61,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   //            SUBSYSTEMS
-  private final ThreeMotorChassis m_chassis;
+  private final Chassis m_chassis;
   private final Intake m_intake;
   private final Shooter m_shooter;
   private final Feed m_feed;
@@ -87,7 +87,7 @@ public class RobotContainer {
     
     //CameraServer.startAutomaticCapture();
     m_intake = new Intake();
-    m_chassis = new ThreeMotorChassis();
+    m_chassis = new Chassis();
     m_shooter = new Shooter();
     m_feed = new Feed();
     m_indexer = new Indexer();
@@ -161,6 +161,37 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
+    var autoVoltageConstraint =
+        new DifferentialDriveVoltageConstraint(
+            new SimpleMotorFeedforward(
+                Constants.ksVolts,
+                Constants.kvVoltSecondsPerMeter,
+                Constants.kaVoltSecondsSquaredPerMeter),
+                Constants.kDriveKinematics,
+            10);
+
+    // Create config for trajectory
+    // TrajectoryConfig config =
+    //     new TrajectoryConfig(
+    //       Constants.kMaxSpeedMetersPerSecond,
+    //       Constants.kMaxAccelerationMetersPerSecondSquared)
+    //         // Add kinematics to ensure max speed is actually obeyed
+    //         .setKinematics(Constants.kDriveKinematics)
+    //         // Apply the voltage constraint
+    //         .addConstraint(autoVoltageConstraint);
+
+    // An example trajectory to follow.  All units in meters.
+    // Trajectory exampleTrajectory =
+    //     TrajectoryGenerator.generateTrajectory(
+    //         // Start at the origin facing the +X direction
+    //         new Pose2d(0, 0, new Rotation2d(0)),
+    //         // Pass through these two interior waypoints, making an 's' curve path
+    //         List.of(new Translation2d(0.25, 0), new Translation2d(.75, 0)),
+    //         // End 3 meters straight ahead of where we started, facing forward
+    //         new Pose2d(1, 0, new Rotation2d(0)),
+    //         // Pass config
+    //         config);
+            
     //Trajectory trajectory1 = new Trajectory();
     Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/straight2.wpilib.json");
     //Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/autoTest2.wpilib.json");
