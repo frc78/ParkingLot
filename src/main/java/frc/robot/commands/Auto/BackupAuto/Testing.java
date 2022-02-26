@@ -14,7 +14,7 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Testing extends SequentialCommandGroup {
   /** Creates a new Testing. */
-  public Testing(Chassis m_chassis)
+  public Testing(Chassis m_chassis) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(

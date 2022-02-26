@@ -121,8 +121,15 @@ public class Chassis extends SubsystemBase {
     return m_odometry.getPoseMeters();
   }
 
+  // public double getMotorSpeed(TalonFX motor) {
+  //   SmartDashboard.putNumber("LeftMotorSpeed", ((leftLeader.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS);
+  //   SmartDashboard.putNumber("RightMotorSpeed", ((rightLeader.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS);
+  //   return ((motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS;
+  // }
+
   public double getMotorSpeed(TalonFX motor) {
-    return (motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+    // return motor.getInverted() == true ? ((rightLeader.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * -10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS : ((rightLeader.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS;
+    return ((motor.getSelectedSensorVelocity() / Constants.UNITS_PER_REVOLUTION * 10) / Constants.WHEEL_GEAR_RATIO)* Constants.WHEEL_CIRC_METERS;
   }
 
   public double getMotorPosition(TalonFX motor) {
@@ -139,12 +146,14 @@ public class Chassis extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    SmartDashboard.putNumber("leftMotorSpeed", getMotorSpeed(leftLeader));
+    SmartDashboard.putNumber("rightMotorSpeed", getMotorSpeed(rightLeader));
     return new DifferentialDriveWheelSpeeds(getMotorSpeed(leftLeader), getMotorSpeed(rightLeader));
   }
 
   @Override
   public void periodic() {
-  //  m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+   m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
     SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
     SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());

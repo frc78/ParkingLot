@@ -160,9 +160,13 @@ public class RobotContainer {
     // return new BackupAuto1Seq(m_chassis);
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
     // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
-    return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
+    // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
 
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
+    RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
 
+    m_chassis.resetOdometry(trajectory1.getInitialPose());
+    return ramsete1;
 
    //return new Testing(m_chassis);
     
