@@ -166,7 +166,8 @@ public class RobotContainer {
     RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
 
     m_chassis.resetOdometry(trajectory1.getInitialPose());
-    return ramsete1;
+    
+    return ramsete1.andThen(() -> m_chassis.stop());
 
    //return new Testing(m_chassis);
     

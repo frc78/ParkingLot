@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -153,7 +154,8 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-   m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+  Rotation2d yawRot = new Rotation2d(pidgey.getYaw());
+   m_odometry.update(yawRot, getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
     SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
     SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
