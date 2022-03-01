@@ -29,8 +29,8 @@ public class Tank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.3);
-    double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.3);
+    double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2);//To increase speed make this number lower (math equation)
+    double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2);//To increase speed make this number lower (mathequation)
 
     boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
     if(motorToggle){

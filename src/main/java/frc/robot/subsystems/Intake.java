@@ -43,6 +43,13 @@ public class Intake extends SubsystemBase {
   public void setSpeed(double speed) {
     intake.set(ControlMode.PercentOutput, speed);
   }
+  public void compressorOn(boolean isOn){
+    if(isOn){
+      comp.enableDigital();
+    }else{
+      comp.disable();
+    }
+  }
 
 
   @Override
