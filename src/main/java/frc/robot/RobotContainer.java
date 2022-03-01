@@ -198,11 +198,12 @@ public class RobotContainer {
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
     // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
    // return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
-    return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 0.8, Constants.spinupVel2); // Auto2Ball High auto A
-
+    return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 0.8, Constants.spinupVel2, 175); // Auto2Ball High auto A
+    return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160); // Auto2Ball High auto B
+    return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175);
 
 
    //return new Testing(m_chassis);
     
   }
-}
+}-

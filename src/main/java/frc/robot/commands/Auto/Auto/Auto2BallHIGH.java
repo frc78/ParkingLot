@@ -22,13 +22,13 @@ import frc.robot.Constants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Auto2BallHIGH extends SequentialCommandGroup {
   /** Creates a new Auto2BallHIGH. */
-  public Auto2BallHIGH(Chassis chassis, Intake intake, Indexer index, Feed feed, FeedWheel feedWheel, Shooter shooter, double distance, double distance2, double spinUpVel ) {
+  public Auto2BallHIGH(Chassis chassis, Intake intake, Indexer index, Feed feed, FeedWheel feedWheel, Shooter shooter, double distance, double distance2, double spinUpVel, double degrees ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new DriveAndIntake(chassis, intake, index, distance, 0.3),
       new AutoStraight(chassis, distance2, -0.3),
-      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, 175, 0.2),
+      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2),
       new FireAUTO(feed, feedWheel, index)
     );
   }
