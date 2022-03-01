@@ -24,9 +24,9 @@ public class Auto2BallSEQ extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
     new DriveAndIntake(chassis, intake, index),
-    new AutoTurn(chassis, 160, .2),
+    new AutoTurn(chassis, 180, .2),
     new DriveAndSpinUp(chassis, shooter),
-    new SpinAndFire(shooter, feed, index, wheely)
+    new SpinAndFire(shooter, feed, index, wheely, intake)
     );
   }
 }

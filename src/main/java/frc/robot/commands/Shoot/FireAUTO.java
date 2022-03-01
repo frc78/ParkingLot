@@ -9,19 +9,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 
 public class FireAUTO extends CommandBase {
   private Feed m_feed;
   private FeedWheel m_wheely;
   private Indexer m_index;
   private double startTime;
+  private Intake m_intake;
   /** Creates a new FireAUTO. */
-  public FireAUTO(Feed feed, FeedWheel wheely, Indexer indexer) {
+  public FireAUTO(Feed feed, FeedWheel wheely, Indexer indexer, Intake intake) {
     m_feed = feed;
     m_wheely = wheely;
     m_index = indexer;
+    m_intake = intake;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(m_feed, m_wheely, m_index);
+        addRequirements(m_feed, m_wheely, m_index, m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -34,8 +37,9 @@ public class FireAUTO extends CommandBase {
   @Override
   public void execute() {
     m_index.indexRun();
-    m_feed.feedRun(.75);
+    m_feed.feedRun(1);
     m_wheely.runFeedWheel();
+    m_intake.compressorOn(false);
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +48,7 @@ public class FireAUTO extends CommandBase {
     m_index.stopIndexer();
     m_wheely.stopFeedWheel();
     m_feed.stopFeed();
+    m_intake.compressorOn(true);
   }
 
   // Returns true when the command should end.

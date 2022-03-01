@@ -175,7 +175,7 @@ public class RobotContainer {
     manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
 
     Button manipControllerRB = new JoystickButton(m_manipController, 6);
-    manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
+    manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel, m_intake));
 
     Button manipControllerSTART = new JoystickButton(m_manipController, 10);
     manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
@@ -205,8 +205,6 @@ public class RobotContainer {
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
     // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
-    // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
-    // return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
 
     return autoList.getSelected();
 
