@@ -13,6 +13,7 @@ import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -21,13 +22,13 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Auto2BallPAR extends ParallelCommandGroup {
   /** Creates a new Auto2BallPAR. */
-  public Auto2BallPAR(Chassis chassis, IntakeCommand intake, Shooter shoot, Indexer indexer, Feed feed, FeedWheel feedWheel) {
+  public Auto2BallPAR(Chassis chassis, Intake intake, Shooter shoot, Indexer indexer, Feed feed, FeedWheel feedWheel) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new SpinUp(shoot, Constants.spinupVel),
       new AutoTurn(chassis, 180, .2),
-      new Fire(feed, indexer, feedWheel)
+      new Fire(feed, indexer, feedWheel, intake)
 
 
     );

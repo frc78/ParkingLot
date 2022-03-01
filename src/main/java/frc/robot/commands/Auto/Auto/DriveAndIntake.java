@@ -22,7 +22,7 @@ public class DriveAndIntake extends ParallelRaceGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(chassis, 2.4, -.3),
+      new AutoStraight(chassis, 2.4, .3),
       new IntakeNoFeed(intake, indexer)
     );
   }
