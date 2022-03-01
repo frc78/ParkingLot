@@ -14,6 +14,7 @@ import frc.robot.commands.Shoot.SpinUp;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -22,12 +23,12 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Auto1BALL extends ParallelRaceGroup {
   /** Creates a new Auto1BALL. */
-  public Auto1BALL(Shooter shoot, Feed feed, Indexer index, FeedWheel feedWheel ) {
+  public Auto1BALL(Shooter shoot, Feed feed, Indexer index, FeedWheel feedWheel, Intake intake ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new SpinUp(shoot, Constants.spinupVel),
-      new FireAUTO(feed, feedWheel, index)
+      new FireAUTO(feed, feedWheel, index, intake)
     );
   }
 }

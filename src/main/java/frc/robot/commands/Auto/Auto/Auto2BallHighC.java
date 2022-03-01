@@ -28,7 +28,7 @@ public class Auto2BallHighC extends SequentialCommandGroup {
       new DriveAndIntake(chassis, intake, indexer, 1.5, 0.3),
       new AutoStraight(chassis, 1.5, -0.3),
       new AutoTurnandSpinUp(chassis, shooter, Constants.spinupVel2, 175, 0.2),
-      new FireAUTO(feed, feedWheel, indexer)
+      new FireAUTO(feed, feedWheel, indexer, intake)
     );
   }
 }

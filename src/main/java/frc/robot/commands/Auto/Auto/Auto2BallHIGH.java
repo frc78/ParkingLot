@@ -29,7 +29,7 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
       new DriveAndIntake(chassis, intake, index, distance, 0.3),
       new AutoStraight(chassis, distance2, -0.3),
       new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2),
-      new FireAUTO(feed, feedWheel, index)
+      new FireAUTO(feed, feedWheel, index, intake)
     );
   }
 }
