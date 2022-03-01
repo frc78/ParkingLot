@@ -5,6 +5,7 @@
 package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Shoot.FireAUTO;
 import frc.robot.subsystems.Feed;
@@ -23,9 +24,9 @@ public class Auto2BallSEQ extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new DriveAndIntake(chassis, intake, index),
-    new AutoTurn(chassis, 160, .2),
-    new DriveAndSpinUp(chassis, shooter),
+    new DriveAndIntake(chassis, intake, index, 1.5, 0.3),
+    new AutoTurn(chassis, 170, .2),
+    new DriveAndSpinUp(chassis, shooter, 2.4, Constants.spinupVel),
     new SpinAndFire(shooter, feed, index, wheely)
     );
   }

@@ -4,26 +4,24 @@
 
 package frc.robot.commands.Auto.Auto;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import frc.robot.commands.Auto.AutoStraight;
-import frc.robot.commands.Intake.IntakeCommand;
-import frc.robot.commands.Intake.IntakeNoFeed;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
+import frc.robot.commands.Auto.AutoTurn;
+import frc.robot.commands.Shoot.SpinUp;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DriveAndIntake extends ParallelRaceGroup {
-  /** Creates a new DriveAndFeed. */
-  public DriveAndIntake(Chassis chassis, Intake intake, Indexer indexer, double distance, double speed) {
+public class AutoTurnandSpinUp extends ParallelRaceGroup {
+  /** Creates a new AutoTurnandSpinUp. */
+  public AutoTurnandSpinUp(Chassis chassis, Shooter shooter, double spinupVel, double degrees, double turnSpeed) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(chassis, distance, speed),
-      new IntakeNoFeed(intake, indexer)
+      new AutoTurn(chassis, degrees, turnSpeed),
+      new SpinUp(shooter, spinupVel)
+
     );
   }
 }

@@ -40,6 +40,7 @@ import frc.robot.commands.Auto.PathCommands;
 import frc.robot.commands.Auto.Auto.AUTO1BALLSEQ;
 import frc.robot.commands.Auto.Auto.Auto1Ball2Par;
 import frc.robot.commands.Auto.Auto.Auto1Ball3Par;
+import frc.robot.commands.Auto.Auto.Auto2BallHIGH;
 import frc.robot.commands.Auto.Auto.Auto2BallSEQ;
 import frc.robot.commands.Auto.Auto.AutoTaxi1Seq;
 import frc.robot.commands.Auto.Auto.BackupAutoTestSeq;
@@ -85,6 +86,7 @@ public class RobotContainer {
   private final FeedWheel m_feedWheel;
   private final Hanger m_hanger;
 
+
   //THERE IS PROBABLY A BETTER WAY TO DO THIS THAN INSTANTIATING A CLASS
   private final PathCommands m_pathcommands;
 
@@ -113,6 +115,8 @@ public class RobotContainer {
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new Joystick(Constants.DRIVEMP);
     m_pathcommands = new PathCommands();
+    
+    
     
   
     //Configure the button bindings
@@ -186,13 +190,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    
 
     // return new BackupAuto1Seq(m_chassis);
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
   //  return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
-    return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
-    //return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
+    // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
+   // return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
+    return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 0.8, Constants.spinupVel2); // Auto2Ball High auto A
 
 
 
