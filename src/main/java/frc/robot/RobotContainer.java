@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -85,6 +86,11 @@ public class RobotContainer {
   private final FeedWheel m_feedWheel;
   private final Hanger m_hanger;
 
+  // making the way to change the auto modes
+  SendableChooser<Command> autoList = new SendableChooser<>();
+
+  Command auto1BallSeq;
+
   //THERE IS PROBABLY A BETTER WAY TO DO THIS THAN INSTANTIATING A CLASS
   private final PathCommands m_pathcommands;
 
@@ -135,6 +141,14 @@ public class RobotContainer {
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
     m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
     //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
+
+    // auto commands selector
+    auto1BallSeq = new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);   //AUTO 1 BALL
+    autoList.setDefaultOption("1 Ball Auto", auto1BallSeq);
+
+    autoList.addOption("2 Ball Auto", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
+
+    SmartDashboard.putData(autoList);
     
   }
 
@@ -189,12 +203,12 @@ public class RobotContainer {
 
     // return new BackupAuto1Seq(m_chassis);
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
-  //  return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
+    // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
-    return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
-    //return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
+    // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
+    // return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
 
-
+    return autoList.getSelected();
 
    //return new Testing(m_chassis);
     
