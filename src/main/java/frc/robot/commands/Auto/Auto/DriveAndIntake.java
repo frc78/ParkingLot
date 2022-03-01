@@ -18,11 +18,11 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveAndIntake extends ParallelRaceGroup {
   /** Creates a new DriveAndFeed. */
-  public DriveAndIntake(Chassis chassis, Intake intake, Indexer indexer) {
+  public DriveAndIntake(Chassis chassis, Intake intake, Indexer indexer, double distance, double speed) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(chassis, 2.4, .3),
+      new AutoStraight(chassis, distance, speed),
       new IntakeNoFeed(intake, indexer)
     );
   }

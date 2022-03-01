@@ -16,13 +16,14 @@ import frc.robot.subsystems.Chassis.Chassis;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DriveAndSpinUp extends ParallelRaceGroup {
+  
   /** Creates a new DriveAndSpinUp. */
-  public DriveAndSpinUp(Chassis chassis, Shooter shooter) {
+  public DriveAndSpinUp(Chassis chassis, Shooter shooter, double distance2, double spinupVel) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(chassis, 2.4, .3),
-      new SpinUp(shooter, Constants.spinupVel)
+      new AutoStraight(chassis, distance2, .3),
+      new SpinUp(shooter, spinupVel)
     );
   }
 }

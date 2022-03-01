@@ -24,7 +24,7 @@ public class AUTO1BALLSEQ extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new Auto1BALL(shooter, feed, index, feedWheel, intake),
-      new AutoStraight(chassis, 2, -.3)
+      new AutoStraight(chassis, 2, .3)
     );
   }
 }
