@@ -146,10 +146,12 @@ public class RobotContainer {
     // auto commands selector
     autoList.setDefaultOption("2 Ball HIGH-C", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175));
 
-    autoList.addOption("2 Ball Auto", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
+    autoList.addOption("2 Ball Auto HIGH-A", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.3, Constants.spinupVel2, 175));
+    autoList.addOption("2 Ball Auto HIGH-B", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160));
+    autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
+    autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
 
     SmartDashboard.putData(autoList);
-    
   }
 
   /**       
@@ -191,7 +193,6 @@ public class RobotContainer {
 
     Button manipControllerY = new JoystickButton(m_manipController, 4);//bandaid---- Fixed Officially Names and everything. 
     manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
-
   }
 
   /**
@@ -200,21 +201,16 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    
-
     // return new BackupAuto1Seq(m_chassis);
     // return new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel);
     // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
-    // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel);     //AUTO 1 BALL
+    // return new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_indexer);     //AUTO 1 BALL
    // return new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer); // AUTO 2 BALL
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 0.8, Constants.spinupVel2, 175); // Auto2Ball High auto A
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160); // Auto2Ball High auto B
-    // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175);
-
-    return autoList.getSelected();
-
+    // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175); // Auto2Ball High auto C
    //return new Testing(m_chassis);
-    
+   return autoList.getSelected();
   }
 }
