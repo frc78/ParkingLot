@@ -46,7 +46,7 @@ public class DeployHanger extends CommandBase {
             m_hanger.rise();
           }
         }else if(m_hanger.getPosition() <= 0){
-          /SmartDashboard.putNumber("Climbif", 2);
+          //SmartDashboard.putNumber("Climbif", 2);
           //will not run down buttons
           if (dPadValue == -1){
             m_hanger.stop();
