@@ -21,7 +21,6 @@ public class AutoTurnandSpinUp extends ParallelRaceGroup {
     addCommands(
       new AutoTurn(chassis, degrees, turnSpeed),
       new SpinUp(shooter, spinupVel)
-
     );
   }
 }

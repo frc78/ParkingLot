@@ -17,12 +17,14 @@ public class FireAUTO extends CommandBase {
   private Indexer m_index;
   private double startTime;
   private Intake m_intake;
+  private double waitTime;
   /** Creates a new FireAUTO. */
-  public FireAUTO(Feed feed, FeedWheel wheely, Indexer indexer, Intake intake) {
+  public FireAUTO(Feed feed, FeedWheel wheely, Indexer indexer, Intake intake, double shootTime) {
     m_feed = feed;
     m_wheely = wheely;
     m_index = indexer;
     m_intake = intake;
+    waitTime = shootTime;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(m_feed, m_wheely, m_index, m_intake);
   }
@@ -55,6 +57,6 @@ public class FireAUTO extends CommandBase {
   @Override
   public boolean isFinished() {
 
-   return(Timer.getFPGATimestamp() > startTime + 3);
+   return(Timer.getFPGATimestamp() > startTime + waitTime);
   }
 }

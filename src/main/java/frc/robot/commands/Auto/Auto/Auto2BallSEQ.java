@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Auto.Auto;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoTurn;
@@ -20,14 +22,29 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Auto2BallSEQ extends SequentialCommandGroup {
   /** Creates a new Auto2BallSEQ. */
+  Chassis chassis;
+  private Timer timer;
   public Auto2BallSEQ(Chassis chassis, Intake intake, Feed feed, Shooter shooter, FeedWheel wheely, Indexer index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    this.chassis = chassis;
     addCommands(
     new DriveAndIntake(chassis, intake, index, 1.5, 0.3),
     new AutoTurn(chassis, 170, .2),
     new DriveAndSpinUp(chassis, shooter, 2.4, Constants.spinupVel),
-    new SpinAndFire(shooter, feed, index, wheely, intake)
+    new SpinAndFire(shooter, feed, index, wheely, intake, Constants.spinupVel)
     );
   }
+  // @Override
+  //   public void initialize() {
+  //     chassis.breakVcoast(false);
+  //     try {timer.wait(0); // in milliseconds
+  //     } catch (Exception exeption) {
+  //       DriverStation.reportError(exeption.getMessage(), exeption.getStackTrace());
+  //     } 
+  //   }
+  //   @Override
+  //   public void end(boolean wasInterrupted) {
+  //     chassis.breakVcoast(true);
+  //   }
 }

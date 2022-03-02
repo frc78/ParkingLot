@@ -51,9 +51,9 @@ public class Chassis extends SubsystemBase {
     rightLeader.configFactoryDefault();
 
     // Set motor mode
-    leftLeader.setNeutralMode(Constants.MOTOR_MODE);
+    leftLeader.setNeutralMode(NeutralMode.Brake);
 
-    rightLeader.setNeutralMode(Constants.MOTOR_MODE);
+    rightLeader.setNeutralMode(NeutralMode.Brake);
 
     leftLeader.setSensorPhase(true);
     rightLeader.setSensorPhase(true);
@@ -157,10 +157,12 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-  //  m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
+    m_odometry.update(pidgey.getRotation2d(), getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
-    SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
+    if (Constants.DEBUG) {
+      SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
+      SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
+    }
     // This method will be called once per scheduler run
   }
 }

@@ -8,6 +8,7 @@ package frc.robot.commands.Hanger;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Chassis.Hanger;
 
 public class DeployHanger extends CommandBase {
@@ -33,10 +34,10 @@ public class DeployHanger extends CommandBase {
   @Override
   public void execute() {
     int dPadValue = m_controller.getPOV();
-    SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
+    if (Constants.DEBUG) SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
         if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < MAX_ENCODER_CLICKS){
           //will run down buttons 
-          SmartDashboard.putNumber("Climbif", dPadValue);
+          //SmartDashboard.putNumber("Climbif", dPadValue);
           if (dPadValue == -1){
             m_hanger.stop();
           } else if ((dPadValue > 90) && (dPadValue <= 270)){
@@ -45,7 +46,7 @@ public class DeployHanger extends CommandBase {
             m_hanger.rise();
           }
         }else if(m_hanger.getPosition() <= 0){
-          SmartDashboard.putNumber("Climbif", 2);
+          //SmartDashboard.putNumber("Climbif", 2);
           //will not run down buttons
           if (dPadValue == -1){
             m_hanger.stop();
@@ -55,7 +56,7 @@ public class DeployHanger extends CommandBase {
             m_hanger.rise();
           }
         }else if(m_hanger.getPosition() > MAX_ENCODER_CLICKS){
-          SmartDashboard.putNumber("Climbif", 3);
+          //SmartDashboard.putNumber("Climbif", 3);
           // Buttons up will not run
           if (dPadValue == -1){
             m_hanger.stop();
@@ -65,7 +66,7 @@ public class DeployHanger extends CommandBase {
             m_hanger.stop();
           }
         }else{
-          SmartDashboard.putNumber("Climbif", 4);
+          //SmartDashboard.putNumber("Climbif", 4);
           //do not run whatsoever
           m_hanger.stop();
           

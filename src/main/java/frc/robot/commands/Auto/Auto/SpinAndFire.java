@@ -19,12 +19,12 @@ import frc.robot.subsystems.Shooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class SpinAndFire extends ParallelRaceGroup {
   /** Creates a new SpinAndFire. */
-  public SpinAndFire(Shooter shooter, Feed feed, Indexer index, FeedWheel wheely, Intake intake) {
+  public SpinAndFire(Shooter shooter, Feed feed, Indexer index, FeedWheel wheely, Intake intake, double spinupVel) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new FireAUTO(feed, wheely, index, intake),
-      new SpinUp(shooter, Constants.spinupVel)
+      new FireAUTO(feed, wheely, index, intake, 6),
+      new SpinUp(shooter, spinupVel)
     );
   }
 }

@@ -7,6 +7,7 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Chassis.Chassis;
 
 public class Tank extends CommandBase {
@@ -29,8 +30,9 @@ public class Tank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2);//To increase speed make this number lower (math equation)
-    double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2);//To increase speed make this number lower (mathequation)
+    double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2, 0.4); // default speed = 1 - the 2nd parameter (upAdjust)
+    double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2, 0.4);
+    // 1st input is controller input, 2nd is the % of speed it can increase by holding down RT all the way, and 3rd input is % speed it decreases by holding down LT
 
     boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
     if(motorToggle){
@@ -39,8 +41,10 @@ public class Tank extends CommandBase {
       m_chassis.setSpeed(lSpeed, rSpeed);
     }
     
-    SmartDashboard.putNumber("Left Joystick Value", lSpeed);
-    SmartDashboard.putNumber("Right Joystick Value", rSpeed);
+    if (Constants.DEBUG) {
+      SmartDashboard.putNumber("Left Joystick Value", lSpeed);
+      SmartDashboard.putNumber("Right Joystick Value", rSpeed);
+    }
 
   }
 
@@ -57,9 +61,16 @@ public class Tank extends CommandBase {
   }
 
   //this function is meant to take in the joystick input, and maxAdjust has to be between 0 and 1
-  public double triggerAdjustedSpeed(double inputSpeed, double maxAdjust){
-    double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
-    tempSpeed = ((1 - maxAdjust) * inputSpeed) + (inputSpeed * maxAdjust * tempSpeed);
+  // public double triggerAdjustedSpeed(double inputSpeed, double maxAdjust){
+  //   double tempSpeed = m_controller.getRightTriggerAxis() - m_controller.getLeftTriggerAxis();
+  //   tempSpeed = ((1 - maxAdjust) * inputSpeed) + (inputSpeed * maxAdjust * tempSpeed);
+
+  //   //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
+  //   return Math.max(-1, Math.min(1, tempSpeed));
+  // }
+  public double triggerAdjustedSpeed(double inputSpeed, double upAdjust, double downAdjust){
+    double tempSpeed = (m_controller.getRightTriggerAxis() * upAdjust) - (m_controller.getLeftTriggerAxis() * downAdjust);
+    tempSpeed = ((1 - upAdjust) * inputSpeed) + (inputSpeed * tempSpeed);
 
     //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
     return Math.max(-1, Math.min(1, tempSpeed));
