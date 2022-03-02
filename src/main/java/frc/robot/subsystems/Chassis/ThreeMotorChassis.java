@@ -5,6 +5,8 @@
 package frc.robot.subsystems.Chassis;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import frc.robot.Constants;
 
@@ -66,5 +68,18 @@ public class ThreeMotorChassis extends Chassis {
         //rightFollower2.configOpenloopRamp(0.78);
         rightFollower1.configOpenloopRamp(0.2);
         rightFollower2.configOpenloopRamp(0.2);
+
+        // Set reporting rate
+        leftFollower1.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+        leftFollower2.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+
+        leftFollower1.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255);
+        leftFollower2.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255);
+
+        rightFollower1.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+        rightFollower2.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+
+        rightFollower1.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255);
+        rightFollower2.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255);
     }
 }

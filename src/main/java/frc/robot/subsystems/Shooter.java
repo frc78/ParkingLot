@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
@@ -54,6 +55,9 @@ public class Shooter extends SubsystemBase {
 
     shooterWheel.configAllSettings(_velocity_closed);
     shooterWheel.selectProfileSlot(0, 0);
+
+    shooterWheel2.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+    shooterWheel2.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
   }
  public void startWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0.33);
