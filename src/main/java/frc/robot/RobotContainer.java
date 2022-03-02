@@ -144,10 +144,10 @@ public class RobotContainer {
     //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
 
     // auto commands selector
-    autoList.setDefaultOption("2 Ball HIGH-C", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175));
+    autoList.setDefaultOption("2 Ball HIGH-C", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.1, Constants.spinupVel2, 175));
 
     autoList.addOption("2 Ball Auto HIGH-A", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.3, Constants.spinupVel2, 175));
-    autoList.addOption("2 Ball Auto HIGH-B", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160));
+    autoList.addOption("2 Ball Auto HIGH-B", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, Constants.spinupVel2, 150));
     autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
     autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
 

@@ -51,11 +51,11 @@ public class AutoStraight extends CommandBase {
   }
 
   // this just doesn't seem to work for now, would be nice to fix it
-  double calcSpeed(double t, double maxSpeed, double maxDistance) {
-    if (t < (maxDistance * 0.25)){
-      return maxSpeed * (t / (maxDistance * 0.25));
-    } else if (t > (maxDistance * 0.75)){
-      return maxSpeed * (1 - ((t - (maxDistance * 0.75)) / (maxDistance * 0.25)));
+  double calcSpeed(double enc, double maxSpeed, double maxDistance) {
+    if (enc < (maxDistance * 0.25)){
+      return maxSpeed * (enc / (maxDistance * 0.25));
+    } else if (enc > (maxDistance * 0.75)){
+      return maxSpeed * (1 - ((enc - (maxDistance * 0.75)) / (maxDistance * 0.25)));
     } else {
       return maxSpeed;
     }

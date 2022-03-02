@@ -40,11 +40,11 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
     // @Override
     // public void initialize() {
     //   chassis.breakVcoast(false);
-    //   try {
-    //     timer.wait(0); // in milliseconds
-    //   } catch (Exception exeption) {
-    //     DriverStation.reportError(exeption.getMessage(), exeption.getStackTrace());
-    //   } 
+      // try {
+      //   timer.wait(0); // in milliseconds
+      // } catch (Exception exeption) {
+      //   DriverStation.reportError(exeption.getMessage(), exeption.getStackTrace());
+      // } 
     // }
     // @Override
     // public void end(boolean wasInterrupted) {
