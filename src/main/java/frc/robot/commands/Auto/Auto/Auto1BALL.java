@@ -33,6 +33,7 @@ public class Auto1BALL extends ParallelRaceGroup {
       new FireAUTO(feed, feedWheel, index, intake, 3)
     );
   }
+  
  // @Override
    /* public void initialize() {
       try {

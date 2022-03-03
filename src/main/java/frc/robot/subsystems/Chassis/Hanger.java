@@ -36,8 +36,8 @@ public class Hanger extends SubsystemBase{
 
         climbFollower.setNeutralMode(NeutralMode.Brake);
         climbLeader.setNeutralMode(NeutralMode.Brake);
-        climbFollower.setInverted(TalonFXInvertType.CounterClockwise);
-        climbLeader.setInverted(TalonFXInvertType.Clockwise);
+        climbFollower.setInverted(TalonFXInvertType.Clockwise);
+        climbLeader.setInverted(TalonFXInvertType.CounterClockwise);
 
         climbLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         climbFollower.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
