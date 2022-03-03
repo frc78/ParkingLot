@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Auto.Auto;
 
+import com.fasterxml.jackson.databind.jsontype.impl.AsDeductionTypeDeserializer;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
@@ -17,12 +19,15 @@ public class Testing extends SequentialCommandGroup {
   public Testing(Chassis m_chassis) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    // addCommands(
+    //   new AutoStraight(m_chassis, 0.7, 0.2),
+    //   new AutoTurn(m_chassis, 40, 0.15),
+    //   new AutoStraight(m_chassis, 3, 0.2),
+    //   new AutoTurn(m_chassis, 70, 0.2),
+    //   new AutoStraight(m_chassis, 3, 0.2)
+    // );
     addCommands(
-      new AutoStraight(m_chassis, 0.7, 0.2),
-      new AutoTurn(m_chassis, 40, 0.15),
-      new AutoStraight(m_chassis, 3, 0.2),
-      new AutoTurn(m_chassis, 70, 0.2),
-      new AutoStraight(m_chassis, 3, 0.2)
-    );
+      new AutoStraight(m_chassis, 2, 1)
+       );
   }
 }

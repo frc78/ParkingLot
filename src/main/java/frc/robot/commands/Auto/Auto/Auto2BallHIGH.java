@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Auto.Auto;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -37,17 +39,17 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
       new SpinAndFire(shooter, feed, index, feedWheel, intake, spinUpVel)
     );
     }
-    // @Override
-    // public void initialize() {
-    //   chassis.breakVcoast(false);
-      // try {
+    @Override
+    public void initialize() {
+      chassis.breakVcoast(false);
+    }
+    @Override
+    public void end(boolean wasInterrupted) {
+      chassis.breakVcoast(Constants.MOTOR_MODE == NeutralMode.Coast ? true : false);
+    }
+          // try {
       //   timer.wait(0); // in milliseconds
       // } catch (Exception exeption) {
       //   DriverStation.reportError(exeption.getMessage(), exeption.getStackTrace());
       // } 
-    // }
-    // @Override
-    // public void end(boolean wasInterrupted) {
-    //   chassis.breakVcoast(true);
-    // }
 }

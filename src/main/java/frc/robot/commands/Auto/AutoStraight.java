@@ -33,7 +33,8 @@ public class AutoStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance));
+    m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance));
+    // m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance));
     m_chassis.setSpeed(speed, speed);
     DriverStation.reportError("enc position :" + m_chassis.getRawMotorPosition(0), false);
   }
