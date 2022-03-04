@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Chassis;
 
 import java.sql.Driver;
+import java.util.concurrent.ExecutionException;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -101,6 +102,11 @@ public class Chassis extends SubsystemBase {
   public void resetEncoder() {
     leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
     rightLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+    // try {
+    //   Thread.sleep(50);
+    // } catch (Exception e) {
+    //   DriverStation.reportError("Reset Encoders", e.getStackTrace());
+    // }
   }
 
   public void zeroAllSensors() {
