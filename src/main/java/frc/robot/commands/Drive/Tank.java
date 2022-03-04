@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Drive;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -25,7 +27,10 @@ public class Tank extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // m_chassis.breakVcoast(Constants.MOTOR_MODE == NeutralMode.Brake ? false : true);
+    m_chassis.breakVcoast(true);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

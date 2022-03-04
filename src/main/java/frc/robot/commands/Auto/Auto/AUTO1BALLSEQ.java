@@ -6,6 +6,7 @@ package frc.robot.commands.Auto.Auto;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoStraight;
@@ -22,22 +23,23 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AUTO1BALLSEQ extends SequentialCommandGroup {
   /** Creates a new AUTO1BALLSEQ. */
-  Chassis chassis;
+  // Chassis chassis;
   public AUTO1BALLSEQ(Chassis chassis, Feed feed, Indexer index, Shooter shooter, FeedWheel feedWheel, Intake intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    this.chassis = chassis;
+    // this.chassis = chassis;
     addCommands(
+      new InstantCommand(() -> chassis.breakVcoast(false), chassis),
       new Auto1BALL(shooter, feed, index, feedWheel, intake),
       new AutoStraight(chassis, 2, -.3)
     );
   }
-  @Override
-  public void initialize() {
-    chassis.breakVcoast(false);
-  }
-  @Override
-  public void end(boolean wasInterrupted) {
-    chassis.breakVcoast(Constants.MOTOR_MODE == NeutralMode.Coast ? true : false);
-  }
+  // @Override
+  // public void initialize() {
+  //   chassis.breakVcoast(false);
+  // }
+  // @Override
+  // public void end(boolean wasInterrupted) {
+  //   chassis.breakVcoast(Constants.MOTOR_MODE == NeutralMode.Coast ? true : false);
+  // }
 }

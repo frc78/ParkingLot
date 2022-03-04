@@ -6,6 +6,7 @@ package frc.robot.commands.Auto.Auto;
 
 import com.fasterxml.jackson.databind.jsontype.impl.AsDeductionTypeDeserializer;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
@@ -27,6 +28,7 @@ public class Testing extends SequentialCommandGroup {
     //   new AutoStraight(m_chassis, 3, 0.2)
     // );
     addCommands(
+      new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
       new AutoStraight(m_chassis, 2, 1)
        );
   }

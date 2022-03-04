@@ -24,7 +24,7 @@ import frc.robot.subsystems.Shooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Auto1BALL extends ParallelRaceGroup {
   /** Creates a new Auto1BALL. */
-  private Timer timer;
+  // private Timer timer;
   public Auto1BALL(Shooter shoot, Feed feed, Indexer index, FeedWheel feedWheel, Intake intake ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

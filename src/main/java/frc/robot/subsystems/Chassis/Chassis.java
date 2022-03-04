@@ -118,6 +118,11 @@ public class Chassis extends SubsystemBase {
     resetEncoder();
     m_odometry.resetPosition(pose, pidgey.getRotation2d());
   }
+
+  /**
+   * True is coast mode, and False is brake mode
+   * @param isMotorControl
+   */
   public void breakVcoast(boolean isMotorControl){
     if(isMotorControl){
       leftLeader.setNeutralMode(NeutralMode.Coast);

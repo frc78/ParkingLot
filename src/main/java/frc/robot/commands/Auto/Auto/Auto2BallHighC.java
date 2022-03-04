@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Auto.Auto;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoStraight;
@@ -25,6 +26,7 @@ public class Auto2BallHighC extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new InstantCommand(() -> chassis.breakVcoast(false), chassis),
       new DriveAndIntake(chassis, intake, indexer, 1.5, 0.3),
       new AutoStraight(chassis, 1.5, -0.3),
       new AutoTurnandSpinUp(chassis, shooter, Constants.spinupVel2, 175, 0.2),
