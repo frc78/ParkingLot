@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Auto.FireAuto;
@@ -28,7 +29,7 @@ import frc.robot.Constants;
 public class Auto2BallHIGH extends SequentialCommandGroup {
   /** Creates a new Auto2BallHIGH. */
   // Chassis chassis;
-  // Timer timer;
+  Timer timer;
   public Auto2BallHIGH(Chassis chassis, Intake intake, Indexer index, Feed feed, FeedWheel feedWheel, Shooter shooter, double distance, double distance2, double spinUpVel, double degrees ) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
@@ -36,6 +37,8 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> chassis.breakVcoast(false), chassis),
       new DriveAndIntake(chassis, intake, index, distance, 0.3),
+      new InstantCommand(() -> chassis.resetEncoder(), chassis),
+      new WaitCommand(0.5),
       new AutoStraight(chassis, distance2, -0.3),
       new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2),
       new SpinAndFire(shooter, feed, index, feedWheel, intake, spinUpVel)
