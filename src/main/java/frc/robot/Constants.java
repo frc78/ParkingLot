@@ -52,7 +52,7 @@ public final class Constants {
     public static final int Indexer = 12;//Temporary subject to change.
 
     //Shooter Velocity
-    public static final double spinupVel = 1900.0; //Bottom Goal
+    public static final double spinupVel = 1300.0; //Bottom Goal
     public static final double spinupVel2 = 3120.0;//Top Goal
     
     //            JOYSTICKS

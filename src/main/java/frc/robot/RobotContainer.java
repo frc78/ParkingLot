@@ -190,7 +190,7 @@ public class RobotContainer {
     manipControllerLowLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel));//Low goal
     
     Button manipControllerB = new JoystickButton(m_manipController, 3);// swapped with b 
-    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
+    manipControllerB.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));
 
     Button manipControllerY = new JoystickButton(m_manipController, 4);//bandaid---- Fixed Officially Names and everything. 
     manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));

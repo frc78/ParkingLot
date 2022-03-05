@@ -46,8 +46,9 @@ public class IntakeCommand extends CommandBase {
       m_indexer.indexRun();
     }else{
       m_intake.DeployIntake();
-      m_intake.setSpeed(-0.75);
-      m_indexer.indexRun();
+      m_intake.setSpeed(0.75);
+      m_feed.feedRun(-0.75);
+      m_indexer.indexReverse();
     }
 
     
