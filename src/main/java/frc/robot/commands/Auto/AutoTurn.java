@@ -19,7 +19,8 @@ public class AutoTurn extends CommandBase {
   private double speed;
 
   /** Creates a new AutoTurn. */
-  public AutoTurn(Chassis subsystem1, double turndegrees, double turnSpeed) {
+  public 
+  AutoTurn(Chassis subsystem1, double turndegrees, double turnSpeed) {
     m_chassis = subsystem1;
     degrees = turndegrees;
     speed = turnSpeed;

@@ -6,6 +6,7 @@ package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoTurn;
@@ -23,12 +24,13 @@ import frc.robot.subsystems.Chassis.Chassis;
 public class Auto2BallSEQ extends SequentialCommandGroup {
   /** Creates a new Auto2BallSEQ. */
   Chassis chassis;
-  private Timer timer;
+  // private Timer timer;
   public Auto2BallSEQ(Chassis chassis, Intake intake, Feed feed, Shooter shooter, FeedWheel wheely, Indexer index) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    this.chassis = chassis;
+    // this.chassis = chassis;
     addCommands(
+    new InstantCommand(() -> chassis.breakVcoast(false), chassis),
     new DriveAndIntake(chassis, intake, index, 1.5, 0.3),
     new AutoTurn(chassis, 170, .2),
     new DriveAndSpinUp(chassis, shooter, 2.4, Constants.spinupVel),
