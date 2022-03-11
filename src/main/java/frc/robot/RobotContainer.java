@@ -40,6 +40,7 @@ import frc.robot.commands.Auto.BackupAuto.BackupAutoTestSeq;
 import frc.robot.commands.Auto.BackupAuto.Testing;
 import frc.robot.commands.Auto.PathweaverAutos.Auto1BallPar;
 import frc.robot.commands.Auto.PathweaverAutos.AutoTestSeq;
+import frc.robot.commands.Auto.PathweaverAutos.PathTestSEQ;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -64,12 +65,12 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   //            SUBSYSTEMS
-  private final ThreeMotorChassis m_chassis;
-  private final Intake m_intake;
-  private final Shooter m_shooter;
-  private final Feed m_feed;
-  private final Indexer m_indexer;
-  private final FeedWheel m_feedWheel;
+  private final Chassis m_chassis;
+  // private final Intake m_intake;
+  // private final Shooter m_shooter;
+  // private final Feed m_feed;
+  // private final Indexer m_indexer;
+  // private final FeedWheel m_feedWheel;
 
   //THERE IS PROBABLY A BETTER WAY TO DO THIS THAN INSTANTIATING A CLASS
   private final PathCommands m_pathcommands;
@@ -88,12 +89,12 @@ public class RobotContainer {
   public RobotContainer() {
     
     // CameraServer.startAutomaticCapture();
-    m_intake = new Intake();
-    m_chassis = new ThreeMotorChassis();
-    m_shooter = new Shooter();
-    m_feed = new Feed();
-    m_indexer = new Indexer();
-    m_feedWheel = new FeedWheel();
+    // m_intake = new Intake();
+    m_chassis = new Chassis();
+    // m_shooter = new Shooter();
+    // m_feed = new Feed();
+    // m_indexer = new Indexer();
+    // m_feedWheel = new FeedWheel();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new XboxController(Constants.DRIVEMP);
@@ -106,14 +107,14 @@ public class RobotContainer {
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
 
-    m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
+    // m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 
     // UsbCamera RobotCamera = CameraServer.startAutomaticCapture();
     // RobotCamera.setResolution(640, 480);
 
-    m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely, m_shooter)));
-    m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
-    m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
+    // m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely, m_shooter)));
+    // m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
+    // m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
   }
 
   /**       
@@ -129,23 +130,23 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
-    Button manipControllerX = new JoystickButton(m_manipController, 3);
-    manipControllerX.whenHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
+    // Button manipControllerX = new JoystickButton(m_manipController, 3);
+    // manipControllerX.whenHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
 
-    Button manipControllerA = new JoystickButton(m_manipController, 1);
-    manipControllerA.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));
+    // Button manipControllerA = new JoystickButton(m_manipController, 1);
+    // manipControllerA.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));
 
-    Button manipControllerRB = new JoystickButton(m_manipController, 6);
-    manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
+    // Button manipControllerRB = new JoystickButton(m_manipController, 6);
+    // manipControllerRB.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel));
 
-    Button manipControllerLB = new JoystickButton(m_manipController, 5);
-    manipControllerLB.whileHeld(new SpinUp(m_shooter));
+    // Button manipControllerLB = new JoystickButton(m_manipController, 5);
+    // manipControllerLB.whileHeld(new SpinUp(m_shooter));
     
-    Button manipControllerY = new JoystickButton(m_manipController, 4);
-    manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
+    // Button manipControllerY = new JoystickButton(m_manipController, 4);
+    // manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
 
-    Button manipControllerB = new JoystickButton(m_manipController, 2);
-    manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
+    // Button manipControllerB = new JoystickButton(m_manipController, 2);
+    // manipControllerB.whileHeld(new Tuck(m_feed, m_indexer, false));
 
     
   }
@@ -162,14 +163,46 @@ public class RobotContainer {
     // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
 
-    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
-    RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
+    // Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
 
-    m_chassis.resetOdometry(trajectory1.getInitialPose());
+    var autoVoltageConstraint =
+        new DifferentialDriveVoltageConstraint(
+            new SimpleMotorFeedforward(
+                Constants.ksVolts,
+                Constants.kvVoltSecondsPerMeter,
+                Constants.kaVoltSecondsSquaredPerMeter),
+                Constants.kDriveKinematics,
+            10);
+
+    // Create config for trajectory
+    TrajectoryConfig config =
+        new TrajectoryConfig(
+          Constants.kMaxSpeedMetersPerSecond,
+          Constants.kMaxAccelerationMetersPerSecondSquared)
+            // Add kinematics to ensure max speed is actually obeyed
+            .setKinematics(Constants.kDriveKinematics)
+            // Apply the voltage constraint
+            .addConstraint(autoVoltageConstraint);
+
+    // An example trajectory to follow.  All units in meters.
+    Trajectory exampleTrajectory =
+        TrajectoryGenerator.generateTrajectory(
+            // Start at the origin facing the +X direction
+            new Pose2d(0, 0, new Rotation2d(0)),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(3, 0, new Rotation2d(0)),
+            // Pass config
+            config);
+
+    RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(exampleTrajectory, m_chassis);
+
+    m_chassis.resetOdometry(exampleTrajectory.getInitialPose());
     
-    return ramsete1.andThen(() -> m_chassis.stop());
+    // return ramsete1.andThen(() -> m_chassis.stop());
 
-   //return new Testing(m_chassis);
+   return new PathTestSEQ(ramsete1, exampleTrajectory, m_chassis);
     
   }
 }

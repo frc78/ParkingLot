@@ -105,7 +105,7 @@ public class Chassis extends SubsystemBase {
   public void zeroAllSensors() {
     resetEncoder();
     pidgey.reset();
-    // pidgey.setYaw(0, 30);
+    pidgey.setYaw(0, 30);
     // pidgey.setAccumZAngle(0, 30);
   }
 
@@ -115,10 +115,13 @@ public class Chassis extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose) {
     resetEncoder();
-    m_odometry.resetPosition(pose, pidgey.getRotation2d());
+    zeroAllSensors();
+    m_odometry.resetPosition(pose, new Rotation2d(getPidgeonYaw()));
   }
 
   public Pose2d getPose() {
+    SmartDashboard.putNumber("odoXM", m_odometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("odoYM", m_odometry.getPoseMeters().getY());
     return m_odometry.getPoseMeters();
   }
 
@@ -134,7 +137,7 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getMotorPosition(TalonFX motor) {
-    return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+    return ((motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) / Constants.WHEEL_GEAR_RATIO) * Constants.WHEEL_CIRC_METERS;
   }
 
   public double getRawMotorPosition(int motor) {
@@ -143,6 +146,7 @@ public class Chassis extends SubsystemBase {
 
   public double getPidgeonYaw() {
     // return pidgey.getYaw();
+    SmartDashboard.putNumber("autoYaw", pidgey.getAngle());
     return pidgey.getAngle();
   }
 
@@ -154,11 +158,11 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-  Rotation2d yawRot = new Rotation2d(pidgey.getYaw());
+  Rotation2d yawRot = new Rotation2d(getPidgeonYaw());
    m_odometry.update(yawRot, getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
-    SmartDashboard.putNumber("left encoder", leftLeader.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("right encoder", rightLeader.getSelectedSensorVelocity());
+   SmartDashboard.putNumber("autoLeftMotor", getMotorPosition(leftLeader));
+   SmartDashboard.putNumber("autoRightMotor", getMotorPosition(rightLeader));
     // This method will be called once per scheduler run
   }
 }

@@ -85,7 +85,7 @@ public final class Constants {
     public static final double WHEEL_CIRC_METERS = 0.31918;
     public static final double WHEEL_GEAR_RATIO = 9.091;
 
-    public static final double kTrackWidthMeters = 0.584;
+    public static final double kTrackWidthMeters = 0.67945;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
     //        Feedback
@@ -95,8 +95,8 @@ public final class Constants {
     public static final double kPDriveVel = 0.9399;
 
     //        Robot Speed
-    public static final double kMaxSpeedMetersPerSecond = 0.25;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 0.25;
+    public static final double kMaxSpeedMetersPerSecond = 0.5;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 0.5;
     //        Ramsete Controller
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
