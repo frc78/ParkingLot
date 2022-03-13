@@ -22,6 +22,6 @@ public class SpinAndAuto extends ParallelCommandGroup {
   public SpinAndAuto(Chassis m_chassis, Shooter m_shooter, Intake m_intake, Feed m_feed, FeedWheel m_feedWheel, Indexer m_indexer, double dist, double dist2, double vel, double deg) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SpinUp(m_shooter, Constants.spinupVel2), new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, dist, dist2, vel, deg));
+    addCommands(new SpinUp(m_shooter, Constants.spinupVel2, true), new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, dist, dist2, vel, deg, true));
   }
 }

@@ -26,7 +26,7 @@ public class Auto1Ball3Par extends ParallelRaceGroup {
     addCommands(
       new Auto1Ball3Seq(m_chassis, m_indexer, m_feed, m_feedWheel),
       new IntakeCommand(m_intake, m_feed, m_indexer, true),
-      new SpinUp(m_shooter, Constants.spinupVel)
+      new SpinUp(m_shooter, Constants.spinupVel, true)
     );
   }
 }

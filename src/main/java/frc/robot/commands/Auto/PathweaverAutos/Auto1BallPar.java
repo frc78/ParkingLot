@@ -24,7 +24,7 @@ public class Auto1BallPar extends ParallelRaceGroup {
   public Auto1BallPar(RamseteCommand ramseteCommand1, Shooter m_shooter, Intake intake, Feed feed, Indexer indexer) {
     addCommands(
       new Auto1BallSeq(ramseteCommand1),
-      new SpinUp(m_shooter, Constants.spinupVel),
+      new SpinUp(m_shooter, Constants.spinupVel, true),
       new IntakeCommand(intake, feed, indexer, true)
       );
   }

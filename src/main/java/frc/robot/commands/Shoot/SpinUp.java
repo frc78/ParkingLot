@@ -16,9 +16,10 @@ public class SpinUp extends CommandBase {
 
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity) {
+  public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
     this.shooter = shooter;
     this.vel = Velocity;
+    this.shooter.isHood(isHood);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }

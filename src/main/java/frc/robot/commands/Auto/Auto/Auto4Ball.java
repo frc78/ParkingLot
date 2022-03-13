@@ -6,9 +6,9 @@ package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Auto.AutoStraight;
-import frc.robot.commands.Auto.FireAuto;
+import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Shoot.FireAUTO;
 import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
@@ -20,17 +20,25 @@ import frc.robot.subsystems.Chassis.Chassis;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto2BallHighC extends SequentialCommandGroup {
-  /** Creates a new Auto2BallC. */
-  public Auto2BallHighC(Chassis chassis, Intake intake, Indexer indexer, Shooter shooter, Feed feed, FeedWheel feedWheel) {
+public class Auto4Ball extends SequentialCommandGroup {
+  /** Creates a new Auto4Ball. */
+  public Auto4Ball(Chassis chassis, Intake intake, Indexer indexer, Feed feed, FeedWheel wheely, Shooter shooter,double distance1, double distance2, double distance3, double distance4, double velocity, double deg, double deg2, double deg3, boolean isHood) {
+
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(() -> chassis.breakVcoast(false), chassis),
-      new DriveAndIntake(chassis, intake, indexer, 1.5, 0.3),
-      new AutoStraight(chassis, 1.5, -0.3),
-      new AutoTurnandSpinUp(chassis, shooter, Constants.spinupVel2, 175, 0.2, true),
-      new FireAUTO(feed, feedWheel, indexer, intake, 3)
+      new DriveAndIntake(chassis, intake, indexer, distance1, .3),
+      new WaitCommand(.5),
+      new AutoStraight(chassis, distance2, -.3),
+      new AutoTurnandSpinUp(chassis, shooter, velocity, deg, .2, true),
+      new FireAUTO(feed, wheely, indexer, intake, 2),//the 2 is subject to change, 2 is indicated as time (seconds)
+      new AutoTurn(chassis, deg2, .2),
+      new DriveAndIntake(chassis, intake, indexer, distance3, .3),
+      new WaitCommand(2),
+      new AutoTurn(chassis, deg3, .2),
+      new DriveAndSpinUp(chassis, shooter, distance4, velocity, true),
+      new FireAUTO(feed, wheely, indexer, intake, 6)
     );
   }
 }

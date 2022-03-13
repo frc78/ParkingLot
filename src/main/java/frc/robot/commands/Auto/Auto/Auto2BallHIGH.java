@@ -30,7 +30,7 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
   /** Creates a new Auto2BallHIGH. */
   // Chassis chassis;
   Timer timer;
-  public Auto2BallHIGH(Chassis chassis, Intake intake, Indexer index, Feed feed, FeedWheel feedWheel, Shooter shooter, double distance, double distance2, double spinUpVel, double degrees ) {
+  public Auto2BallHIGH(Chassis chassis, Intake intake, Indexer index, Feed feed, FeedWheel feedWheel, Shooter shooter, double distance, double distance2, double spinUpVel, double degrees, boolean isHood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     // this.chassis = chassis;
@@ -40,7 +40,7 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
       new InstantCommand(() -> chassis.resetEncoder(), chassis),
       new WaitCommand(0.5),
       new AutoStraight(chassis, distance2, -0.3),
-      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2),
+      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2, true),
       new SpinAndFire(shooter, feed, index, feedWheel, intake, spinUpVel)
     );
     }

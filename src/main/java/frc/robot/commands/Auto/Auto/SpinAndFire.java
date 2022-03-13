@@ -24,7 +24,7 @@ public class SpinAndFire extends ParallelRaceGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new FireAUTO(feed, wheely, index, intake, 6),
-      new SpinUp(shooter, spinupVel)
+      new SpinUp(shooter, spinupVel, true)
     );
   }
 }

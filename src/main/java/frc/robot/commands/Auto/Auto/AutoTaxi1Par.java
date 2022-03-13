@@ -22,7 +22,7 @@ public class AutoTaxi1Par extends ParallelRaceGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(m_shooter, Constants.spinupVel),
+      new SpinUp(m_shooter, Constants.spinupVel, true),
       new AutoTaxi1Seq(m_chassis, m_indexer, m_feed, m_feedWheel)
     );
   }

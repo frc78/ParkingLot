@@ -54,6 +54,7 @@ public final class Constants {
     //Shooter Velocity
     public static final double spinupVel = 1600.0; //Bottom Goal
     public static final double spinupVel2 = 3120.0;//Top Goal
+    public static final double spinUpVel3 = 3000.0;//top fender
     
     //            JOYSTICKS
     public static final int DRIVEJS = 1;

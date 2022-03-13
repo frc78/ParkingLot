@@ -18,12 +18,12 @@ import frc.robot.subsystems.Chassis.Chassis;
 public class DriveAndSpinUp extends ParallelRaceGroup {
   
   /** Creates a new DriveAndSpinUp. */
-  public DriveAndSpinUp(Chassis chassis, Shooter shooter, double distance2, double spinupVel) {
+  public DriveAndSpinUp(Chassis chassis, Shooter shooter, double distance2, double spinupVel, boolean isHood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new AutoStraight(chassis, distance2, .3),
-      new SpinUp(shooter, spinupVel)
+      new SpinUp(shooter, spinupVel, isHood)
     );
   }
 }
