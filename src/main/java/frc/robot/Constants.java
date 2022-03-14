@@ -70,6 +70,19 @@ public final class Constants {
     public static final double WHEEL_CIRC_METERS = 0.478;
     public static final double WHEEL_GEAR_RATIO = 12.27;
 
+    //            LIMELIGHT
+    // height of the lime light from the ground, in meters
+    public static final double LIME_HEIGHTM = 0;
+    // x axis angle of limelight from the horizontal plane
+    public static final double LIME_ANGLE = 0;
+    // height of the high goal (8ft 8in, 264cm) in meters
+    public static final double HIGHGOAL_HEIGHTM = 2.64;
+    // the optimal shooting distance from the high goal for shooting into the high goal, in meters
+    public static final double OPTIMAL_SHOOTING_DISTANCEM = 2;
+    // offsets for the x and y angle crosshair of the limelight, changing where the target should be for optimal shooting, in degs
+    public static final double X_CROSS_OFFSET = 0;
+    public static final double Y_CROSS_OFFSET = 0;
+
     //            PATH FOLLOWING CONSTANTS
     public static final double kTrackWidthMeters = 0.584;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
