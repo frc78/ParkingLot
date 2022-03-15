@@ -144,6 +144,7 @@ public class RobotContainer {
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
     m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
+  
     //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
 
     // auto commands selector
@@ -154,8 +155,8 @@ public class RobotContainer {
     autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
     autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
     autoList.addOption("test", new Testing(m_chassis));
-    autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 5.4, 6, Constants.spinupVel2, 150, -60, 190, true));
-                                                                                                                      //DISTANCE 1,2,3,4 VEL DEG 1,2,3      
+    autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 5.4, 6, Constants.spinupVel2, 150, -126, 190, true));
+                                                                                                                       //DISTANCE 1,2,3,4 VEL DEG 1,2,3      
     SmartDashboard.putData(autoList);
   }
 
@@ -166,11 +167,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton aButton = new JoystickButton(m_driveController, 1);
-    aButton.whenHeld(new Forward50(m_chassis, 0.5));
+    //JoystickButton aButton = new JoystickButton(m_driveController, 1);
+    //aButton.whenHeld(new Forward50(m_chassis, 0.5));
 
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
+
+    JoystickButton driverX = new JoystickButton(m_driveController, 1);
+    driverX.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(true), m_hanger));
+
+    JoystickButton driverB = new JoystickButton(m_driveController, 3);
+    driverB.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(false), m_hanger));
     
     //Button driveControllerSTART = new JoystickButton(m_driveController, 10);
    // driveControllerSTART.whileHeld(new SetUpHanger(m_hanger));

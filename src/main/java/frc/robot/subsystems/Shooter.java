@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private static TalonFX shooterWheel = new TalonFX(Constants.LeftShoot);
   private static TalonFX shooterWheel2 = new TalonFX(Constants.RightShoot);
   private static TalonFXConfiguration _velocity_closed = new TalonFXConfiguration();
-  DoubleSolenoid solenoidShooter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1,4);
+  DoubleSolenoid solenoidShooter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1,5);
   
 
 
