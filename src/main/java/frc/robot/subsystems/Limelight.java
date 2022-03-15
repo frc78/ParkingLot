@@ -39,6 +39,7 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putNumber("LimelightArea", area);
     SmartDashboard.putNumber("X shot confidence", 1 / (Math.abs(x) - Constants.X_CROSS_OFFSET));
     SmartDashboard.putNumber("Y shot confidence", 1 / (Math.abs(y) - Constants.Y_CROSS_OFFSET));
+    SmartDashboard.putNumber("DistanceToTarget", highGoalDistance());
   }
   /**
    * 
@@ -65,6 +66,6 @@ public class Limelight extends SubsystemBase {
   }
 
   public double highGoalDistance () {
-    return (Constants.HIGHGOAL_HEIGHTM - Constants.LIME_HEIGHTM) / (Math.tan(Math.toRadians(y)) - Constants.LIME_ANGLE);
+    return (Constants.HIGHGOAL_HEIGHTM - Constants.LIME_HEIGHTM) / Math.tan(Math.toRadians(y + Constants.LIME_ANGLE));
   }
 }

@@ -72,11 +72,11 @@ public final class Constants {
 
     //            LIMELIGHT
     // height of the lime light from the ground, in meters
-    public static final double LIME_HEIGHTM = 0;
+    public static final double LIME_HEIGHTM = 0.07; // small chassis
     // x axis angle of limelight from the horizontal plane
-    public static final double LIME_ANGLE = 0;
+    public static final double LIME_ANGLE = 37;
     // height of the high goal (8ft 8in, 264cm) in meters
-    public static final double HIGHGOAL_HEIGHTM = 2.64;
+    public static final double HIGHGOAL_HEIGHTM = 1.7526; //2.64 is real goal height
     // the optimal shooting distance from the high goal for shooting into the high goal, in meters
     public static final double OPTIMAL_SHOOTING_DISTANCEM = 2;
     // offsets for the x and y angle crosshair of the limelight, changing where the target should be for optimal shooting, in degs

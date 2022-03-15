@@ -36,10 +36,13 @@ public class Tank extends CommandBase {
     // double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2, 0.4); // default speed = 1 - the 2nd parameter (upAdjust)
     // double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2, 0.4);
     // 1st input is controller input, 2nd is the % of speed it can increase by holding down RT all the way, and 3rd input is % speed it decreases by holding down LT
-    double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2, 0.4);
-    double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2, 0.4);
-    lSpeed = limelightAiming(lSpeed, 0.2, 1, false);
-    rSpeed = limelightAiming(rSpeed, 0.2, 1, true);
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.2, 0.4);
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.2, 0.4);
+    if (m_controller.getRightBumper()) {
+      lSpeed = limelightAiming(lSpeed, 0.2, 0, false);
+      rSpeed = limelightAiming(rSpeed, 0.2, 0, true);
+      SmartDashboard.putBoolean("isPressedAim", m_controller.getRightBumper());
+    }
 
     boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
     if(motorToggle){
@@ -75,10 +78,14 @@ public class Tank extends CommandBase {
    * @return Adjusted speed
    */
   public double limelightAiming (double inputspeed, double topSpeed, double thres, boolean side) {
-    double x = m_limelight.getTarget("x") < thres ? 0 : m_limelight.getTarget("x");
-    double degRange = 8;
-
-    return ((Math.min(x, degRange) / degRange) * topSpeed * (side==true ? -1:1)) + inputspeed;
+    if (m_limelight.hasTarget()) {
+      double x = Math.abs(m_limelight.getTarget("x")) < thres ? 0 : m_limelight.getTarget("x");
+      double degRange = 8;
+  
+      return ((Math.min(Math.abs(x), degRange) / degRange) * topSpeed * (side==true ? 1:-1) * (Math.abs(x) / x)) + inputspeed;
+    } else {
+      return inputspeed;
+    }
   }
 
   //this function is meant to take in the joystick input, and maxAdjust has to be between 0 and 1
