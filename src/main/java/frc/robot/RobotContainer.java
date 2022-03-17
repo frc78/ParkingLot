@@ -194,11 +194,11 @@ public class RobotContainer {
     Button manipControllerSTART = new JoystickButton(m_manipController, 10);
     manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
-    Button manipControllerRB = new JoystickButton(m_manipController, 6);
-    manipControllerRB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, true));//High tarmac shot exteded hood
+    Button manipControllerLT = new JoystickButton(m_manipController, 7);
+    manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, true));//High tarmac shot exteded hood
 
-    Button manipControllerLowLT = new JoystickButton(m_manipController, 7);
-    manipControllerLowLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel, true));//Low fender extended hood
+    Button manipControllerLowRB = new JoystickButton(m_manipController, 6);
+    manipControllerLowRB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel, true));//Low fender extended hood
     
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
     manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinUpVel3, false));//high fender retract hood

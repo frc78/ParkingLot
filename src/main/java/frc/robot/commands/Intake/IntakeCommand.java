@@ -42,12 +42,12 @@ public class IntakeCommand extends CommandBase {
     if(m_isIntake){
       m_intake.DeployIntake();
       m_intake.setSpeed(-0.75);
-      m_feed.feedRun(0.75);
+      m_feed.feedRunIfNoCargo(0.75);
       m_indexer.indexRun();
     }else{
       m_intake.DeployIntake();
       m_intake.setSpeed(0.75);
-      m_feed.feedRun(-0.75);
+      m_feed.feedRunIfNoCargo(-0.75);
       m_indexer.indexReverse();
     }
 
