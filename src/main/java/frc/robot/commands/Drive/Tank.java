@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Drive;
 
+import java.util.Random;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -39,7 +41,7 @@ public class Tank extends CommandBase {
       m_chassis.setSpeed(lSpeed, rSpeed);
     }
     
-    SmartDashboard.putNumber("Left Joystick Value", lSpeed);
+    SmartDashboard.putNumber("left Joystick Value", lSpeed);
     SmartDashboard.putNumber("Right Joystick Value", rSpeed);
 
   }
