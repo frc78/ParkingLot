@@ -14,7 +14,9 @@ import frc.robot.subsystems.Chassis.Hanger;
 public class DeployHanger extends CommandBase {
   private Hanger m_hanger;
   private Joystick m_controller;
+  private int currentEncoderCLicks = 205000;
   private int MAX_ENCODER_CLICKS = 205000;
+  private int NEW_MAX_ENCODER_CLICKS = 245000;
 
   /** Creates a new DeployHanger. */
   public DeployHanger(Hanger hanger, Joystick controller ) {
@@ -24,7 +26,7 @@ public class DeployHanger extends CommandBase {
     addRequirements(hanger);
     m_controller = controller;
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -33,9 +35,15 @@ public class DeployHanger extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(m_hanger.isHangerDeployed()){
+      currentEncoderCLicks = NEW_MAX_ENCODER_CLICKS;
+    }else{
+      currentEncoderCLicks = MAX_ENCODER_CLICKS;
+    }
     int dPadValue = m_controller.getPOV();
-    if (Constants.DEBUG) SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
-        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < MAX_ENCODER_CLICKS){
+    SmartDashboard.putNumber("currentEncoderClicks", currentEncoderCLicks);
+     SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
+        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < currentEncoderCLicks){
           //will run down buttons 
           //SmartDashboard.putNumber("Climbif", dPadValue);
           if (dPadValue == -1){
@@ -55,7 +63,7 @@ public class DeployHanger extends CommandBase {
           } else if ((dPadValue <= 90) || (dPadValue > 270)){
             m_hanger.rise();
           }
-        }else if(m_hanger.getPosition() > MAX_ENCODER_CLICKS){
+        }else if(m_hanger.getPosition() > currentEncoderCLicks){
           //SmartDashboard.putNumber("Climbif", 3);
           // Buttons up will not run
           if (dPadValue == -1){

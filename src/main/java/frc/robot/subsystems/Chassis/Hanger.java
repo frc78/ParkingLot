@@ -86,6 +86,9 @@ public class Hanger extends SubsystemBase{
     public double getPosition(){
        return climbLeader.getSelectedSensorPosition();
     }
+    public boolean isHangerDeployed(){
+        return (solenoidHanger.get() == Value.kReverse);
+    }
     @Override
     public void periodic(){
      

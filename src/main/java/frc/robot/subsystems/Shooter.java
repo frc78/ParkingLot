@@ -90,6 +90,7 @@ public void isHood(boolean isHood){
  public void stopWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0);
    shooterWheel2.set(ControlMode.PercentOutput, 0);
+   solenoidShooter.set(Value.kForward);
  }
   @Override
   public void periodic() {
