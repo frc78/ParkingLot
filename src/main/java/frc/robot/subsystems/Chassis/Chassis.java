@@ -152,6 +152,15 @@ public class Chassis extends SubsystemBase {
   public double getMotorPosition(TalonFX motor) {
     return (motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
   }
+/**
+ *
+ * @param motor
+ * 0 is left motor, 1 is right motor
+ * @return
+ */
+  public double getMotorPositionExt(int motor) {
+    return motor == 0 ? (leftLeader.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO : (rightLeader.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) * Constants.WHEEL_CIRC_METERS / Constants.WHEEL_GEAR_RATIO;
+  }
 
   public double getRawMotorPosition(int motor) {
     return motor == 0 ? leftLeader.getSelectedSensorPosition() : rightLeader.getSelectedSensorPosition();

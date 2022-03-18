@@ -29,7 +29,10 @@ public class Testing extends SequentialCommandGroup {
     // );
     addCommands(
       new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
-      new AutoStraight(m_chassis, 2, 1)
+      new AutoStraight(m_chassis, 2, 0.4),
+      new AutoTurn(m_chassis, 180, 0.2),
+      new AutoStraight(m_chassis, 2, 0.4),
+      new AutoTurn(m_chassis, -180, 0.2)
        );
   }
 }

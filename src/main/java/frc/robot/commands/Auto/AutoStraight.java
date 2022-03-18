@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Auto;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -13,12 +14,16 @@ public class AutoStraight extends CommandBase {
 
   private Chassis m_chassis;
   private double encDistance;
+  private double distance;
   private double speed;
+  private PIDController PID;
   //private double goalDistance;
   
   public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {
     m_chassis = subsytem1;
     speed = maxSpeed;
+    distance = distanceM;
+    PID = new PIDController(Constants.kP, Constants.kI, Constants.kD);
     //encDistance = (int) Math.round(((distance / Constants.WHEEL_CIRC_METERS) / Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION);
     encDistance = ((distanceM / Constants.WHEEL_CIRC_METERS) * Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION;
     addRequirements(m_chassis);
@@ -35,7 +40,8 @@ public class AutoStraight extends CommandBase {
   public void execute() {
     //m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance));
     // m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance));
-    m_chassis.setSpeed(speed, speed);
+    // m_chassis.setSpeed(speed, speed);
+    m_chassis.setSpeed(PID.calculate(m_chassis.getMotorPositionExt(0), distance), PID.calculate(m_chassis.getMotorPositionExt(1), distance));
     //DriverStation.reportError("enc position :" + m_chassis.getRawMotorPosition(0), false);
   }
 
@@ -52,13 +58,13 @@ public class AutoStraight extends CommandBase {
   }
 
   // this just doesn't seem to work for now, would be nice to fix it
-  double calcSpeed(double enc, double maxSpeed, double maxDistance) {
-    if (enc < (maxDistance * 0.25)){
-      return maxSpeed * (enc / (maxDistance * 0.25));
-    } else if (enc > (maxDistance * 0.75)){
-      return maxSpeed * (1 - ((enc - (maxDistance * 0.75)) / (maxDistance * 0.25)));
-    } else {
-      return maxSpeed;
-    }
-  }
+  // double calcSpeed(double enc, double maxSpeed, double maxDistance) {
+  //   if (enc < (maxDistance * 0.25)){
+  //     return maxSpeed * (enc / (maxDistance * 0.25));
+  //   } else if (enc > (maxDistance * 0.75)){
+  //     return maxSpeed * (1 - ((enc - (maxDistance * 0.75)) / (maxDistance * 0.25)));
+  //   } else {
+  //     return maxSpeed;
+  //   }
+  // }
 }

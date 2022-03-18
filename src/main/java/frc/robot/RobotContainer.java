@@ -225,7 +225,7 @@ public class RobotContainer {
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 0.8, Constants.spinupVel2, 175); // Auto2Ball High auto A
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160); // Auto2Ball High auto B
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175); // Auto2Ball High auto C
-   //return new Testing(m_chassis);
-   return autoList.getSelected();
+   return new Testing(m_chassis);
+  //  return autoList.getSelected();
   }
 }

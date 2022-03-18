@@ -88,4 +88,8 @@ public final class Constants {
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
 
+    // PID
+    public static final double kP = 0.2;
+    public static final double kI = 0.05;
+    public static final double kD = 0.1;
 }

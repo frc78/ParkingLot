@@ -50,9 +50,6 @@ public class IntakeCommand extends CommandBase {
       m_feed.feedRunIfNoCargo(-0.75);
       m_indexer.indexReverse();
     }
-
-    
-    
   }
 
   // Called once the command ends or is interrupted.
