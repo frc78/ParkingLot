@@ -6,19 +6,22 @@ package frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;
 
 public class SpinUp extends CommandBase {
   private Shooter shooter;
   private double vel;
+  private Limelight limelight;
   
 
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity) {
+  public SpinUp(Shooter shooter, double Velocity, Limelight limelight) {
     this.shooter = shooter;
     this.vel = Velocity;
+    this.limelight = limelight;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -33,7 +36,7 @@ public class SpinUp extends CommandBase {
   @Override
   public void execute() {
     
-    shooter.startWheel(vel);
+    shooter.startWheel(adjustedVel());
 
   }
 
@@ -47,5 +50,9 @@ public class SpinUp extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public double adjustedVel() {
+    return limelight.highGoalDistance() * Constants.distVelRatio + Constants.distVelOffset;
   }
 }
