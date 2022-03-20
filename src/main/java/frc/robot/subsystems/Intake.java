@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Intake extends SubsystemBase {
 
   /** Creates a new Intake. */
-  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0,1);
+  DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3,2);
   Compressor comp = new Compressor(PneumaticsModuleType.REVPH);
 
     protected TalonFX intake;

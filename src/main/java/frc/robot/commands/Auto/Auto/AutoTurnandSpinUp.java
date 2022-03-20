@@ -15,12 +15,12 @@ import frc.robot.subsystems.Chassis.Chassis;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoTurnandSpinUp extends ParallelRaceGroup {
   /** Creates a new AutoTurnandSpinUp. */
-  public AutoTurnandSpinUp(Chassis chassis, Shooter shooter, double spinupVel, double degrees, double turnSpeed) {
+  public AutoTurnandSpinUp(Chassis chassis, Shooter shooter, double spinupVel, double degrees, double turnSpeed, boolean isHood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new AutoTurn(chassis, degrees, turnSpeed),
-      new SpinUp(shooter, spinupVel)
+      new SpinUp(shooter, spinupVel, isHood)
     );
   }
 }

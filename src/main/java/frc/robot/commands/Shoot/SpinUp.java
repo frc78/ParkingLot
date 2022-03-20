@@ -12,13 +12,15 @@ import frc.robot.Constants;
 public class SpinUp extends CommandBase {
   private Shooter shooter;
   private double vel;
-  
+  private boolean isHood;
 
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity) {
+  public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
     this.shooter = shooter;
     this.vel = Velocity;
+    this.isHood = isHood;
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -27,6 +29,7 @@ public class SpinUp extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Starting spin up!");
+    this.shooter.isHood(isHood);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

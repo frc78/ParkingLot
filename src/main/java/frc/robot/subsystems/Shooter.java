@@ -13,6 +13,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,6 +24,8 @@ public class Shooter extends SubsystemBase {
   private static TalonFX shooterWheel = new TalonFX(Constants.LeftShoot);
   private static TalonFX shooterWheel2 = new TalonFX(Constants.RightShoot);
   private static TalonFXConfiguration _velocity_closed = new TalonFXConfiguration();
+  DoubleSolenoid solenoidShooter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1,5);
+  
 
 
   /**NOT NEEDED YET public static int shootMode = 0;*/
@@ -68,11 +73,24 @@ public class Shooter extends SubsystemBase {
   velocity = ((velocity * 2048) / 600); // Convert velocity in RPM to Units Per 100ms
   shooterWheel.set(ControlMode.Velocity, velocity);
   shooterWheel2.follow(shooterWheel);
+  
 }
-
+/**
+ * 
+ * @param isHood true is extended false is retracted
+ */
+public void isHood(boolean isHood){
+  if(isHood){
+    solenoidShooter.set(Value.kForward);
+  }else{
+    solenoidShooter.set(Value.kReverse);
+  }
+}
+ 
  public void stopWheely(){
    shooterWheel.set(ControlMode.PercentOutput, 0);
    shooterWheel2.set(ControlMode.PercentOutput, 0);
+   solenoidShooter.set(Value.kForward);
  }
   @Override
   public void periodic() {

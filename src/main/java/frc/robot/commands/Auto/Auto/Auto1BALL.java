@@ -29,7 +29,7 @@ public class Auto1BALL extends ParallelRaceGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(shoot, Constants.spinupVel2),
+      new SpinUp(shoot, Constants.spinupVel2, true),
       new FireAUTO(feed, feedWheel, index, intake, 3)
     );
   }

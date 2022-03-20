@@ -10,6 +10,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,6 +20,7 @@ import frc.robot.commands.Hanger.HangerOverrideReset;
 
 /** Add your docs here. */
 public class Hanger extends SubsystemBase{
+    DoubleSolenoid solenoidHanger = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0,4);
 
     private WPI_TalonFX climbLeader;
     private WPI_TalonFX climbFollower;
@@ -66,6 +70,13 @@ public class Hanger extends SubsystemBase{
         climbLeader.set(ControlMode.PercentOutput, 0);
         climbFollower.set(ControlMode.PercentOutput, 0);
     }
+    public void deployHangerPneumatics(boolean isDeployed){
+        if(isDeployed){
+            solenoidHanger.set(Value.kForward);
+          }else{
+            solenoidHanger.set(Value.kReverse);
+          }
+    }
     public void hover(){
        // climbLeader.set(ControlMode.PercentOutput, 0.03);
         //climbFollower.set(ControlMode.PercentOutput, 0.03);
@@ -74,6 +85,9 @@ public class Hanger extends SubsystemBase{
     }
     public double getPosition(){
        return climbLeader.getSelectedSensorPosition();
+    }
+    public boolean isHangerDeployed(){
+        return (solenoidHanger.get() == Value.kReverse);
     }
     @Override
     public void periodic(){

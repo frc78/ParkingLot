@@ -26,7 +26,7 @@ public class Auto2BallPAR extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new SpinUp(shoot, Constants.spinupVel),
+      new SpinUp(shoot, Constants.spinupVel, true),
       new AutoTurn(chassis, 180, .2),
       new Fire(feed, indexer, feedWheel, intake)
 
