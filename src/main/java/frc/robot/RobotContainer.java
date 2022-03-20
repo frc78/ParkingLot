@@ -65,6 +65,7 @@ import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 import frc.robot.subsystems.Chassis.Hanger;
@@ -87,6 +88,7 @@ public class RobotContainer {
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
   private final Hanger m_hanger;
+  private final Limelight m_limelight;
 
   // making the way to change the auto modes
   SendableChooser<Command> autoList = new SendableChooser<>();
@@ -115,6 +117,7 @@ public class RobotContainer {
     m_indexer = new Indexer();
     m_feedWheel = new FeedWheel();
     m_hanger = new Hanger();
+    m_limelight = new Limelight();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
     m_manipController = new Joystick(Constants.DRIVEMP);
@@ -128,7 +131,7 @@ public class RobotContainer {
     SmartDashboard.putData(new HangerOverrideReset(m_hanger));
 
 
-    m_chassis.setDefaultCommand(new Tank(m_chassis, m_driveController));
+    m_chassis.setDefaultCommand(new Tank(m_chassis, m_limelight, m_driveController));
 
     m_intake.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_intake::StopIntake, m_intake)));
 

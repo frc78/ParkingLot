@@ -64,12 +64,29 @@ public final class Constants {
     public static final int IMU = 0;
 
     //            PARAMETERS
-    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
-    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.Clockwise;
+    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.CounterClockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
     public static final double WHEEL_CIRC_METERS = 0.478;
     public static final double WHEEL_GEAR_RATIO = 12.27;
+
+    //            LIMELIGHT
+    // height of the lime light from the ground, in meters
+    // public static final double LIME_HEIGHTM = 0.1397; // small chassis
+    // // x axis angle of limelight from the horizontal plane
+    // public static final double LIME_ANGLE = 511;
+    // height of the high goal (8ft 8in, 264cm) in meters
+    public static final double HIGHGOAL_HEIGHTM = 2.032; //2.64 is real goal height
+    // the optimal shooting distance from the high goal for shooting into the high goal, roughly around tarmac line, in meters
+    public static final double OPTIMAL_SHOOTING_DISTANCEM = 2;
+    // offsets for the x and y angle crosshair of the limelight, changing where the target should be for optimal shooting, in degs
+    public static final double X_CROSS_OFFSET = 0;
+    public static final double Y_CROSS_OFFSET = 0;
+
+    //large chassis
+    public static final double LIME_HEIGHTM = 0.762;
+    public static final double LIME_ANGLE = 65.64; //old 60.612 // 1.143 to goal, 1.27 del hight
 
     //            PATH FOLLOWING CONSTANTS
     public static final double kTrackWidthMeters = 0.584;
