@@ -6,6 +6,8 @@ package frc.robot.subsystems.LEDs;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class FridayNightLights implements LedsIO {
@@ -33,8 +35,25 @@ public class FridayNightLights implements LedsIO {
   @Override
   public void setMode(LedMode mode) {
     switch(mode){
-      
+      case Shoot_Accuracy:
+      breath(Color.kGreen, Color.kBlue);
+      break;
+
     }
     // This method will be called once per scheduler run
+  }
+  private void solid(Color color){
+    for (int i = 0; i < length; i ++) {
+      buffer.setLED(1, color);
+    }
+  }
+  private void breath(Color c1, Color c2){
+    double x = ((Timer.getFPGATimestamp() % breathDuration)/ breathDuration) * 2.0 * Math.PI;
+    double ratio = (Math.sin(x)) + 1.0 / 2.0;
+    double red = (c1.red * (1 - ratio)) + (c2.red * ratio);
+    double green = (c1.green * (1 - ratio)) + (c2.blue * ratio);
+    double blue = (c1.blue * (1 - ratio)) + (c2.blue * ratio);
+    solid(new Color(red, green, blue));
+    
   }
 }

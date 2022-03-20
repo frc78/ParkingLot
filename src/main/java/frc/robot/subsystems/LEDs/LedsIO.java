@@ -12,6 +12,7 @@ public interface LedsIO{
 
   public static enum LedMode{
 // will put constant checks in here
+Shoot_Accuracy,
   }
 }
 
