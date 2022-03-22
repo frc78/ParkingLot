@@ -82,14 +82,14 @@ public final class Constants {
     public static final double kPDriveVel = 8.5;
 
     //        Robot Speed
-    public static final double kMaxSpeedMetersPerSecond = 1.5;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 1.5;
+    public static final double kMaxSpeedMetersPerSecond = 2;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 2;
     //        Ramsete Controller
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
 
     // PID
-    public static final double kP = 0.3;
-    public static final double kI = 0.07;
-    public static final double kD = 0.2;
+    public static final double kP = 2.5;
+    public static final double kI = 0;
+    public static final double kD = 0;
 }
