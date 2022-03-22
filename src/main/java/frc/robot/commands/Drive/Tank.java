@@ -41,8 +41,8 @@ public class Tank extends CommandBase {
     // double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2, 0.4); // default speed = 1 - the 2nd parameter (upAdjust)
     // double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2, 0.4);
     // 1st input is controller input, 2nd is the % of speed it can increase by holding down RT all the way, and 3rd input is % speed it decreases by holding down LT
-    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.2, 0.4);
-    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.2, 0.4);
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.1, 0.4);
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.1, 0.4);
     if (m_controller.getRightBumper()) {
       lSpeed = limelightAiming(lSpeed, 0.2, 0, false);
       rSpeed = limelightAiming(rSpeed, 0.2, 0, true);
@@ -101,6 +101,14 @@ public class Tank extends CommandBase {
   //   //clamping the output to make sure it doesnt exit -1 and 1 (for safetey)
   //   return Math.max(-1, Math.min(1, tempSpeed));
   // }
+
+  /**
+   * 
+   * @param inputSpeed The input speed from the driver's controls
+   * @param upAdjust The % of speed it can increase upward
+   * @param downAdjust The % of speed it can decrease downward
+   * @return
+   */
   public double triggerAdjustedSpeed(double inputSpeed, double upAdjust, double downAdjust){
     double tempSpeed = (m_controller.getRightTriggerAxis() * upAdjust) - (m_controller.getLeftTriggerAxis() * downAdjust);
     tempSpeed = ((1 - upAdjust) * inputSpeed) + (inputSpeed * tempSpeed);
