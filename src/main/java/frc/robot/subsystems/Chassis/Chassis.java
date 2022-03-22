@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.Chassis;
 
+import java.io.Console;
 import java.sql.Driver;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -93,7 +94,7 @@ public class Chassis extends SubsystemBase {
   public void setVoltage(double lVoltage, double rVoltage) {
     leftLeader.setVoltage(lVoltage);
     rightLeader.setVoltage(rVoltage);
-    DriverStation.reportWarning("L: " + lVoltage + " R: " + rVoltage, false);
+    System.out.println("L: " + lVoltage + " R: " + rVoltage);
     m_drive.feed();
   }
 
