@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Utility;
@@ -19,7 +20,9 @@ public class AutoStraight extends CommandBase {
   private double encDistance;
   private double distance;
   private double speed;
-  private ProfiledPIDController PID;
+  private double startTime;
+  // private ProfiledPIDController PID;
+  // private Timer timer;
 
   private TrapezoidProfile trapProfile;
   private TrapezoidProfile.Constraints trapConstraints;
@@ -31,13 +34,16 @@ public class AutoStraight extends CommandBase {
     m_chassis = subsytem1;
     speed = maxSpeed;
     distance = distanceM;
+    startTime = Timer.getFPGATimestamp();
     
     //trapezoid motion profiling & PID variables
-    trapConstraints = new TrapezoidProfile.Constraints(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared);
+    trapConstraints = new TrapezoidProfile.Constraints(Constants.kMaxSpeedMetersPerSecond * maxSpeed, Constants.kMaxAccelerationMetersPerSecondSquared);
     trapGoal = new TrapezoidProfile.State(distanceM, 0);
     trapStart = new TrapezoidProfile.State(0, 0);
     trapProfile = new TrapezoidProfile(trapConstraints, trapGoal, trapStart);
-    PID = new ProfiledPIDController(Constants.kP, Constants.kI, Constants.kD, trapConstraints);
+    // PID = new ProfiledPIDController(Constants.kP, Constants.kI, Constants.kD, trapConstraints);
+    // timer = new Timer();
+    
     
     //encDistance = (int) Math.round(((distance / Constants.WHEEL_CIRC_METERS) / Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION);
     encDistance = Utility.metersToEncoders(distanceM);
@@ -55,7 +61,7 @@ public class AutoStraight extends CommandBase {
   public void execute() {
     // m_chassis.setSpeed(speed, speed);
     // m_chassis.setSpeed(PID.calculate(m_chassis.getMotorPositionExt(0), distance), PID.calculate(m_chassis.getMotorPositionExt(1), distance));
-    speed = PID.calculate(getAverageEnc(), trapGoal);
+    speed = trapProfile.calculate(Timer.getFPGATimestamp() - startTime).velocity;
     m_chassis.setSpeed(speed, speed);
   }
 

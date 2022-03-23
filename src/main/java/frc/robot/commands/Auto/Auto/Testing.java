@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.jsontype.impl.AsDeductionTypeDeserializer;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.subsystems.Chassis.Chassis;
@@ -27,12 +28,18 @@ public class Testing extends SequentialCommandGroup {
     //   new AutoTurn(m_chassis, 70, 0.2),
     //   new AutoStraight(m_chassis, 3, 0.2)
     // );
+    // addCommands(
+    //   new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
+    //   new AutoStraight(m_chassis, 2, 0.4),
+    //   new AutoTurn(m_chassis, 175, 0.2),
+    //   new AutoStraight(m_chassis, 2, 0.4),
+    //   new AutoTurn(m_chassis, -175, 0.2)
+    //    );
     addCommands(
       new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
       new AutoStraight(m_chassis, 2, 0.4),
-      new AutoTurn(m_chassis, 175, 0.2),
-      new AutoStraight(m_chassis, 2, 0.4),
-      new AutoTurn(m_chassis, -175, 0.2)
+      new WaitCommand(1),
+      new AutoStraight(m_chassis, 2, -0.4)
        );
   }
 }
