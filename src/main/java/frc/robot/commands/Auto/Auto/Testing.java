@@ -28,7 +28,7 @@ public class Testing extends SequentialCommandGroup {
     //   new AutoStraight(m_chassis, 3, 0.2)
     // );
     addCommands(
-      new InstantCommand(() -> m_chassis.breakVcoast(true), m_chassis),
+      new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
       new AutoStraight(m_chassis, 2, 0.4),
       new AutoTurn(m_chassis, 175, 0.2),
       new AutoStraight(m_chassis, 2, 0.4),
