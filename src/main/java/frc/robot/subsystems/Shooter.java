@@ -73,6 +73,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     double vel = SmartDashboard.getNumber("Velocity", Constants.spinupVel);
     double vel2 = SmartDashboard.getNumber("VelocityTop", Constants.spinupVel2);
+    SmartDashboard.putNumber("Actual Velocity", shooterWheel.getSelectedSensorVelocity());
     // This method will be called once per scheduler run
   }
 }
