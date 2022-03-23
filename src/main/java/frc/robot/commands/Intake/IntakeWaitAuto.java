@@ -29,7 +29,7 @@ public class IntakeWaitAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_waitTime = Timer.getFPGATimestamp();
+    startTime = Timer.getFPGATimestamp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,6 +45,7 @@ public class IntakeWaitAuto extends CommandBase {
   public void end(boolean interrupted) {
     m_feed.feedRun(0);
     m_indexer.stopIndexer();
+    m_intake.StopIntake();
   }
 
   // Returns true when the command should end.
