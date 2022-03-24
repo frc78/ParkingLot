@@ -37,10 +37,9 @@ public class Auto4Ball extends SequentialCommandGroup {
      // new FireAUTO(feed, wheely, indexer, intake, 2),//the 2 is subject to change, 2 is indicated as time (seconds)
       new AutoTurn(chassis, deg2, .2),
       new DriveAndIntake(chassis, intake, indexer, distance3, -.6),
-      new IntakeWaitAuto(intake, feed, indexer, 3),
+      new IntakeWaitAuto(intake, feed, indexer, 2),
       new AutoTurn(chassis, deg3, .2),
-      new DriveAndSpinUp(chassis, shooter, distance4, velocity, true),
-      new SpinAndFire(shooter, feed, indexer, wheely, intake, velocity)
+      new AutoStraight(chassis, distance4, -0.6)
      // new FireAUTO(feed, wheely, indexer, intake, 6)
     );
   }

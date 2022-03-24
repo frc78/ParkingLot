@@ -22,7 +22,7 @@ public class DriveAndSpinUp extends ParallelRaceGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(chassis, distance2, -.5),
+      new AutoStraight(chassis, distance2, -0.6),
       new SpinUp(shooter, spinupVel, isHood)
     );
   }

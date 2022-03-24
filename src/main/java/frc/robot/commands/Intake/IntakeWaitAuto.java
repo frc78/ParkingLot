@@ -38,6 +38,7 @@ public class IntakeWaitAuto extends CommandBase {
     m_intake.DeployIntake();
     m_feed.feedRun(1);
     m_indexer.indexRun();
+    m_intake.setSpeed(-0.75);
     }
 
   // Called once the command ends or is interrupted.
