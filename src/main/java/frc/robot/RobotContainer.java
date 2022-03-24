@@ -163,47 +163,48 @@ public class RobotContainer {
     // return new Auto1Ball2Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis);
     // return new Auto1Ball3Par(m_intake, m_feed, m_indexer, m_shooter, m_chassis, m_feedWheel);
 
-    // Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
+    // DifferentialDriveVoltageConstraint autoVoltageConstraint =
+    //     new DifferentialDriveVoltageConstraint(
+    //         new SimpleMotorFeedforward(
+    //             Constants.ksVolts,
+    //             Constants.kvVoltSecondsPerMeter,
+    //             Constants.kaVoltSecondsSquaredPerMeter),
+    //             Constants.kDriveKinematics,
+    //         10);
 
-    var autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(
-                Constants.ksVolts,
-                Constants.kvVoltSecondsPerMeter,
-                Constants.kaVoltSecondsSquaredPerMeter),
-                Constants.kDriveKinematics,
-            10);
+    // // Create config for trajectory
+    // TrajectoryConfig config =
+    //     new TrajectoryConfig(
+    //       Constants.kMaxSpeedMetersPerSecond,
+    //       Constants.kMaxAccelerationMetersPerSecondSquared)
+    //         // Add kinematics to ensure max speed is actually obeyed
+    //         .setKinematics(Constants.kDriveKinematics)
+    //         // Apply the voltage constraint
+    //         .addConstraint(autoVoltageConstraint);
 
-    // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(
-          Constants.kMaxSpeedMetersPerSecond,
-          Constants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(Constants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);
+    // // An example trajectory to follow.  All units in meters.
+    // Trajectory exampleTrajectory =
+    //     TrajectoryGenerator.generateTrajectory(
+    //         // Start at the origin facing the +X direction
+    //         new Pose2d(0, 0, new Rotation2d(0)),
+    //         // Pass through these two interior waypoints, making an 's' curve path
+    //         // List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+    //         List.of(new Translation2d(1.5, 0)),
+    //         // End 3 meters straight ahead of where we started, facing forward
+    //         new Pose2d(2, 0, new Rotation2d(0)),
+    //         // Pass config
+    //         config);
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
+    Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/output/autoTest2.wpilib.json");
 
-    // An example trajectory to follow.  All units in meters.
-    Trajectory exampleTrajectory =
-        TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            // List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            List.of(new Translation2d(1.5, 0)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            // Pass config
-            config);
+    RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
+    RamseteCommand ramsete2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
 
-    RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(exampleTrajectory, m_chassis);
-
-    m_chassis.resetOdometry(exampleTrajectory.getInitialPose());
+    m_chassis.resetOdometry(trajectory1.getInitialPose());
     
     // return ramsete1.andThen(() -> m_chassis.stop());
 
-   return new PathTestSEQ(ramsete1, exampleTrajectory, m_chassis);
+   return new PathTestSEQ(ramsete1, ramsete2, m_chassis);
     
   }
 }

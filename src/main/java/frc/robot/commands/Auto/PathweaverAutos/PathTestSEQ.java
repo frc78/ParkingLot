@@ -15,14 +15,15 @@ import frc.robot.subsystems.Chassis.Chassis;
 public class PathTestSEQ extends SequentialCommandGroup {
   /** Creates a new PathTestSEQ. */
   Chassis m_chassis;
-  public PathTestSEQ(RamseteCommand ramseteCommand1, Trajectory trajectory1, Chassis chassis) {
+  public PathTestSEQ(RamseteCommand ramseteCommand1, RamseteCommand ramseteCommand2, Chassis chassis) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     m_chassis = chassis;
     addRequirements(m_chassis);
     addCommands(
       // m_chassis.resetOdometry(trajectory1.getInitialPose()),
-      ramseteCommand1
+      ramseteCommand1,
+      ramseteCommand2
     );
   }
 }

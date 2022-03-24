@@ -115,14 +115,11 @@ public class Chassis extends SubsystemBase {
   }
 
   public void resetOdometry(Pose2d pose) {
-    resetEncoder();
     zeroAllSensors();
-    m_odometry.resetPosition(pose, new Rotation2d(getPidgeonYaw()));
+    m_odometry.resetPosition(pose, pidgey.getRotation2d()); //odometry angles have left as positive
   }
 
   public Pose2d getPose() {
-    SmartDashboard.putNumber("odoXM", m_odometry.getPoseMeters().getX());
-    SmartDashboard.putNumber("odoYM", m_odometry.getPoseMeters().getY());
     return m_odometry.getPoseMeters();
   }
 
@@ -159,11 +156,14 @@ public class Chassis extends SubsystemBase {
 
   @Override
   public void periodic() {
-  Rotation2d yawRot = new Rotation2d(getPidgeonYaw());
+  //uses .fromDegrees because Rotation2d by default uses radians. that was probably one of the big problems for pathweaver
+  Rotation2d yawRot = pidgey.getRotation2d(); //odometry angles have left as positive
    m_odometry.update(yawRot, getMotorPosition(leftLeader), getMotorPosition(rightLeader));
 
    SmartDashboard.putNumber("autoLeftMotor", getMotorPosition(leftLeader));
    SmartDashboard.putNumber("autoRightMotor", getMotorPosition(rightLeader));
+   SmartDashboard.putNumber("odoXM", m_odometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("odoYM", m_odometry.getPoseMeters().getY());
     // This method will be called once per scheduler run
   }
 }
