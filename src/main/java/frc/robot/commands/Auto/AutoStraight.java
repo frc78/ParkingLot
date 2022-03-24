@@ -4,10 +4,14 @@
 
 package frc.robot.commands.Auto;
 
+import java.lang.invoke.ConstantCallSite;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Utility;
@@ -26,6 +30,10 @@ public class AutoStraight extends CommandBase {
   private TrapezoidProfile.State trapGoal;
   private TrapezoidProfile.State trapStart;
   //private double goalDistance;
+
+  private double lastSpeed;
+  private double lastTime;
+  private SimpleMotorFeedforward feedforward;
   
   public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {
     m_chassis = subsytem1;
@@ -38,6 +46,10 @@ public class AutoStraight extends CommandBase {
     trapStart = new TrapezoidProfile.State(0, 0);
     trapProfile = new TrapezoidProfile(trapConstraints, trapGoal, trapStart);
     PID = new ProfiledPIDController(Constants.kP, Constants.kI, Constants.kD, trapConstraints);
+
+    lastSpeed = PID.getSetpoint().velocity;
+    lastTime = Timer.getFPGATimestamp();
+    feedforward = new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter);
     
     //encDistance = (int) Math.round(((distance / Constants.WHEEL_CIRC_METERS) / Constants.WHEEL_GEAR_RATIO) * Constants.UNITS_PER_REVOLUTION);
     encDistance = Utility.metersToEncoders(distanceM);
@@ -55,8 +67,9 @@ public class AutoStraight extends CommandBase {
   public void execute() {
     // m_chassis.setSpeed(speed, speed);
     // m_chassis.setSpeed(PID.calculate(m_chassis.getMotorPositionExt(0), distance), PID.calculate(m_chassis.getMotorPositionExt(1), distance));
-    speed = PID.calculate(getAverageEnc(), trapGoal);
-    m_chassis.setSpeed(speed, speed);
+    // speed = PID.calculate(getAverageEnc(), trapGoal);
+    goToPosition(distance);
+    // m_chassis.setSpeed(speed, speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -77,14 +90,14 @@ public class AutoStraight extends CommandBase {
 
   // Controls a simple motor's position using a SimpleMotorFeedforward
   // and a ProfiledPIDController
-  // public void goToPosition(double goalPosition) {
-  //   double acceleration = (controller.getSetpoint().velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime)
-  //   m_chassis.setVoltage(
-  //       PID.calculate(m_chassis.getMotorPositionExt(0), goalPosition)
-  //       + feedforward.calculate(controller.getSetpoint().velocity, acceleration));
-  //   lastSpeed = controller.getSetpoint().velocity;
-  //   lastTime = Timer.getFPGATimestamp();
-  // }
+  public void goToPosition(double goalPosition) {
+    double acceleration = (PID.getSetpoint().velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime);
+    double speed = PID.calculate(m_chassis.getMotorPositionExt(0), goalPosition)
+                    + feedforward.calculate(PID.getSetpoint().velocity, acceleration);
+    m_chassis.setVoltage(speed, speed);
+    lastSpeed = PID.getSetpoint().velocity;
+    lastTime = Timer.getFPGATimestamp();
+  }
 
   // this just doesn't seem to work for now, would be nice to fix it
   // double calcSpeed(double enc, double maxSpeed, double maxDistance) {

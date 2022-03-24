@@ -20,13 +20,6 @@ public class Testing extends SequentialCommandGroup {
   public Testing(Chassis m_chassis) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    // addCommands(
-    //   new AutoStraight(m_chassis, 0.7, 0.2),
-    //   new AutoTurn(m_chassis, 40, 0.15),
-    //   new AutoStraight(m_chassis, 3, 0.2),
-    //   new AutoTurn(m_chassis, 70, 0.2),
-    //   new AutoStraight(m_chassis, 3, 0.2)
-    // );
     addCommands(
       new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
       new AutoStraight(m_chassis, 2, 0.4),
@@ -34,5 +27,9 @@ public class Testing extends SequentialCommandGroup {
       new AutoStraight(m_chassis, 2, 0.4),
       new AutoTurn(m_chassis, -175, 0.2)
        );
+    // addCommands(
+    //   new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
+    //   new AutoStraight(m_chassis, 2, 0.4)
+    //    );
   }
 }
