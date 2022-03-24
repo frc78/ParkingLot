@@ -91,6 +91,6 @@ public final class Constants {
     // PID
     public static final double kP = 10;
     // public static final double kP = 2.7;
-    public static final double kI = 0;
+    public static final double kI = 0.05;
     public static final double kD = 0.05; // maybe put them back to 0 later perhaps
 }
