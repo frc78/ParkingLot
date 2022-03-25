@@ -59,8 +59,8 @@ public class Hanger extends SubsystemBase{
         climbFollower.set(ControlMode.PercentOutput, 1);
     }
     public void fall(){
-        climbLeader.set(ControlMode.PercentOutput, -0.5);
-        climbFollower.set(ControlMode.PercentOutput, -0.5);
+        climbLeader.set(ControlMode.PercentOutput, -0.75);
+        climbFollower.set(ControlMode.PercentOutput, -0.75);
     }
     public void slowFall() {
         climbLeader.set(ControlMode.PercentOutput, -0.2);
@@ -76,6 +76,14 @@ public class Hanger extends SubsystemBase{
           }else{
             solenoidHanger.set(Value.kReverse);
           }
+    }
+    public void deployHangerPneumatics(){
+        //System.out.println(solenoidHanger.get().toString());
+        if(solenoidHanger.get()== Value.kReverse || solenoidHanger.get()== Value.kOff){
+            solenoidHanger.set(Value.kForward);
+        }else{
+            solenoidHanger.set(Value.kReverse);
+        }
     }
     public void hover(){
        // climbLeader.set(ControlMode.PercentOutput, 0.03);

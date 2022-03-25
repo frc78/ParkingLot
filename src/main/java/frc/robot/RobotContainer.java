@@ -124,7 +124,7 @@ public class RobotContainer {
     m_pathcommands = new PathCommands();
     
     m_shooter.isHood(true); //initalize hood to extended
-    
+    m_hanger.deployHangerPneumatics(false);   
   
     //Configure the button bindings
     configureButtonBindings();
@@ -158,7 +158,7 @@ public class RobotContainer {
     autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
     autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
     autoList.addOption("test", new Testing(m_chassis));
-    autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 5, 6, Constants.spinupVel2, 150, -126, 190, true));
+    autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 4.75, 2.5, Constants.spinupVel2, -150, 122, -170, true));
                                                                                                                        //DISTANCE 1,2,3,4 VEL DEG 1,2,3      
     SmartDashboard.putData(autoList);
   }
@@ -176,11 +176,15 @@ public class RobotContainer {
     JoystickButton bButton = new JoystickButton(m_driveController, 2);
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
-    JoystickButton driverX = new JoystickButton(m_driveController, 1);
-    driverX.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(true), m_hanger));
+    JoystickButton driverX = new JoystickButton(m_driveController, 3);
+    driverX.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(), m_hanger));
+    
+    //driverX.toggleWhenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(true), m_hanger));
+    
 
-    JoystickButton driverB = new JoystickButton(m_driveController, 3);
-    driverB.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(false), m_hanger));
+    //JoystickButton driverB = new JoystickButton(m_driveController, 3);
+    //driverB.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(false), m_hanger));
+    
     
     //Button driveControllerSTART = new JoystickButton(m_driveController, 10);
    // driveControllerSTART.whileHeld(new SetUpHanger(m_hanger));
@@ -189,7 +193,8 @@ public class RobotContainer {
     manipControllerA.whenHeld(new IntakeNoFeed(m_intake, m_indexer));
 
     Button manipControllerX = new JoystickButton(m_manipController, 1);// swapped with x until wiring is fixed
-    manipControllerX.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, true));
+    manipControllerX.toggleWhenPressed(new IntakeCommand(m_intake, m_feed, m_indexer, true));
+    
 
     Button manipControllerRT = new JoystickButton(m_manipController, 8);
     manipControllerRT.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel, m_intake));
