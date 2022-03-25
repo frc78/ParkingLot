@@ -77,6 +77,14 @@ public class Hanger extends SubsystemBase{
             solenoidHanger.set(Value.kReverse);
           }
     }
+    public void deployHangerPneumatics(){
+        //System.out.println(solenoidHanger.get().toString());
+        if(solenoidHanger.get()== Value.kReverse || solenoidHanger.get()== Value.kOff){
+            solenoidHanger.set(Value.kForward);
+        }else{
+            solenoidHanger.set(Value.kReverse);
+        }
+    }
     public void hover(){
        // climbLeader.set(ControlMode.PercentOutput, 0.03);
         //climbFollower.set(ControlMode.PercentOutput, 0.03);
