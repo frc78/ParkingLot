@@ -41,8 +41,8 @@ public class Tank extends CommandBase {
     // double lSpeed = triggerAdjustedSpeed(-1 * m_controller.getLeftY(), 0.2, 0.4); // default speed = 1 - the 2nd parameter (upAdjust)
     // double rSpeed = triggerAdjustedSpeed(-1 * m_controller.getRightY(), 0.2, 0.4);
     // 1st input is controller input, 2nd is the % of speed it can increase by holding down RT all the way, and 3rd input is % speed it decreases by holding down LT
-    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.1, 0.4);
-    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.1, 0.4);
+    double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.2, 0.5);
+    double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.2, 0.5);
     if (m_controller.getRightBumper()) {
       lSpeed = limelightAiming(lSpeed, 0.2, 0, false);
       rSpeed = limelightAiming(rSpeed, 0.2, 0, true);
@@ -75,7 +75,6 @@ public class Tank extends CommandBase {
     return false;
   }
   /**
-   * DONT FORGET TO MULTIPLY BY -1 FOR THE RIGHT SIDE! (or it won't turn, but move forward)
    * @param inputspeed the driver input
    * @param topSpeed the top speed it should add
    * @param thres the threshold for when it considers the angle too small to bother moving

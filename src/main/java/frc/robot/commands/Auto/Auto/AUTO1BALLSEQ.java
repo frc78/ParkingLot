@@ -31,7 +31,7 @@ public class AUTO1BALLSEQ extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> chassis.breakVcoast(false), chassis),
       new Auto1BALL(shooter, feed, index, feedWheel, intake),
-      new AutoStraight(chassis, 2, -.3)
+      new AutoStraight(chassis, 2, .3)
     );
   }
   // @Override
