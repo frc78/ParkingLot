@@ -157,7 +157,7 @@ public class RobotContainer {
     autoList.addOption("2 Ball Auto HIGH-B", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, Constants.spinupVel2, 150, true));
     autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
     autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
-    autoList.addOption("test", new Testing(m_chassis));
+    autoList.addOption("test", new Testing(m_chassis, m_limelight));
     autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 5, 6, Constants.spinupVel2, 150, -126, 190, true));
                                                                                                                        //DISTANCE 1,2,3,4 VEL DEG 1,2,3      
     SmartDashboard.putData(autoList);
@@ -229,6 +229,6 @@ public class RobotContainer {
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.6, Constants.spinupVel2, 160); // Auto2Ball High auto B
     // return new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.3, 1.3, Constants.spinupVel2, 175); // Auto2Ball High auto C
    //return new Testing(m_chassis);
-   return autoList.getSelected();
+   return new Testing(m_chassis, m_limelight);
   }
 }
