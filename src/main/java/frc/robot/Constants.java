@@ -63,16 +63,16 @@ public final class Constants {
     //            SENSORS
     public static final int IMU = 0;
 
-    //            PARAMETERS
+    //            PARAMETERS FOR LARGE CHASSIS
     public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
     public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
-    public static final double WHEEL_CIRC_METERS = 0.478;
+    public static final double WHEEL_CIRC_METERS = 0.47877;
     public static final double WHEEL_GEAR_RATIO = 12.27;
 
     //            PATH FOLLOWING CONSTANTS
-    public static final double kTrackWidthMeters = 0.584;
+    public static final double kTrackWidthMeters = 0.6858;
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
     //        Feedback
@@ -82,15 +82,46 @@ public final class Constants {
     public static final double kPDriveVel = 8.5;
 
     //        Robot Speed
-    public static final double kMaxSpeedMetersPerSecond = 2.5;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+    public static final double kMaxSpeedMetersPerSecond = 2;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 1.5;
     //        Ramsete Controller
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
 
     // PID
-    public static final double kP = 10;
+    public static final double kP = 9; // 16
     // public static final double kP = 2.7;
-    public static final double kI = 0.05;
-    public static final double kD = 0.05; // maybe put them back to 0 later perhaps
+    public static final double kI = 0.3;
+    public static final double kD = 0.1; // maybe put them back to 0 later perhaps
+
+    // //            PARAMETERS FOR SMALL CHASSIS
+    // public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
+    // public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
+    // public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
+    // public static final int UNITS_PER_REVOLUTION = 2048;
+    // public static final double WHEEL_CIRC_METERS = 0.478;
+    // public static final double WHEEL_GEAR_RATIO = 9.091;
+
+    // //            PATH FOLLOWING CONSTANTS
+    // public static final double kTrackWidthMeters = 0.584;
+    // public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+
+    // //        Feedback
+    // public static final double ksVolts = 0.22;
+    // public static final double kvVoltSecondsPerMeter = 1.98;
+    // public static final double kaVoltSecondsSquaredPerMeter = 0.2;
+    // public static final double kPDriveVel = 8.5;
+
+    // //        Robot Speed
+    // public static final double kMaxSpeedMetersPerSecond = 2.5;
+    // public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+    // //        Ramsete Controller
+    // public static final double kRamseteB = 2;
+    // public static final double kRamseteZeta = 0.7;
+
+    // // PID
+    // public static final double kP = 10;
+    // // public static final double kP = 2.7;
+    // public static final double kI = 0.05;
+    // public static final double kD = 0.05; // maybe put them back to 0 later perhaps
 }

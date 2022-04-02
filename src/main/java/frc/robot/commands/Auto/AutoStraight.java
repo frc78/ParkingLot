@@ -81,7 +81,8 @@ public class AutoStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return encDistance < Math.abs(m_chassis.getRawMotorPosition(0)) ? true:false;
+    // return encDistance < Math.abs(m_chassis.getRawMotorPosition(0)) ? true:false;
+    return PID.atGoal();
   }
 
   private double getAverageEnc() {
