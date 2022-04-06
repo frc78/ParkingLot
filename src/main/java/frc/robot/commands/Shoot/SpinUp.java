@@ -14,23 +14,22 @@ public class SpinUp extends CommandBase {
   private Shooter shooter;
   private double vel;
   private boolean isHood;
-  private Feed feed;
-  public double feedSpeed;
   public double bnt;
 
+  public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
+    this(shooter, Velocity, 1, isHood);
+  }
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity, Feed feed, double feedSpeed, double bnt, boolean isHood) {
+  public SpinUp(Shooter shooter, double Velocity, double bnt, boolean isHood) {
     this.shooter = shooter;
     this.vel = Velocity;
     this.isHood = isHood;
-    this.feed = feed;
-    this.feedSpeed = feedSpeed;
     this.bnt = bnt;
     
     
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter, feed);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -45,7 +44,6 @@ public class SpinUp extends CommandBase {
   public void execute() {
     
     shooter.startWheel(vel);
-    feed.feedRun(feedSpeed);
     //shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
     double neoPercent = vel * 5.93 * Math.PI * 0.75 / Math.PI / 6380;
     shooter.startBackWheels(neoPercent * bnt);
