@@ -44,8 +44,8 @@ public class Tank extends CommandBase {
     double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.2, 0.4);
     double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.2, 0.4);
     if (m_controller.getRightBumper()) {
-      lSpeed = limelightAiming(lSpeed, 0.2, 0, false);
-      rSpeed = limelightAiming(rSpeed, 0.2, 0, true);
+      lSpeed = limelightAiming(lSpeed, 0.2, 0.5, false);
+      rSpeed = limelightAiming(rSpeed, 0.2, 0.5, true);
       SmartDashboard.putBoolean("isPressedAim", m_controller.getRightBumper());
     }
 
@@ -53,7 +53,7 @@ public class Tank extends CommandBase {
     if(motorToggle){
       m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
     } else {
-      m_chassis.setSpeed(lSpeed, rSpeed);
+      m_chassis.setSpeed(lSpeed * -1, rSpeed * -1);
     }
     
     if (Constants.DEBUG) {

@@ -16,6 +16,12 @@ public class AutoStraight extends CommandBase {
   private double speed;
   //private double goalDistance;
   
+  /**
+   * 
+   * @param subsytem1 chassis subsytem
+   * @param distanceM distance in meters to travel
+   * @param maxSpeed the speed at which it would travel, negative value to go backwards
+   */
   public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {
     m_chassis = subsytem1;
     speed = maxSpeed;

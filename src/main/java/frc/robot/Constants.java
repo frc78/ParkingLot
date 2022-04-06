@@ -64,8 +64,8 @@ public final class Constants {
     public static final int IMU = 0;
 
     //            PARAMETERS
-    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.Clockwise;
-    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.CounterClockwise;
+    public static final TalonFXInvertType LEFT_INVERTED = TalonFXInvertType.CounterClockwise;
+    public static final TalonFXInvertType RIGHT_INVERTED = TalonFXInvertType.Clockwise;
     public static final NeutralMode MOTOR_MODE = NeutralMode.Coast;
     public static final int UNITS_PER_REVOLUTION = 2048;
     public static final double WHEEL_CIRC_METERS = 0.478;

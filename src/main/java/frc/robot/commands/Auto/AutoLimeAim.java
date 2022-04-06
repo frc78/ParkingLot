@@ -15,6 +15,13 @@ public class AutoLimeAim extends CommandBase {
 
   private double topspeed;
   private double threshold;
+  /**
+   * Aims in auto mode with the limelight, ends command when accuracy threshold met
+   * @param chassis chassis object
+   * @param limelight limelight object
+   * @param topspeed top speed of turn, in motor percentage
+   * @param threshold threshold when the robot decides the aim is "close enough", in degrees
+   */
   public AutoLimeAim(Chassis chassis, Limelight limelight, double topspeed, double threshold) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_chassis = chassis;

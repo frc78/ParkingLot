@@ -31,9 +31,9 @@ public class Testing extends SequentialCommandGroup {
     // );
     addCommands(
       new InstantCommand(() -> m_chassis.breakVcoast(false), m_chassis),
-      new AutoStraight(m_chassis, 1, 0.3),
-      new AutoLimeAim(m_chassis, m_limelight, 0.3, 2),
-      new AutoStraight(m_chassis, 1, 0.3)
+      new AutoStraight(m_chassis, 0.5, 0.3),
+      new AutoLimeAim(m_chassis, m_limelight, 0.1, 0.5),
+      new AutoStraight(m_chassis, 1, -0.3)
        );
   }
 }
