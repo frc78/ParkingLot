@@ -204,13 +204,13 @@ public class RobotContainer {
     manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
     Button manipControllerLT = new JoystickButton(m_manipController, 7);
-    manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, true));//High tarmac shot exteded hood
+    manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, m_feed, 0.6, 1, true));//High tarmac shot exteded hood
 
     Button manipControllerLowRB = new JoystickButton(m_manipController, 6);
-    manipControllerLowRB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel, true));//Low fender extended hood
+    manipControllerLowRB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel, m_feed, 0.6, 1, true));//Low fender extended hood
     
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
-    manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinUpVel3, false));//high fender retract hood
+    manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinUpVel3,m_feed, 0.4, 1, false));//high fender retract hood
     
     Button manipControllerB = new JoystickButton(m_manipController, 3);// swapped with b 
     manipControllerB.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));

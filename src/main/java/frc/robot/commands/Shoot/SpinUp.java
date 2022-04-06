@@ -46,8 +46,9 @@ public class SpinUp extends CommandBase {
     
     shooter.startWheel(vel);
     feed.feedRun(feedSpeed);
-    shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
-    double
+    //shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
+    double neoPercent = vel * 5.93 * Math.PI * 0.75 / Math.PI / 6380;
+    shooter.startBackWheels(neoPercent * bnt);
 
   }
 
