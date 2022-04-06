@@ -15,6 +15,7 @@ public class Fire extends CommandBase {
   private Indexer m_indexer;
   private FeedWheel m_feedWheel;
   private Intake m_intake;
+  public int feedSpeed;
   /** Creates a new RunFeed. */
   public Fire(Feed subsystem, Indexer subsystem2, FeedWheel subsystem3, Intake subsystem4) {
     m_feed = subsystem;
@@ -37,7 +38,7 @@ public class Fire extends CommandBase {
   @Override
   public void execute() {
     m_indexer.indexRun();
-    m_feed.feedRun(.60);
+    m_feed.feedRun(feedSpeed);
     m_feedWheel.runFeedWheel();
   }
 

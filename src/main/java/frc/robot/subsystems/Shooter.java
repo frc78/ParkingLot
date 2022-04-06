@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.revrobotics.CANSparkMax;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,6 +26,8 @@ public class Shooter extends SubsystemBase {
   private static TalonFX shooterWheel2 = new TalonFX(Constants.RightShoot);
   private static TalonFXConfiguration _velocity_closed = new TalonFXConfiguration();
   DoubleSolenoid solenoidShooter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1,5);
+  private static CANSparkMax backWheel1;
+  private static CANSparkMax backWheel2;
   
 
 
@@ -45,6 +48,13 @@ public class Shooter extends SubsystemBase {
 
     shooterWheel.setNeutralMode(NeutralMode.Coast);
     shooterWheel2.setNeutralMode(NeutralMode.Coast);
+
+    backWheel1.setInverted(true);
+    backWheel2.setInverted(false);
+
+    backWheel2.follow(backWheel1);
+
+
 
     
     // Config all PID settings
@@ -73,7 +83,14 @@ public class Shooter extends SubsystemBase {
   velocity = ((velocity * 2048) / 600); // Convert velocity in RPM to Units Per 100ms
   shooterWheel.set(ControlMode.Velocity, velocity);
   shooterWheel2.follow(shooterWheel);
+ }
+
+public void startBackWheels(double speed){
+  backWheel1.set(speed);
+}
   
+public double getShooterSpeed(){
+  return shooterWheel.getMotorOutputPercent();
 }
 /**
  * 
