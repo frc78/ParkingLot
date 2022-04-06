@@ -15,24 +15,26 @@ public class Feed extends SubsystemBase {
   public CANSparkMax beltneo;
   public DigitalInput input;
   
+  
   /** Creates a new Feed. */
   public Feed() {
    beltneo = new CANSparkMax(Constants.BeltNeo, MotorType.kBrushless);
    input = new DigitalInput(0);
+  
    
   }
   
-  public void feedRun(double m_feedSpeed) {
+  public void feedRun(double feedSpeed) {
     
-      beltneo.set(m_feedSpeed);//subject to change during testing
+      beltneo.set(feedSpeed);//subject to change during testing
      
   }
-  public void feedRunIfNoCargo(double m_feedSpeed) {
+  public void feedRunIfNoCargo(double feedSpeed) {
     if (input.get()){
       beltneo.set(0.0);
     }
     else{
-      beltneo.set(m_feedSpeed);//subject to change during testing
+      beltneo.set(feedSpeed);//subject to change during testing
     }
      
   }

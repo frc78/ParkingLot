@@ -6,6 +6,7 @@ package frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.Shooter;
 import frc.robot.Constants;
 
@@ -13,16 +14,23 @@ public class SpinUp extends CommandBase {
   private Shooter shooter;
   private double vel;
   private boolean isHood;
+  private Feed feed;
+  public double feedSpeed;
+  public double bnt;
 
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
+  public SpinUp(Shooter shooter, double Velocity, Feed feed, double feedSpeed, double bnt, boolean isHood) {
     this.shooter = shooter;
     this.vel = Velocity;
     this.isHood = isHood;
+    this.feed = feed;
+    this.feedSpeed = feedSpeed;
+    this.bnt = bnt;
+    
     
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    addRequirements(shooter, feed);
   }
 
   // Called when the command is initially scheduled.
@@ -37,6 +45,9 @@ public class SpinUp extends CommandBase {
   public void execute() {
     
     shooter.startWheel(vel);
+    feed.feedRun(feedSpeed);
+    shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
+    double
 
   }
 
