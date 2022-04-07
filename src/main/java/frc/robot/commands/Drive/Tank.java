@@ -31,14 +31,14 @@ public class Tank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double lSpeed = m_controller.getLeftY();
-    double rSpeed = m_controller.getRightY();
+    double lSpeed = m_controller.getLeftY() * 0.5;
+    double rSpeed = m_controller.getRightY() * 0.5;
 
     boolean motorToggle = SmartDashboard.getBoolean("Exponential?", false);
     if(motorToggle){
       m_chassis.setSpeed(Math.abs(lSpeed) * lSpeed, Math.abs(rSpeed) * rSpeed);
     }else{
-      m_chassis.setSpeed(lSpeed, rSpeed);
+      m_chassis.setSpeed(lSpeed * -1, rSpeed * -1);
     }
     
     SmartDashboard.putNumber("left Joystick Value", lSpeed);

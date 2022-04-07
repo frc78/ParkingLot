@@ -39,6 +39,7 @@ import frc.robot.commands.Auto.BackupAuto.AutoTaxi1Seq;
 import frc.robot.commands.Auto.BackupAuto.BackupAutoTestSeq;
 import frc.robot.commands.Auto.BackupAuto.Testing;
 import frc.robot.commands.Auto.PathweaverAutos.Auto1BallPar;
+import frc.robot.commands.Auto.PathweaverAutos.Auto4BallPathSeq;
 import frc.robot.commands.Auto.PathweaverAutos.AutoTestSeq;
 import frc.robot.commands.Auto.PathweaverAutos.PathTestSEQ;
 import frc.robot.commands.Drive.Forward50;
@@ -194,17 +195,23 @@ public class RobotContainer {
     //         new Pose2d(2, 0, new Rotation2d(0)),
     //         // Pass config
     //         config);
-    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/autoTest1.wpilib.json");
-    Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/output/autoTest2.wpilib.json");
+    Trajectory trajectory1 = m_pathcommands.createTrajectory("paths/output/4BAutoV2P1.wpilib.json");
+    Trajectory trajectory2 = m_pathcommands.createTrajectory("paths/output/4BAutoV2P2.wpilib.json");
+    Trajectory trajectory3 = m_pathcommands.createTrajectory("paths/output/4BAutoV2P3.wpilib.json");
+    Trajectory trajectory4 = m_pathcommands.createTrajectory("paths/output/4BAutoV2P4.wpilib.json");
+    Trajectory trajectory5 = m_pathcommands.createTrajectory("paths/output/4BAutoV2P5.wpilib.json");
 
     RamseteCommand ramsete1 = m_pathcommands.createRamseteCommand(trajectory1, m_chassis);
     RamseteCommand ramsete2 = m_pathcommands.createRamseteCommand(trajectory2, m_chassis);
+    RamseteCommand ramsete3 = m_pathcommands.createRamseteCommand(trajectory3, m_chassis);
+    RamseteCommand ramsete4 = m_pathcommands.createRamseteCommand(trajectory4, m_chassis);
+    RamseteCommand ramsete5 = m_pathcommands.createRamseteCommand(trajectory5, m_chassis);
 
     m_chassis.resetOdometry(trajectory1.getInitialPose());
     
     // return ramsete1.andThen(() -> m_chassis.stop());
 
-   return new PathTestSEQ(ramsete1, ramsete2, m_chassis);
+   return new Auto4BallPathSeq(ramsete1, ramsete2, ramsete3, ramsete4, ramsete5, m_chassis);
     
   }
 }
