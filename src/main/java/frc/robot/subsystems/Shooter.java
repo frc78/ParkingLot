@@ -26,8 +26,8 @@ public class Shooter extends SubsystemBase {
   private static TalonFX shooterWheel2 = new TalonFX(Constants.RightShoot);
   private static TalonFXConfiguration _velocity_closed = new TalonFXConfiguration();
   DoubleSolenoid solenoidShooter = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1,5);
-  private static CANSparkMax backWheel1;
-  private static CANSparkMax backWheel2;
+  // private static CANSparkMax backWheel1;
+  // private static CANSparkMax backWheel2;
   
 
 
@@ -49,10 +49,10 @@ public class Shooter extends SubsystemBase {
     shooterWheel.setNeutralMode(NeutralMode.Coast);
     shooterWheel2.setNeutralMode(NeutralMode.Coast);
 
-    backWheel1.setInverted(true);
-    backWheel2.setInverted(false);
+    // backWheel1.setInverted(true);
+    // backWheel2.setInverted(false);
 
-    backWheel2.follow(backWheel1);
+    // backWheel2.follow(backWheel1);
 
 
 
@@ -86,7 +86,7 @@ public class Shooter extends SubsystemBase {
  }
 
 public void startBackWheels(double speed){
-  backWheel1.set(speed);
+  // backWheel1.set(speed);
 }
   
 public double getShooterSpeed(){
