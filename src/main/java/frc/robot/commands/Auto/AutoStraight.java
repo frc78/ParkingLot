@@ -34,8 +34,9 @@ public class AutoStraight extends CommandBase {
   @Override
   public void execute() {
     //m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), 1, encDistance));
+    // m_chassis.setSpeed(calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance), calcSpeed(m_chassis.getRawMotorPosition(0), speed, encDistance));
     m_chassis.setSpeed(speed, speed);
-    DriverStation.reportError("enc position :" + m_chassis.getRawMotorPosition(0), false);
+    //DriverStation.reportError("enc position :" + m_chassis.getRawMotorPosition(0), false);
   }
 
   // Called once the command ends or is interrupted.
@@ -51,13 +52,13 @@ public class AutoStraight extends CommandBase {
   }
 
   // this just doesn't seem to work for now, would be nice to fix it
-  double calcSpeed(double t, double maxSpeed, double maxDistance) {
-    if (t < (maxDistance * 0.25)){
-      return maxSpeed * (t / (maxDistance * 0.25));
-    } else if (t > (maxDistance * 0.75)){
-      return maxSpeed * (1 - ((t - (maxDistance * 0.75)) / (maxDistance * 0.25)));
+  /*double calcSpeed(double enc, double maxSpeed, double maxDistance) {
+    if (enc < (maxDistance * 0.25)){
+      return maxSpeed * (enc / (maxDistance * 0.25));
+    } else if (enc > (maxDistance * 0.75)){
+      return maxSpeed * (1 - ((enc - (maxDistance * 0.75)) / (maxDistance * 0.25)));
     } else {
       return maxSpeed;
     }
-  }
+  }*/
 }

@@ -2,27 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Auto.BackupAuto;
+package frc.robot.commands.Auto.Auto;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Auto.AutoStraight;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import frc.robot.commands.Auto.AutoTurn;
+import frc.robot.commands.Shoot.SpinUp;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto1Ball2Seq extends SequentialCommandGroup {
-  /** Creates a new Auto1Ball2Seq. */
-  public Auto1Ball2Seq(Chassis m_chassis) {
+public class AutoTurnandSpinUp extends ParallelRaceGroup {
+  /** Creates a new AutoTurnandSpinUp. */
+  public AutoTurnandSpinUp(Chassis chassis, Shooter shooter, double spinupVel, double degrees, double turnSpeed, boolean isHood) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoStraight(m_chassis, 1.6, -0.3),
-      new AutoTurn(m_chassis, -75, 0.15),
-      new AutoStraight(m_chassis, 2, 0.3)
-      // new AutoTurn(m_chassis, -75, 0.15),
-      // new AutoStraight(m_chassis, 2, 0.2)
+      new AutoTurn(chassis, degrees, turnSpeed),
+      new SpinUp(shooter, spinupVel, isHood)
     );
   }
 }

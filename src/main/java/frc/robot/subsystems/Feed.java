@@ -8,23 +8,35 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Feed extends SubsystemBase {
   public CANSparkMax beltneo;
+  public DigitalInput input;
   
   
   /** Creates a new Feed. */
   public Feed() {
    beltneo = new CANSparkMax(Constants.BeltNeo, MotorType.kBrushless);
-   
+   input = new DigitalInput(0);
+  
    
   }
   
-  public void feedRun(double m_feedSpeed) {
+  public void feedRun(double feedSpeed) {
     
-    beltneo.set(m_feedSpeed);//subject to change during testing 
+      beltneo.set(feedSpeed);//subject to change during testing
+     
+  }
+  public void feedRunIfNoCargo(double feedSpeed) {
+    if (input.get()){
+      beltneo.set(0.0);
+    }
+    else{
+      beltneo.set(feedSpeed);//subject to change during testing
+    }
+     
   }
   
   public void feedReverse() {

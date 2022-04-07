@@ -19,7 +19,8 @@ public class AutoTurn extends CommandBase {
   private double speed;
 
   /** Creates a new AutoTurn. */
-  public AutoTurn(Chassis subsystem1, double turndegrees, double turnSpeed) {
+  public 
+  AutoTurn(Chassis subsystem1, double turndegrees, double turnSpeed) {
     m_chassis = subsystem1;
     degrees = turndegrees;
     speed = turnSpeed;
@@ -54,9 +55,9 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     if (degrees > 0) {
-      return m_chassis.getPidgeonYaw() > degrees ? true:false;
+      return Math.abs(m_chassis.getPidgeonYaw()) > degrees ? true:false;
     } else {
-      return m_chassis.getPidgeonYaw() < degrees ? true:false;
+      return -Math.abs(m_chassis.getPidgeonYaw()) < degrees ? true:false;
     }
   }
 }

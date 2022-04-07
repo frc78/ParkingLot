@@ -4,27 +4,50 @@
 
 package frc.robot.commands.Shoot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.Shooter;
+import frc.robot.Constants;
 
 public class SpinUp extends CommandBase {
   private Shooter shooter;
+  private double vel;
+  private boolean isHood;
+  public double bnt;
+
+  public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
+    this(shooter, Velocity, 1, isHood);
+  }
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter) {
+  public SpinUp(Shooter shooter, double Velocity, double bnt, boolean isHood) {
     this.shooter = shooter;
+    this.vel = Velocity;
+    this.isHood = isHood;
+    this.bnt = bnt;
+    
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("Starting spin up!");
+    this.shooter.isHood(isHood);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.startWheely();
+    
+    shooter.startWheel(vel);
+    //shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
+    double neoPercent = vel * 5.93 * Math.PI * 0.75 / Math.PI / 6380;
+    shooter.startBackWheels(neoPercent * bnt);
+
   }
 
   // Called once the command ends or is interrupted.

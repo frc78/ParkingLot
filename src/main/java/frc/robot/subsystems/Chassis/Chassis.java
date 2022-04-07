@@ -6,9 +6,11 @@ package frc.robot.subsystems.Chassis;
 
 import java.io.Console;
 import java.sql.Driver;
+import java.util.concurrent.ExecutionException;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
@@ -17,6 +19,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.networktables.NetworkTableType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,9 +54,9 @@ public class Chassis extends SubsystemBase {
     rightLeader.configFactoryDefault();
 
     // Set motor mode
-    leftLeader.setNeutralMode(Constants.MOTOR_MODE);
+    leftLeader.setNeutralMode(NeutralMode.Brake);
 
-    rightLeader.setNeutralMode(Constants.MOTOR_MODE);
+    rightLeader.setNeutralMode(NeutralMode.Brake);
 
     leftLeader.setSensorPhase(true);
     rightLeader.setSensorPhase(true);
@@ -77,8 +80,8 @@ public class Chassis extends SubsystemBase {
     m_odometry = new DifferentialDriveOdometry(pidgey.getRotation2d());
 
     // Set minimum time to ramp up (originally .8)
-    leftLeader.configOpenloopRamp(0.78);
-    rightLeader.configOpenloopRamp(0.78);
+    leftLeader.configOpenloopRamp(0.2);
+   rightLeader.configOpenloopRamp(0.2);
   }
 
   public void setSpeed(double lSpeed, double rSpeed) {
@@ -101,6 +104,11 @@ public class Chassis extends SubsystemBase {
   public void resetEncoder() {
     leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
     rightLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+    // try {
+    //   Thread.sleep(50);
+    // } catch (Exception e) {
+    //   DriverStation.reportError("Reset Encoders", e.getStackTrace());
+    // }
   }
 
   public void zeroAllSensors() {
@@ -118,6 +126,22 @@ public class Chassis extends SubsystemBase {
     zeroAllSensors();
     m_odometry.resetPosition(pose, pidgey.getRotation2d()); //odometry angles have left as positive
   }
+
+  /**
+   * True is coast mode, and False is brake mode
+   * @param isMotorControl
+   */
+  public void breakVcoast(boolean isMotorControl){
+    if(isMotorControl){
+      leftLeader.setNeutralMode(NeutralMode.Coast);
+      rightLeader.setNeutralMode(NeutralMode.Coast);
+      }else{
+        leftLeader.setNeutralMode(NeutralMode.Brake);
+        rightLeader.setNeutralMode(NeutralMode.Brake);
+      }
+    }
+
+  
 
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
