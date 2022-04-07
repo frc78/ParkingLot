@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Utility;
 
 public class Chassis extends SubsystemBase {
 
@@ -159,7 +160,16 @@ public class Chassis extends SubsystemBase {
   }
 
   public double getMotorPosition(TalonFX motor) {
-    return ((motor.getSelectedSensorPosition() / Constants.UNITS_PER_REVOLUTION) / Constants.WHEEL_GEAR_RATIO) * Constants.WHEEL_CIRC_METERS;
+    return Utility.encodersToMeters(motor.getSelectedSensorPosition());
+  }
+/**
+ *
+ * @param motor
+ * 0 is left motor, 1 is right motor
+ * @return Meters
+ */
+  public double getMotorPositionExt(int motor) {
+    return motor == 0 ? Utility.encodersToMeters(leftLeader.getSelectedSensorPosition()) : Utility.encodersToMeters(rightLeader.getSelectedSensorPosition());
   }
 
   public double getRawMotorPosition(int motor) {

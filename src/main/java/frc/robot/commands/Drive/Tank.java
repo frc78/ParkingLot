@@ -30,7 +30,7 @@ public class Tank extends CommandBase {
   @Override
   public void initialize() {
     // m_chassis.breakVcoast(Constants.MOTOR_MODE == NeutralMode.Brake ? false : true);
-    m_chassis.breakVcoast(true);
+    m_chassis.breakVcoast(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
