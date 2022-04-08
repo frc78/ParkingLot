@@ -112,10 +112,14 @@ public class Chassis extends SubsystemBase {
     // }
   }
 
-  public void zeroAllSensors() {
-    resetEncoder();
+  public void resetPidgeon() {
     pidgey.reset();
     pidgey.setYaw(0, 30);
+  }
+
+  public void zeroAllSensors() {
+    resetEncoder();
+    resetPidgeon();
     // pidgey.setAccumZAngle(0, 30);
   }
 

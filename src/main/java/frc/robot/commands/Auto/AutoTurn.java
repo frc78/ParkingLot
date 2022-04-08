@@ -30,7 +30,7 @@ public class AutoTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_chassis.zeroAllSensors();
+    m_chassis.resetPidgeon();
     if (degrees > 0) {
       m_chassis.setSpeed(speed, speed * -1);
     } else {
@@ -42,7 +42,7 @@ public class AutoTurn extends CommandBase {
   @Override
   public void execute() {
     m_chassis.feedDrive();
-    DriverStation.reportError("real moment, this is the readed headings: " + m_chassis.getPidgeonYaw(), false);
+    DriverStation.reportError("this is the readed headings: " + m_chassis.getPidgeonYaw(), false);
   }
 
   // Called once the command ends or is interrupted.

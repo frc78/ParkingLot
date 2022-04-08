@@ -113,7 +113,7 @@ public final class Constants {
     // PID
     public static final double kP = 9; // 16
     // public static final double kP = 2.7;
-    public static final double kI = 0.3;
+    public static final double kI = 0.7;
     public static final double kD = 0.1; // maybe put them back to 0 later perhaps
 
     // //            PARAMETERS FOR SMALL CHASSIS

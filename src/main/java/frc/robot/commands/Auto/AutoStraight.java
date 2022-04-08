@@ -34,11 +34,15 @@ public class AutoStraight extends CommandBase {
   private double lastSpeed;
   private double lastTime;
   private SimpleMotorFeedforward feedforward;
+  private double initPosL;
+  private double initPosR;
   
   public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {
     m_chassis = subsytem1;
     speed = maxSpeed;
     distance = distanceM;
+    initPosL = m_chassis.getMotorPositionExt(0);
+    initPosR = m_chassis.getMotorPositionExt(1);
     
     //trapezoid motion profiling & PID variables
     trapConstraints = new TrapezoidProfile.Constraints(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared);
@@ -86,14 +90,14 @@ public class AutoStraight extends CommandBase {
   }
 
   private double getAverageEnc() {
-    return (m_chassis.getMotorPositionExt(0) * 0.5) + (m_chassis.getMotorPositionExt(1) * 0.5);
+    return (initPosL - (m_chassis.getMotorPositionExt(0)) * 0.5) + (initPosR - (m_chassis.getMotorPositionExt(1)) * 0.5);
   }
 
   // Controls a simple motor's position using a SimpleMotorFeedforward
   // and a ProfiledPIDController
   public void goToPosition(double goalPosition) {
     double acceleration = (PID.getSetpoint().velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime);
-    double speed = PID.calculate(m_chassis.getMotorPositionExt(0), goalPosition)
+    double speed = PID.calculate(getAverageEnc(), goalPosition)
                     + feedforward.calculate(PID.getSetpoint().velocity, acceleration);
     m_chassis.setVoltage(speed, speed);
     lastSpeed = PID.getSetpoint().velocity;
