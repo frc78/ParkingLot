@@ -42,8 +42,8 @@ public class Tank extends CommandBase {
     double lSpeed = triggerAdjustedSpeed(m_controller.getLeftY(), 0.3, 0.5);
     double rSpeed = triggerAdjustedSpeed(m_controller.getRightY(), 0.3, 0.5);
     if (m_controller.getRightBumper()) {
-      lSpeed = limelightAiming(lSpeed, 0.2, 0, false);
-      rSpeed = limelightAiming(rSpeed, 0.2, 0, true);
+      lSpeed = limelightAiming(lSpeed, 0.2, 0.5, false);
+      rSpeed = limelightAiming(rSpeed, 0.2, 0.5, true);
       SmartDashboard.putBoolean("isPressedAim", m_controller.getRightBumper());
     }
 
