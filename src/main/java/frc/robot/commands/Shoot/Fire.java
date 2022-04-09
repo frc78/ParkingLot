@@ -15,7 +15,7 @@ public class Fire extends CommandBase {
   private Indexer m_indexer;
   private FeedWheel m_feedWheel;
   private Intake m_intake;
-  public int feedSpeed;
+  public double feedSpeed = 0.65;
   /** Creates a new RunFeed. */
   public Fire(Feed subsystem, Indexer subsystem2, FeedWheel subsystem3, Intake subsystem4) {
     m_feed = subsystem;

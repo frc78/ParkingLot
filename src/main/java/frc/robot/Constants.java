@@ -48,14 +48,17 @@ public final class Constants {
     public static final int BeltNeo = 10;
     public static final int WheelNeo = 11;
 
+    public static final int backWheel1 = 15;
+    public static final int backWheel2 = 16;
+
     //Indexer
     public static final int Indexer = 12;//Temporary subject to change.
 
     //Shooter Velocity
-    public static final double spinupVel = 1600.0; //Bottom Goal
-    public static final double spinupVel2 = 3100.0;//Top Goal
-    public static final double spinUpVel3 = 3000.0;//top fender
-    
+    public static final double spinupVel = 2168.0; //Bottom Goal
+    public static final double spinupVel2 = 1725.0;//Top Goal
+    public static final double spinUpVel3 = 800.0;//top fender
+    public static final double spinUpVel4 = 3600.0;// far shot
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
