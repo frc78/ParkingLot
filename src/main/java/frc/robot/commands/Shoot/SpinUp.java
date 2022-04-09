@@ -15,17 +15,19 @@ public class SpinUp extends CommandBase {
   private double vel;
   private boolean isHood;
   public double bnt;
+  public double backPercent;
 
   public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
-    this(shooter, Velocity, 1, isHood);
+    this(shooter, Velocity, 1, isHood, 0.7);
   }
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity, double bnt, boolean isHood) {
+  public SpinUp(Shooter shooter, double Velocity, double bnt, boolean isHood, double backPercent) {
     this.shooter = shooter;
     this.vel = Velocity;
     this.isHood = isHood;
     this.bnt = bnt;
+    this.backPercent = backPercent;
     
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -46,7 +48,9 @@ public class SpinUp extends CommandBase {
     shooter.startWheel(vel);
     //shooter.startBackWheels(shooter.getShooterSpeed() * bnt * 2);
     double neoPercent = vel * 5.93 * Math.PI * 0.75 / Math.PI / 6380;
-    shooter.startBackWheels(neoPercent * bnt);
+    //shooter.startBackWheels(neoPercent * bnt);
+    shooter.startBackWheels(backPercent);
+    SmartDashboard.putNumber("Neo Percent", neoPercent);
 
   }
 
@@ -54,6 +58,7 @@ public class SpinUp extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooter.stopWheely();
+    shooter.startBackWheels(0);
   }
 
   // Returns true when the command should end.
