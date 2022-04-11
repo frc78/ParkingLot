@@ -7,6 +7,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 
 /**
@@ -59,6 +62,8 @@ public final class Constants {
     public static final double spinupVel2 = 1725.0;//Top Goal
     public static final double spinUpVel3 = 800.0;//top fender
     public static final double spinUpVel4 = 3600.0;// far shot
+
+    public static final double backSpinVel2 = 0.7;
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
@@ -94,12 +99,14 @@ public final class Constants {
 
     //            PATH FOLLOWING CONSTANTS
     public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+    public static final Pose2d BStartingPose = new Pose2d(new Translation2d(6.549, 2.618), new Rotation2d(204.60880)); //rough estimation
 
     //        Feedback OLD
     // public static final double ksVolts = 0.22;
     // public static final double kvVoltSecondsPerMeter = 1.98;
     // public static final double kaVoltSecondsSquaredPerMeter = 0.2;
     // public static final double kPDriveVel = 8.5;
+
     // NEWER FEEDBACK
     public static final double ksVolts = 0.621;
     public static final double kvVoltSecondsPerMeter = 4.1176;

@@ -51,6 +51,16 @@ public class Intake extends SubsystemBase {
     }
   }
 
+  public void autoIntakeStart(Intake intake, Indexer indexer) {
+    intake.DeployIntake();
+    intake.setSpeed(-.75);
+    indexer.indexRun();
+  }
+
+  public void autoIntakeStop(Intake intake, Indexer indexer) {
+    intake.StopIntake();
+    indexer.stopIndexer();
+  }
 
   @Override
   public void periodic() {

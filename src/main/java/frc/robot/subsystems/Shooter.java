@@ -86,6 +86,16 @@ public class Shooter extends SubsystemBase {
   shooterWheel2.follow(shooterWheel);
  }
 
+ public void startWheels(double velocity, double speed) {
+   startWheel(velocity);
+   startBackWheels(speed);
+ }
+
+ public void stopWheels() {
+   stopWheely();
+   startBackWheels(0);
+ }
+
 public void startBackWheels(double speed){
   backWheel1.set(-speed);
   backWheel2.set(-speed);

@@ -12,6 +12,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Utility;
@@ -47,8 +48,6 @@ public class AutoStraight extends CommandBase {
     m_chassis = subsytem1;
     speed = maxSpeed;
     distance = distanceM;
-    initPosL = m_chassis.getMotorPositionExt(0);
-    initPosR = m_chassis.getMotorPositionExt(1);
     
     //trapezoid motion profiling & PID variables
     trapConstraints = new TrapezoidProfile.Constraints(Constants.kMaxSpeedMetersPerSecond, Constants.kMaxAccelerationMetersPerSecondSquared);
@@ -69,7 +68,8 @@ public class AutoStraight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_chassis.resetEncoder();
+    initPosL = m_chassis.getMotorPositionExt(0);
+    initPosR = m_chassis.getMotorPositionExt(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -78,8 +78,8 @@ public class AutoStraight extends CommandBase {
     // m_chassis.setSpeed(speed, speed);
     // m_chassis.setSpeed(PID.calculate(m_chassis.getMotorPositionExt(0), distance), PID.calculate(m_chassis.getMotorPositionExt(1), distance));
     // speed = PID.calculate(getAverageEnc(), trapGoal);
-    goToPosition(distance);
-    // m_chassis.setSpeed(speed, speed);
+    // goToPosition(distance);
+    m_chassis.setSpeed(speed, speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -91,12 +91,13 @@ public class AutoStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // return encDistance < Math.abs(m_chassis.getRawMotorPosition(0)) ? true:false;
-    return PID.atGoal();
+    return encDistance < Math.abs(getAverageEnc()) ? true:false;
+    // return PID.atGoal();
   }
 
   private double getAverageEnc() {
-    return (initPosL - (m_chassis.getMotorPositionExt(0)) * 0.5) + (initPosR - (m_chassis.getMotorPositionExt(1)) * 0.5);
+    SmartDashboard.putNumber("AUTO_AVGENC", (initPosL - (m_chassis.getRawMotorPosition(0)) * 0.5) + (initPosR - (m_chassis.getRawMotorPosition(1)) * 0.5));
+    return (initPosL - (m_chassis.getRawMotorPosition(0)) * 0.5) + (initPosR - (m_chassis.getRawMotorPosition(1)) * 0.5);
   }
 
   // Controls a simple motor's position using a SimpleMotorFeedforward

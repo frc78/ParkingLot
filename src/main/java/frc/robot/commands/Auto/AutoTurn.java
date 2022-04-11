@@ -9,6 +9,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis.Chassis;
 
@@ -17,6 +18,7 @@ public class AutoTurn extends CommandBase {
   private Chassis m_chassis;
   private double degrees;
   private double speed;
+  private double initDeg;
 
   /** Creates a new AutoTurn. */
   public 
@@ -30,7 +32,7 @@ public class AutoTurn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_chassis.resetPidgeon();
+    initDeg = m_chassis.getPidgeonYaw();
     if (degrees > 0) {
       m_chassis.setSpeed(speed, speed * -1);
     } else {
@@ -54,10 +56,13 @@ public class AutoTurn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (degrees > 0) {
-      return Math.abs(m_chassis.getPidgeonYaw()) > degrees ? true:false;
-    } else {
-      return -Math.abs(m_chassis.getPidgeonYaw()) < degrees ? true:false;
-    }
+      SmartDashboard.putNumber("AUTO_DEG", Math.abs(m_chassis.getPidgeonYaw() - Math.abs(initDeg)));
+      SmartDashboard.putBoolean("AUTO_TURNFINISHED", Math.abs(m_chassis.getPidgeonYaw() - Math.abs(initDeg)) > Math.abs(degrees));
+      // if (degrees < 0) {
+      //   return Math.abs(m_chassis.getPidgeonYaw() - initDeg) < degrees ? true:false;
+      // } else {
+      //   return Math.abs(m_chassis.getPidgeonYaw() - initDeg) > degrees ? true:false;
+      // }
+      return Math.abs(m_chassis.getPidgeonYaw() - initDeg) > Math.abs(degrees) ? true:false;
   }
 }

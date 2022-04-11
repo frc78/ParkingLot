@@ -128,7 +128,7 @@ public class Chassis extends SubsystemBase {
   }
 
   public void resetOdometry(Pose2d pose) {
-    zeroAllSensors();
+    resetEncoder();
     m_odometry.resetPosition(pose, pidgey.getRotation2d()); //odometry angles have left as positive
   }
 
@@ -176,6 +176,12 @@ public class Chassis extends SubsystemBase {
     return motor == 0 ? Utility.encodersToMeters(leftLeader.getSelectedSensorPosition()) : Utility.encodersToMeters(rightLeader.getSelectedSensorPosition());
   }
 
+  /**
+ *
+ * @param motor
+ * 0 is left motor, 1 is right motor
+ * @return Encoder clicks
+ */
   public double getRawMotorPosition(int motor) {
     return motor == 0 ? leftLeader.getSelectedSensorPosition() : rightLeader.getSelectedSensorPosition();
   }
