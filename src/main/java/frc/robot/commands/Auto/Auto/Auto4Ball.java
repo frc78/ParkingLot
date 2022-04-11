@@ -7,6 +7,7 @@ package frc.robot.commands.Auto.Auto;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants;
 import frc.robot.commands.Auto.AutoStraight;
 import frc.robot.commands.Auto.AutoTurn;
 import frc.robot.commands.Intake.IntakeWaitAuto;
@@ -33,7 +34,7 @@ public class Auto4Ball extends SequentialCommandGroup {
       new WaitCommand(1),
       new AutoStraight(chassis, distance2, 0.6),
       new AutoTurnandSpinUp(chassis, shooter, velocity, deg, .2, true),
-      new SpinAndFire(shooter, feed, indexer, wheely, intake, velocity),
+      new SpinAndFire(shooter, feed, indexer, wheely, intake, velocity, Constants.backSpinVel, true),
      // new FireAUTO(feed, wheely, indexer, intake, 2),//the 2 is subject to change, 2 is indicated as time (seconds)
       new AutoTurn(chassis, deg2, .2),
       new DriveAndIntake(chassis, intake, indexer, distance3, -.6),

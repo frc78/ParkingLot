@@ -39,9 +39,9 @@ public class Auto2BallHIGH extends SequentialCommandGroup {
       new DriveAndIntake(chassis, intake, index, distance, -0.3),
       new InstantCommand(() -> chassis.resetEncoder(), chassis),
       new WaitCommand(0.5),
-      new AutoStraight(chassis, distance2, 0.3),
-      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2, true),
-      new SpinAndFire(shooter, feed, index, feedWheel, intake, spinUpVel)
+      //new AutoStraight(chassis, distance2, 0.3),
+      new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees, 0.2, isHood),
+      new SpinAndFire(shooter, feed, index, feedWheel, intake, Constants.spinupVel, Constants.backSpinVel, true)
     );
     }
     // @Override

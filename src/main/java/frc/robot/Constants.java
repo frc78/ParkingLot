@@ -59,6 +59,10 @@ public final class Constants {
     public static final double spinupVel2 = 1725.0;//Top Goal
     public static final double spinUpVel3 = 800.0;//top fender
     public static final double spinUpVel4 = 3600.0;// far shot
+    public static final double spinUpVel5 = 2000; // auto c 3
+
+    public static final double backSpinVel = .78;
+    public static final double backSpinVel5 = .78;
     //            JOYSTICKS
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;

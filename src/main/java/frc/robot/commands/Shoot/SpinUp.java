@@ -18,15 +18,15 @@ public class SpinUp extends CommandBase {
   public double backPercent;
 
   public SpinUp(Shooter shooter, double Velocity, boolean isHood) {
-    this(shooter, Velocity, 1, isHood, 0.7);
+    this(shooter, Velocity, isHood, 0.7);
   }
 
   /** Creates a new Shoot. */
-  public SpinUp(Shooter shooter, double Velocity, double bnt, boolean isHood, double backPercent) {
+  public SpinUp(Shooter shooter, double Velocity, boolean isHood, double backPercent) {
     this.shooter = shooter;
     this.vel = Velocity;
     this.isHood = isHood;
-    this.bnt = bnt;
+    this.bnt = 1;
     this.backPercent = backPercent;
     
     
