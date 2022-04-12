@@ -55,7 +55,7 @@ public class AutoStraight extends CommandBase {
     trapStart = new TrapezoidProfile.State(0, 0);
     trapProfile = new TrapezoidProfile(trapConstraints, trapGoal, trapStart);
     PID = new ProfiledPIDController(Constants.kP, Constants.kI, Constants.kD, trapConstraints);
-
+    //more PID stuff2
     lastSpeed = PID.getSetpoint().velocity;
     lastTime = Timer.getFPGATimestamp();
     feedforward = new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter, Constants.kaVoltSecondsSquaredPerMeter);
@@ -65,14 +65,13 @@ public class AutoStraight extends CommandBase {
     addRequirements(m_chassis);
   }
 
-  // Called when the command is initially scheduled.
+  // records initial motor positions
   @Override
   public void initialize() {
     initPosL = m_chassis.getMotorPositionExt(0);
     initPosR = m_chassis.getMotorPositionExt(1);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // m_chassis.setSpeed(speed, speed);
@@ -82,7 +81,6 @@ public class AutoStraight extends CommandBase {
     m_chassis.setSpeed(speed, speed);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_chassis.setSpeed(0, 0);
@@ -95,13 +93,13 @@ public class AutoStraight extends CommandBase {
     // return PID.atGoal();
   }
 
+  // gets the average encoder values of both leading motors relative to their starting position, with a weight of 0.5 each
   private double getAverageEnc() {
     SmartDashboard.putNumber("AUTO_AVGENC", (initPosL - (m_chassis.getRawMotorPosition(0)) * 0.5) + (initPosR - (m_chassis.getRawMotorPosition(1)) * 0.5));
     return (initPosL - (m_chassis.getRawMotorPosition(0)) * 0.5) + (initPosR - (m_chassis.getRawMotorPosition(1)) * 0.5);
   }
 
-  // Controls a simple motor's position using a SimpleMotorFeedforward
-  // and a ProfiledPIDController
+  // Controls a simple motor's position using a SimpleMotorFeedforward and a ProfiledPIDController
   public void goToPosition(double goalPosition) {
     double acceleration = (PID.getSetpoint().velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime);
     double speed = PID.calculate(getAverageEnc(), goalPosition)
