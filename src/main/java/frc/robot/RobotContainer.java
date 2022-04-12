@@ -289,9 +289,9 @@ public class RobotContainer {
     // return autoList.getSelected();
     // return ramsete1.andThen(() -> m_chassis.stop());
     // return new Auto4BallPathSeq(ramsete1, ramsete2, ramsete3, ramsete4, ramsete5, m_chassis);
-   return new Auto4BallV2Seq(m_chassis, m_intake, m_feed, m_feedWheel, m_indexer, m_limelight, m_shooter, ramsete1, ramsete2, trajectory1);
+  //  return new Auto4BallV2Seq(m_chassis, m_intake, m_feed, m_feedWheel, m_indexer, m_limelight, m_shooter, ramsete1, ramsete2, trajectory1);
   // return new Testing(m_chassis);
-  // return new AutoCPosition3(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, m_limelight, 1.2, 0.8, 2.5, Constants.spinupVel2, Constants.backSpinVel2, 165, 85, -130);
+  return new AutoCPosition3(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, m_limelight, 1.3, 1.1, 1.5, Constants.spinupVel2, Constants.backSpinVel2, 180, -110, -100);
     
   }
 }
