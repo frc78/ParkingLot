@@ -14,6 +14,8 @@ public class AutoStraight extends CommandBase {
   private Chassis m_chassis;
   private double encDistance;
   private double speed;
+  private double initL;
+  private double initR;
   //private double goalDistance;
   
   public AutoStraight(Chassis subsytem1, double distanceM, double maxSpeed) {

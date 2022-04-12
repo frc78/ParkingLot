@@ -15,15 +15,17 @@ import frc.robot.subsystems.Feed;
 import frc.robot.subsystems.FeedWheel;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
+import frc.robot.commands.Auto.Auto.AutoLimeAimAndSpinUp;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoCPosition3 extends SequentialCommandGroup {
   /** Creates a new AutoCPosition3. */
-  public AutoCPosition3(Chassis chassis, Intake intake, Indexer indexer, Feed feed, FeedWheel feedWheels, Shooter shooter, double distance1, double distance2, double distance3, double spinUpVel, double backSpinVel, boolean isHood, double degrees1, double degrees2, double degrees3) {
+  public AutoCPosition3(Chassis chassis, Intake intake, Indexer indexer, Feed feed, FeedWheel feedWheels, Shooter shooter, Limelight limelight, double distance1, double distance2, double distance3, double spinUpVel, double backSpinVel, boolean isHood, double degrees1, double degrees2, double degrees3) {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
@@ -41,6 +43,7 @@ public class AutoCPosition3 extends SequentialCommandGroup {
       new DriveAndIntake(chassis, intake, indexer, distance3, -0.4),
       new WaitCommand(0.5),
       new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees3, 0.2, true),
+      new AutoLimeAimAndSpinUp(chassis, limelight, shooter, 0.2, true),
       new SpinAndFire(shooter, feed, indexer, feedWheels, intake, Constants.spinUpVel5, Constants.backSpinVel5, true),
       new InstantCommand(() -> chassis.breakVcoast(true), chassis)
     );
