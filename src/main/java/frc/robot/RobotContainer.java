@@ -155,13 +155,13 @@ public class RobotContainer {
     // auto commands selector
     autoList.setDefaultOption("2 Ball Auto HIGH-C", new Auto2BallHighC(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.2, .8, Constants.spinupVel2, 155, false));
 
-    autoList.addOption("2 Ball Auto HIGH-A", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 2.0, 1.3, Constants.spinupVel2, 175, false));
+    autoList.addOption("2 Ball Auto HIGH-A", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.5, 1.2, Constants.spinupVel2, 175, false));
     autoList.addOption("2 Ball Auto HIGH-B", new Auto2BallHIGH(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.65, 1.5, Constants.spinupVel2, -175, true));
     autoList.addOption("2 Ball Auto LOW", new Auto2BallSEQ(m_chassis, m_intake, m_feed, m_shooter, m_feedWheel, m_indexer));
     autoList.addOption("1 Ball Auto LOW", new AUTO1BALLSEQ(m_chassis, m_feed, m_indexer, m_shooter, m_feedWheel, m_intake));
     autoList.addOption("test", new Testing(m_chassis));
     autoList.addOption("4 Ball Auto High", new Auto4Ball(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, 1.6, 1.5, 4.75, 2.5, Constants.spinupVel2, -150, 122, -170, true));
-    autoList.addOption("3 Ball Auto C", new AutoCPosition3(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, m_limelight, .2, 0.8, 2.5, Constants.spinupVel2, Constants.backSpinVel, false, 165, 85, -130));
+    autoList.addOption("3 Ball Auto C", new AutoCPosition3(m_chassis, m_intake, m_indexer, m_feed, m_feedWheel, m_shooter, m_limelight, 1.1, 0.8, 2.5, Constants.spinupVel2, Constants.backSpinVel, false, 165, 85, -130));
                                                                                                                        //DISTANCE 1,2,3,4 VEL DEG 1,2,3    
     SmartDashboard.putData(autoList);
   }
@@ -213,7 +213,7 @@ public class RobotContainer {
     manipControllerLowRB.whileHeld(new SpinUp(m_shooter, Constants.spinupVel, true, 0.78));//Low fender extended hood
     
     Button manipControllerLB = new JoystickButton(m_manipController, 5);
-    manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinUpVel3, false, 1));//high fender retract hood
+    manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.spinUpVel3, false, 50));//high fender retract hood
     
     Button manipControllerB = new JoystickButton(m_manipController, 3);// swapped with b 
     manipControllerB.whileHeld(new IntakeCommand(m_intake, m_feed, m_indexer, false));

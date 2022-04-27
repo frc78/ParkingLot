@@ -43,7 +43,7 @@ public class AutoCPosition3 extends SequentialCommandGroup {
       new DriveAndIntake(chassis, intake, indexer, distance3, -0.4),
       new WaitCommand(0.5),
       new AutoTurnandSpinUp(chassis, shooter, spinUpVel, degrees3, 0.2, true),
-      new AutoLimeAimAndSpinUp(chassis, limelight, shooter, 0.2, true),
+      //new AutoLimeAimAndSpinUp(chassis, limelight, shooter, 0.2, true),
       new SpinAndFire(shooter, feed, indexer, feedWheels, intake, Constants.spinUpVel5, Constants.backSpinVel5, true),
       new InstantCommand(() -> chassis.breakVcoast(true), chassis)
     );

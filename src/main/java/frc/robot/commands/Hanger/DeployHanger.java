@@ -44,7 +44,7 @@ public class DeployHanger extends CommandBase {
     int dPadValue = m_controller.getPOV();
     SmartDashboard.putNumber("currentEncoderClicks", currentEncoderCLicks);
      SmartDashboard.putNumber("ClimbClicks", m_hanger.getPosition());
-        if(m_hanger.getPosition() > -2500 && m_hanger.getPosition() < currentEncoderCLicks){
+        if(m_hanger.getPosition() > 0 && m_hanger.getPosition() < currentEncoderCLicks){
           //will run down buttons 
           //SmartDashboard.putNumber("Climbif", dPadValue);
           if (dPadValue == -1){
@@ -54,7 +54,7 @@ public class DeployHanger extends CommandBase {
           } else if ((dPadValue <= 90) || (dPadValue > 270)){
             m_hanger.rise();
           }
-        }else if(m_hanger.getPosition() <= -2500){
+        }else if(m_hanger.getPosition() <= 0){
           //SmartDashboard.putNumber("Climbif", 2);
           //will not run down buttons
           if (dPadValue == -1){
