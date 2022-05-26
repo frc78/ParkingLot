@@ -206,7 +206,7 @@ public class RobotContainer {
     Button manipControllerSTART = new JoystickButton(m_manipController, 10);
     manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
-    Button manipControllerLT = new JoystickButton(m_manipController, 7);
+   Button manipControllerLT = new JoystickButton(m_manipController, 7);
     manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, false, 0.7));//High tarmac shot exteded hood
 
     Button manipControllerLowRB = new JoystickButton(m_manipController, 6);
@@ -220,6 +220,17 @@ public class RobotContainer {
 
     Button manipControllerY = new JoystickButton(m_manipController, 4);//bandaid---- Fixed Officially Names and everything. 
     manipControllerY.whileHeld(new Tuck(m_feed, m_indexer, true));
+
+    //Button manipControllerLT = new JoystickButton(m_manipController, 7);// Demo long shot
+    //manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.demoLongShot_highvelocity, true, .7));
+
+    //Button manipControllerLB = new JoystickButton(m_manipController, 5);//Demo Mid(Tarmac) Shot
+    //manipControllerLB.whileHeld(new SpinUp(m_shooter, Constants.demoMidShot, true, .7));
+
+   // Button manipControllerRB = new JoystickButton(m_manipController, 6);//Demo short shot low indoors
+   // manipControllerRB.whileHeld(new SpinUp(m_shooter, Constants.demoShortShotMiniVel, true, .7));
+
+
   }
 
   /**

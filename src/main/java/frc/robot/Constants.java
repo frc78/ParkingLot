@@ -68,6 +68,11 @@ public final class Constants {
     public static final int DRIVEJS = 1;
     public static final int DRIVEMP = 0;
 
+    //DEMO 
+    public static final double demoLongShot_highvelocity = 6000;
+    public static final double demoMidShot = 2000;
+    public static final double demoShortShotMiniVel = 600;
+
     //            SENSORS
     public static final int IMU = 0;
 
