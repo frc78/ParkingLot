@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands.Auto.Auto;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -34,7 +30,7 @@ public class Auto2BallSEQ extends SequentialCommandGroup {
     new DriveAndIntake(chassis, intake, index, 1.5, 0.3),
     new AutoTurn(chassis, 170, .2),
     new DriveAndSpinUp(chassis, shooter, 2.4, Constants.spinupVel, true),
-    new SpinAndFire(shooter, feed, index, wheely, intake, Constants.spinupVel, Constants.backSpinVel, true)
+    new SpinAndFire(shooter, feed, index, wheely, intake, Constants.spinupVel, Constants.backSpinVel, false)
     );
   }
   // @Override
