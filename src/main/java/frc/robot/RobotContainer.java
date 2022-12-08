@@ -55,7 +55,7 @@ import frc.robot.commands.Auto.PathweaverAutos.AutoTestSeq;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Drive.Forward50;
 import frc.robot.commands.Drive.Tank;
-import frc.robot.commands.Hanger.DeployHanger;
+// import frc.robot.commands.Hanger.DeployHanger;
 import frc.robot.commands.Hanger.HangerOverrideReset;
 import frc.robot.commands.Hanger.SetUpHanger;
 import frc.robot.commands.Intake.IntakeCommand;
@@ -70,7 +70,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Chassis.Chassis;
-import frc.robot.subsystems.Chassis.Hanger;
+// import frc.robot.subsystems.Chassis.Hanger;
 import frc.robot.subsystems.Chassis.ThreeMotorChassis;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
@@ -89,7 +89,7 @@ public class RobotContainer {
   private final Feed m_feed;
   private final Indexer m_indexer;
   private final FeedWheel m_feedWheel;
-  private final Hanger m_hanger;
+  // private final Hanger m_hanger;
   private final Limelight m_limelight;
 
   // making the way to change the auto modes
@@ -118,7 +118,7 @@ public class RobotContainer {
     m_feed = new Feed();
     m_indexer = new Indexer();
     m_feedWheel = new FeedWheel();
-    m_hanger = new Hanger();
+    // m_hanger = new Hanger();
     m_limelight = new Limelight();
     // m_shooter = new Shooter();
     m_driveController = new XboxController(Constants.DRIVEJS);
@@ -126,11 +126,11 @@ public class RobotContainer {
     m_pathcommands = new PathCommands();
     
     m_shooter.isHood(true); //initalize hood to extended
-    m_hanger.deployHangerPneumatics(false);   
+    // m_hanger.deployHangerPneumatics(false);   
   
     //Configure the button bindings
     configureButtonBindings();
-    SmartDashboard.putData(new HangerOverrideReset(m_hanger));
+    // SmartDashboard.putData(new HangerOverrideReset(m_hanger));
 
 
     m_chassis.setDefaultCommand(new Tank(m_chassis, m_limelight, m_driveController));
@@ -148,7 +148,7 @@ public class RobotContainer {
     m_shooter.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_shooter::stopWheely,  m_shooter)));
     m_feed.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feed::stopFeed, m_feed)));
     m_feedWheel.setDefaultCommand(new PerpetualCommand(new InstantCommand(m_feedWheel::stopFeedWheel, m_feedWheel)));
-    m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
+    // m_hanger.setDefaultCommand(new DeployHanger(m_hanger, m_manipController));
   
     //m_hanger.setDefaultCommand(new InstantCommand(m_hanger::hover));
 
@@ -180,7 +180,7 @@ public class RobotContainer {
     bButton.whenHeld(new Forward50(m_chassis, -0.5));
 
     JoystickButton driverX = new JoystickButton(m_driveController, 3);
-    driverX.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(), m_hanger));
+    // driverX.whenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(), m_hanger));
     
     //driverX.toggleWhenPressed(new InstantCommand(()-> m_hanger.deployHangerPneumatics(true), m_hanger));
     
@@ -204,7 +204,7 @@ public class RobotContainer {
     manipControllerRT.whileHeld(new Fire(m_feed, m_indexer, m_feedWheel, m_intake));
 
     Button manipControllerSTART = new JoystickButton(m_manipController, 10);
-    manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
+    // manipControllerSTART.whileHeld(new InstantCommand(m_hanger::hover, m_hanger));
 
     Button manipControllerLT = new JoystickButton(m_manipController, 7);
     manipControllerLT.whileHeld(new SpinUp(m_shooter, Constants.spinupVel2, false, 0.7));//High tarmac shot exteded hood
